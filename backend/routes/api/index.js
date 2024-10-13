@@ -25,9 +25,9 @@ router.use("/bookings", bookingsRouter);
 
 router.use("/reviews", reviewsRouter);
 
-router.post("/test", (req, res) => {
-  res.json({ requestBody: req.body });
-});
+// router.post("/test", (req, res) => {
+//   res.json({ requestBody: req.body });
+// }); //* No longer needed after front end csrf setup
 
 // ***** EXPORTS *****/
 module.exports = router;
