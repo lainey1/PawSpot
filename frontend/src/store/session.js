@@ -6,33 +6,27 @@ import { csrfFetch } from "./csrf";
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
-// Initial State
-const initialState = {
-  user: null,
-};
-
 // Action Creators
-export const setUser = (user) => ({
+const setUser = (user) => ({
   type: SET_USER,
   user,
 });
 
-export const removeUser = () => ({
+const removeUser = () => ({
   type: REMOVE_USER,
 });
 
 // Thunk Action Creator for Login
-export const login = (credential, password) => async (dispatch) => {
+export const login = (user) => async (dispatch) => {
+  const { credential, password } = user;
   const response = await csrfFetch("/api/session", {
     method: "POST",
     body: JSON.stringify({ credential, password }),
   });
 
-  if (response.ok) {
-    const user = await response.json();
-    dispatch(setUser(user));
-    return user; // Optional: Return user data if needed
-  }
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
 };
 
 // Thunk Action Creator for Sign Up
@@ -72,11 +66,14 @@ export const logout = () => async (dispatch) => {
   return response;
 };
 
+// Initial State
+const initialState = { user: null };
+
 // Session Reducer
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.user };
+      return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
     default:
