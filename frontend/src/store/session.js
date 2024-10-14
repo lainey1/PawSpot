@@ -7,12 +7,12 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
 // Action Creators
-const setUser = (user) => ({
+export const setUser = (user) => ({
   type: SET_USER,
   user,
 });
 
-const removeUser = () => ({
+export const removeUser = () => ({
   type: REMOVE_USER,
 });
 
@@ -24,9 +24,15 @@ export const login = (user) => async (dispatch) => {
     body: JSON.stringify({ credential, password }),
   });
 
-  const data = await response.json();
-  dispatch(setUser(data.user));
-  return response;
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data.user)); // Make sure this line is reached
+    return response;
+  } else {
+    // Handle errors
+    const data = await response.json();
+    return Promise.reject(data);
+  }
 };
 
 // Thunk Action Creator for Sign Up
