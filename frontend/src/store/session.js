@@ -55,6 +55,10 @@ export const signup = (user) => async (dispatch) => {
     const data = await response.json();
     dispatch(setUser(data.user));
     return response;
+  } else {
+    const data = await response.json();
+    console.error("Signup Error:", data); // Log any errors for better debugging
+    return Promise.reject(data);
   }
 };
 
