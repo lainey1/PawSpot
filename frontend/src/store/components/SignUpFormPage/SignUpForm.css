@@ -1,0 +1,44 @@
+/* frontend/src/components/SignupFormPage/SignupForm.css */
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form label {
+  margin-bottom: 10px;
+  /* padding: 10px; */
+}
+
+.signup-form input {
+  margin-bottom: 20px;
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.signup-form button {
+  padding: 10px;
+  background-color: rgb(170, 67, 170);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.signup-form button:hover {
+  background-color: rgb(133, 46, 133);
+}
+
+.error {
+  color: red;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}

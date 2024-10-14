@@ -1,19 +1,21 @@
 // frontend/src/components/LoginFormPage/LoginFormPage.jsx
 
-import { useState } from "react";
-import * as sessionActions from "../../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useState } from "react"; // Allows us to add state to a functional component
+import { useDispatch, useSelector } from "react-redux"; //hooks for dispatching actions and accessing state from the redux store
+import * as sessionActions from "../../../store/session"; //imports all actions related to the session
+import { Navigate } from "react-router-dom"; //allows for programmatic navigation
 import "./LoginForm.css";
 // import "./Test.css";
 
 function LoginFormPage() {
+  //State management
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+  //User session handling
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = (e) => {
@@ -27,6 +29,7 @@ function LoginFormPage() {
     );
   };
 
+  //FORM RENDERING
   return (
     <>
       <h1>Log In</h1>
