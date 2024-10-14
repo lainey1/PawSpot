@@ -38,28 +38,33 @@ const validateSignup = [
 //* Sign up route updated
 router.post("/", validateSignup, async (req, res) => {
   const { email, password, username, firstName, lastName } = req.body;
-  const hashedPassword = bcrypt.hashSync(password);
-  const user = await User.create({
-    email,
-    username,
-    hashedPassword,
-    firstName, // added
-    lastName, // added
-  });
+  try {
+    const hashedPassword = bcrypt.hashSync(password);
+    const user = await User.create({
+      email,
+      username,
+      hashedPassword,
+      firstName, // added
+      lastName, // added
+    });
 
-  const safeUser = {
-    id: user.id,
-    email: user.email,
-    username: user.username,
-    firstName: user.firstName, // added
-    lastName: user.lastName, // added
-  };
+    const safeUser = {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      firstName: user.firstName, // added
+      lastName: user.lastName, // added
+    };
 
-  await setTokenCookie(res, safeUser);
+    await setTokenCookie(res, safeUser);
 
-  return res.status(201).json({
-    user: safeUser,
-  });
+    return res.status(201).json({
+      user: safeUser,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // ***** EXPORTS *****/
