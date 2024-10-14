@@ -9,7 +9,7 @@ const REMOVE_USER = "session/REMOVE_USER";
 // Action Creators
 export const setUser = (user) => ({
   type: SET_USER,
-  user,
+  payload: user,
 });
 
 export const removeUser = () => ({
@@ -24,17 +24,18 @@ export const login = (user) => async (dispatch) => {
     body: JSON.stringify({ credential, password }),
   });
 
+  console.log("Response:", response); // Log the response to check its status
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data.user)); // Make sure this line is reached
+    console.log("User data:", data.user); // Log the user data
+    dispatch(setUser(data.user));
     return response;
   } else {
-    // Handle errors
     const data = await response.json();
+    console.error("Error during login:", data); // Log any errors
     return Promise.reject(data);
   }
 };
-
 // Thunk Action Creator for Sign Up
 export const signup = (user) => async (dispatch) => {
   const { username, firstName, lastName, email, password } = user;
