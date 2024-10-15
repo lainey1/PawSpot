@@ -63,7 +63,6 @@ router.put("/:reviewId", requireAuth, async (req, res) => {
 
     return res.status(200).json(currentReview);
   } catch (error) {
-    console.error("Error occurred:", error); // Log full error for debugging
     return res.status(500).json({
       message: "Server Error",
       error: error.message,
@@ -100,7 +99,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
       message: "You are not authorized to add images to this review",
     });
   }
-  console.log("review.ReviewImages  =  ", review.ReviewImages);
+
   // Check if the review already has 10 images
   if (review.ReviewImages.length >= 10) {
     return res.status(403).json({
@@ -155,7 +154,6 @@ router.delete("/:reviewId", requireAuth, async (req, res) => {
 //* GET all reviews by the Current User
 router.get("/current", requireAuth, async (req, res) => {
   const userId = req.user.id;
-  console.log(">>>>>>>>>USER ID: ", userId);
 
   const reviews = await Review.findAll({
     where: {

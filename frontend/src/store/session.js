@@ -24,15 +24,12 @@ export const login = (user) => async (dispatch) => {
     body: JSON.stringify({ credential, password }),
   });
 
-  console.log("Response:", response); // Log the response to check its status
   if (response.ok) {
     const data = await response.json();
-    console.log("User data:", data.user); // Log the user data
     dispatch(setUser(data.user));
     return response;
   } else {
     const data = await response.json();
-    console.error("Error during login:", data); // Log any errors
     return Promise.reject(data);
   }
 };
@@ -57,7 +54,6 @@ export const signup = (user) => async (dispatch) => {
     return response;
   } else {
     const data = await response.json();
-    console.error("Signup Error:", data); // Log any errors for better debugging
     return Promise.reject(data);
   }
 };

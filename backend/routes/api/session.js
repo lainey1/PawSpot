@@ -63,8 +63,6 @@ router.post("/", validateLogin, async (req, res, next) => {
       user: safeUser,
     });
   } catch (error) {
-    // Handle any errors that occurred during the process
-    console.error(error);
     const err = new Error("An error occurred while trying to log in.");
     err.status = 500; // Internal Server Error
     return next(err);
