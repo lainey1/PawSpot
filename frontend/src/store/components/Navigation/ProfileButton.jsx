@@ -4,6 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import * as sessionActions from "../../../store/session";
+// import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal/LoginFormModal";
+import SignupFormModal from "../SignupFormModal/SignupFormModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -11,7 +15,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Prevent click from bubbling up to the document
+    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
   };
 
@@ -19,7 +23,7 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (ulRef.current && !ulRef.current.contains(e.target)) {
+      if (!ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -29,33 +33,59 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const closeMenu = () => setShowMenu(false);
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    closeMenu();
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      {/* <button onClick={() => setShowMenu(!showMenu)} className="profile-button"> */}
       <button onClick={toggleMenu}>
-        {/* <div style={{ color: "rgb(133, 46, 133)" }}>
+        <span className="icon-container">
           <FaUserCircle />
-        </div> */}
-        <div className="icon-container">
-          <FaUserCircle />
-        </div>
+        </span>
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        <li className="nav-item">{user.username}</li>
-        <li className="nav-item">
-          {user.firstName} {user.lastName}
-        </li>
-        <li className="nav-item">{user.email}</li>
-        <li>
-          <button onClick={logout}>Log Out</button>
-        </li>
+        {user ? (
+          <>
+            <li>{user.username}</li>
+            <li>
+              {user.firstName} {user.lastName}
+            </li>
+            <li>{user.email}</li>
+            <li>
+              <button onClick={logout}>Log Out</button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              {/* <OpenModalButton
+                buttonText="Log In"
+                onButtonClick={closeMenu} */}
+              <OpenModalMenuItem
+                itemText="Log In"
+                onItemClick={closeMenu}
+                modalComponent={<LoginFormModal />}
+              />
+            </li>
+            <li>
+              {/* <OpenModalButton
+                buttonText="Sign Up"
+                onButtonClick={closeMenu} */}
+              <OpenModalMenuItem
+                itemText="Sign Up"
+                onItemClick={closeMenu}
+                modalComponent={<SignupFormModal />}
+              />
+            </li>
+          </>
+        )}
       </ul>
     </>
   );
