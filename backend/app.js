@@ -7,7 +7,7 @@ const cors = require("cors");
 const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
-const reviewImagesRouter = require('./routes/api/review-images');
+const reviewImagesRouter = require("./routes/api/review-images");
 
 const { environment } = require("./config");
 const isProduction = environment === "production";
@@ -55,7 +55,7 @@ app.use(
 //* Add routes to the Express application by importing with the other imports
 
 app.use(routes); // Connect all the routes
-app.use('/api/review-images', reviewImagesRouter);
+app.use("/api/review-images", reviewImagesRouter);
 
 //* Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
@@ -83,7 +83,6 @@ app.use((err, _req, _res, next) => {
 //* Error formatter
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
-  console.error(err);
 
   if (!isProduction) {
     // enable cors only in development

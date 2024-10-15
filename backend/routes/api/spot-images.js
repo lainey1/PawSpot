@@ -10,9 +10,7 @@ const router = express.Router();
 
 // DELETE a Spot by ID
 router.delete("/:imageId", requireAuth, async (req, res) => {
-  //   console.log(">>>>>>HELLO DELETE SPOT IMAGE ID<<<<<<<<<<<<<<<");
   const { imageId } = req.params; // Extract imageId from route parameters
-  //   console.log(">>>>>>>>>>>>>>>>>>>IMAGE ID: ", imageId, " <<<<<<<<<<<<<");
   const userId = req.user.id; // Get the current user's ID from authentication
 
   // Find the image by ID
@@ -27,11 +25,9 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
   }
 
   const spotId = image.spotId;
-  console.log(">>>>>>>>>>>>>>>>>>>SPOT: ", spotId, " <<<<<<<<<<<<<");
 
   // Find the spot by ID
   const spot = await Spot.findByPk(spotId);
-  console.log(">>>>>>>>>>>>>>>>>>>SPOT: ", spot, " <<<<<<<<<<<<<");
 
   // Check if the authenticated user is the owner of the spot
   if (spot.ownerId !== userId) {

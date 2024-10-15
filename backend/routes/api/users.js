@@ -62,7 +62,6 @@ router.post("/", validateSignup, async (req, res) => {
       user: safeUser,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });

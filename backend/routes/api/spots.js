@@ -132,7 +132,6 @@ router.get("/current", async (req, res) => {
 
     return res.json({ Spots: formattedSpots });
   } catch (err) {
-    console.error("Error fetching spots for current user:", err);
     return res.status(401).json({ message: "Unauthorized" });
   }
 });
@@ -141,7 +140,6 @@ router.get("/current", async (req, res) => {
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params; // from URL
   const userId = req.user.id; // Get the current user's ID from authentication
-  console.log(req.params);
   const spot = await Spot.findByPk(spotId); // find spot by ID
 
   // Check if the spot exists
@@ -353,33 +351,10 @@ router.post(
         updatedAt: newSpot.updatedAt,
       });
     } catch (err) {
-      console.error("Error creating a new spot:", err);
       return res.status(401).json({ message: "Unauthorized" });
     }
   }
 );
-
-// //* Create a new spot (v1)
-// router.post("/", validateSpot, async (req, res) => {
-//   const { address, city, state, country, lat, lng, name, description, price } =
-//     req.body;
-
-//   const ownerId = req.user.id; // Get ownerId from the authenticated user
-
-//   const spot = await Spot.create({
-//     ownerId,
-//     address,
-//     city,
-//     state,
-//     country,
-//     lat,
-//     lng,
-//     name,
-//     description,
-//     price,
-//   });
-//   return res.status(201).json(spot);
-// });
 
 //* Create a Review for a Spot based on the Spot's id (CHECKED)
 
@@ -480,45 +455,6 @@ router.get("/:spotId/reviews", async (req, res) => {
   return res.status(200).json({ Reviews: reviews });
 });
 
-// //* GET all Spots owned by the Current User (v1)
-// router.get("/current", requireAuth, async (req, res) => {
-//   const userId = req.user.id;
-//   const spots = await Spot.findAll({
-//     where: {
-//       ownerId: userId,
-//     },
-//   });
-//   return res.json({ spots });
-// });
-
-// //* GET all Spots v2 (not working)
-// router.get("/", async (req, res) => {
-//   const Spots = await Spot.findAll({
-//     include: [
-//       {
-//         model: Review,
-//         attributes: [],
-//         required: false,
-//       },
-//       {
-//         model: SpotImage,
-//         as: "SpotImages",
-//         where: { preview: true },
-//         attributes: ['url'],
-//         required: false
-//       },
-//     ],
-//     // Group by required attributes
-//     group: ["Spot.id", "SpotImages.id"],
-//     attributes: {
-//       include: [[fn("AVG", col("Reviews.stars")), "avgStarRating"]],
-//       exclude: ["avgRating"],
-//     },
-//   });
-
-//   return res.json({ Spots });
-// });
-
 //* Add Query Filters to Get All Spots (CHECKED)
 
 router.get("/", validateQueryParams, async (req, res) => {
@@ -596,7 +532,6 @@ router.get("/", validateQueryParams, async (req, res) => {
         previewImage: spot.SpotImages.length ? spot.SpotImages[0].url : null,
       };
     });
-    console.log(formattedSpots.price);
 
     // Return the response with pagination info
     return res.json({
@@ -605,7 +540,6 @@ router.get("/", validateQueryParams, async (req, res) => {
       size, // Include size in response
     });
   } catch (err) {
-    console.error("Error fetching spots:", err);
     return res.status(500).json({ message: "Internal server error" });
   }
 });

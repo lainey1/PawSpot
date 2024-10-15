@@ -2,11 +2,11 @@
 const express = require("express");
 const router = express.Router();
 
-//* Import this file into the routes/index.js file and connect it to the router there.
+// Import this file into the routes/index.js file and connect it to the router there.
 const apiRouter = require("./api");
 router.use("/api", apiRouter);
 
-// * STATIC ROUTES - Serve React build files in production
+// STATIC ROUTES - Serve React build files in production
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
 
@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-//* Add a XSRF-TOKEN cookie in development
+// Add a XSRF-TOKEN cookie in development
 if (process.env.NODE_ENV !== "production") {
   router.get("/api/csrf/restore", (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken());
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-//* Add a XSRF-TOKEN cookie
+// Add a XSRF-TOKEN cookie
 router.get("/api/csrf/restore", (req, res) => {
   const csrfToken = req.csrfToken();
   res.cookie("XSRF-TOKEN", csrfToken);
@@ -46,7 +46,5 @@ router.get("/api/csrf/restore", (req, res) => {
     "XSRF-Token": csrfToken,
   });
 });
-
-// ***** EXPORTS *****/
 
 module.exports = router;
