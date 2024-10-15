@@ -1,7 +1,15 @@
+.home-icon {
+  margin-right: auto; /* Pushes home icon to the left */
+}
+
+.home-image {
+  height: 32px; /* Adjusted height for navigation */
+  width: auto; /* Maintain aspect ratio */
+  padding-top: 15px;
+}
+
 .navigation {
   background-color: white; /* Ensure visibility */
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Darker shadow for testing */
   padding: 10px 20px;
   z-index: 1000;
 }
@@ -42,11 +50,13 @@
 
 .profile-button {
   padding: 15px; /* Adjust padding as needed */
+  border: 1px solid #ccc;
+  border-radius: 40px;
 }
 
 .icon-container {
   color: rgb(133, 46, 133); /* Set icon color */
-  font-size: 30px; /* Increase font size for the icon */
+  font-size: 32px; /* Increase font size for the icon */
 }
 
 button {
