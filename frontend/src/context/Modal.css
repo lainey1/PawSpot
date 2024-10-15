@@ -23,7 +23,7 @@
 #modal-content {
   position: absolute;
   background-color: white;
-  padding: 20px; /* Padding space inside */
+  padding: 0px 15px 20px; /*Top, Left/Right, Bottom padding*/
   margin: 20px; /* Space around the modal */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: for a subtle shadow */
