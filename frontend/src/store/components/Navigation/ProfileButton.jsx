@@ -1,12 +1,12 @@
 //frontend/src/store/components/Navigation/ProfileButton.jsx
 
 import { useState, useEffect, useRef } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
-// import * as sessionActions from "../../../store/session";
+import * as sessionActions from "../../../store/session";
 
 function ProfileButton({ user }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -29,10 +29,10 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  // const logout = (e) => {
-  //   e.preventDefault();
-  //   dispatch(sessionActions.logout());
-  // };
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
@@ -53,9 +53,9 @@ function ProfileButton({ user }) {
           {user.firstName} {user.lastName}
         </li>
         <li className="nav-item">{user.email}</li>
-        {/* <li>
+        <li>
           <button onClick={logout}>Log Out</button>
-        </li> */}
+        </li>
       </ul>
     </>
   );

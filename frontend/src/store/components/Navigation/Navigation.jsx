@@ -5,12 +5,13 @@ import ProfileButton from "./ProfileButton";
 // import * as sessionActions from "../../../store/session";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
+import SignupFormModal from "../SignupFormModal/SignupFormModal";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
-  const sessionLinks = sessionUser ? (
+  let sessionLinks = sessionUser ? (
     <li>
       <ProfileButton user={sessionUser} />
     </li>
@@ -18,12 +19,15 @@ function Navigation({ isLoaded }) {
     <>
       <li>
         <OpenModalButton
-          buttonText="Login"
+          buttonText="Log In"
           modalComponent={<LoginFormModal />}
         />
       </li>
       <li>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <OpenModalButton
+          buttonText="Sign Up"
+          modalComponent={<SignupFormModal />}
+        />
       </li>
     </>
   );
