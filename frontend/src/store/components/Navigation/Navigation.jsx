@@ -1,34 +1,26 @@
 //frontend/src/store/components/Navigation/Navigation.jsx //for react
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import * as sessionActions from "../../../store/session";
+// import * as sessionActions from "../../../store/session";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
-
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
 
   const sessionLinks = sessionUser ? (
-    <>
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
-      <li>
-        <button onClick={logout} className="navigation ul">
-          Log Out
-        </button>
-      </li>
-    </>
+    <li>
+      <ProfileButton user={sessionUser} />
+    </li>
   ) : (
     <>
       <li>
-        <NavLink to="/login">Log In</NavLink>
+        <OpenModalButton
+          buttonText="Login"
+          modalComponent={<LoginFormModal />}
+        />
       </li>
       <li>
         <NavLink to="/signup">Sign Up</NavLink>
@@ -37,14 +29,12 @@ function Navigation({ isLoaded }) {
   );
 
   return (
-    <nav className="navigation">
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        {isLoaded && sessionLinks}
-      </ul>
-    </nav>
+    <ul>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      {isLoaded && sessionLinks}
+    </ul>
   );
 }
 
