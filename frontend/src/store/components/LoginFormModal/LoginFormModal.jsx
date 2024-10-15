@@ -1,32 +1,37 @@
-// frontend/src/components/LoginFormPage/LoginFormPage.jsx
+// frontend/src/components/LoginFormModal/LoginFormModal.jsx
 
 import { useState } from "react"; // Allows us to add state to a functional component
-import { useDispatch, useSelector } from "react-redux"; //hooks for dispatching actions and accessing state from the redux store
+import { useDispatch } from "react-redux"; //hooks for dispatching actions and accessing state from the redux store
 import * as sessionActions from "../../../store/session"; //imports all actions related to the session
-import { Navigate } from "react-router-dom"; //allows for programmatic navigation
+// import { Navigate } from "react-router-dom"; //allows for programmatic navigation
+import { useModal } from "../../../context/Modal";
 import "./LoginForm.css";
 // import "./Test.css";
 
-function LoginFormPage() {
+function LoginFormModal() {
   //State management
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const { closeModal } = useModal();
 
-  //User session handling
-  if (sessionUser) return <Navigate to="/" replace={true} />;
+  // //User session handling
+  // if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
+    return dispatch(sessionActions.login({ credential, password }))
+      .then(closeModal)
+      .catch(async (res) => {
         const data = await res.json();
-        if (data?.errors) setErrors(data.errors);
-      }
-    );
+        // if (data?.errors) setErrors(data.errors);
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
   };
 
   //FORM RENDERING
@@ -59,4 +64,4 @@ function LoginFormPage() {
   );
 }
 
-export default LoginFormPage;
+export default LoginFormModal;

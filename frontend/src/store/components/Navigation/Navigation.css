@@ -7,7 +7,7 @@
 }
 
 .navigation ul {
-  list-style: none;
+  list-style: none !important;
   padding: 0;
   margin: 0;
   display: flex; /* Keep items in a flex container */
@@ -31,12 +31,26 @@
   background-color: lightgrey; /* Change color on hover */
 }
 
+/* .profile-button {
+  /* background: white; Transparent background */
+/* border: 1px solid #ccc; */
+/* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); Darker shadow for testing */
+/* cursor: pointer; Pointer cursor */
+/* padding: 10px; Match padding */
+/* color: rgb(79, 79, 79); Match link color */
+/* transition: background-color 0.3s; Smooth transition */
+
 .profile-button {
-  background: transparent; /* Transparent background */
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Darker shadow for testing */
-  cursor: pointer; /* Pointer cursor */
-  padding: 10px; /* Match padding */
-  color: rgb(79, 79, 79); /* Match link color */
-  transition: background-color 0.3s; /* Smooth transition */
+  padding: 15px; /* Adjust padding as needed */
+}
+
+.icon-container {
+  color: rgb(133, 46, 133); /* Set icon color */
+  font-size: 30px; /* Increase font size for the icon */
+}
+
+button {
+  border: none;
+  outline: none;
+  background: transparent;
 }
