@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import * as sessionActions from "../../../store/session";
-// import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
@@ -65,9 +64,6 @@ function ProfileButton({ user }) {
         ) : (
           <>
             <li>
-              {/* <OpenModalButton
-                buttonText="Log In"
-                onButtonClick={closeMenu} */}
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
@@ -75,9 +71,6 @@ function ProfileButton({ user }) {
               />
             </li>
             <li>
-              {/* <OpenModalButton
-                buttonText="Sign Up"
-                onButtonClick={closeMenu} */}
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
