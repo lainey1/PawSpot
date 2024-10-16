@@ -1,14 +1,16 @@
 // frontend/src/components/SignupFormPage/SignupFormPage.jsx
 
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useModal } from "../../../context/Modal";
-import * as sessionActions from "../../../store/session";
+import { useState } from "react"; // ALLOWS us to manage state in functional component
+import { useDispatch } from "react-redux"; // ALLOWS us to dispatch action to REDUX store
+import { useModal } from "../../context/Modal"; //ALLOWS componenent to access modal-related functions from Modal context
+import * as sessionActions from "../../store/session"; // section actions from SESSION store like login/logout
 import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
   // const sessionUser = useSelector((state) => state.session.user);
+
+  // ? WHAT STATE VARIABLES DO WE NEED TO INIITIATE AND DEFINE CORRESPONDING SETTER FUNCTION ?
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,11 +23,12 @@ function SignupFormModal() {
   // if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // ! allow custom handling of form submission
     if (password === confirmPassword) {
-      setErrors({});
+      setErrors({}); // ! remember to reset existing errors to prep for new submission
       return dispatch(
         sessionActions.signup({
+          // dispatch action defined in SESSION STORE
           firstName,
           lastName,
           email,
@@ -33,11 +36,12 @@ function SignupFormModal() {
           password,
         })
       )
-        .then(closeModal)
+        .then(closeModal) // IF SUCCESS close modal
         .catch(async (res) => {
-          const data = await res.json();
+          // IF FAIL, error handling
+          const data = await res.json(); // thru async func
           if (data?.errors) {
-            setErrors(data.errors);
+            setErrors(data.errors); // parse from error data
           }
         });
     }
@@ -46,6 +50,8 @@ function SignupFormModal() {
         "Confirm Password field must be the same as the Password field",
     });
   };
+
+  // FORM RENDERING
 
   return (
     <>

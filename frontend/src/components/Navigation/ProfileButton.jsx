@@ -1,10 +1,10 @@
-//frontend/src/store/components/Navigation/ProfileButton.jsx
+//frontend/src/components/Navigation/ProfileButton.jsx
 
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import * as sessionActions from "../../../store/session";
+import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
