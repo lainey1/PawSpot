@@ -1,27 +1,30 @@
 //frontend/src/store/components/Navigation/Navigation.jsx //for react
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import homeIcon from "../../../../public/paw-outline.png";
+import { IoPawOutline } from "react-icons/io5";
 
 function Navigation({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
+  const Paw = () => {
+    return (
+      <div>
+        <IoPawOutline />
+      </div>
+    );
+  };
 
   return (
     <nav className="navigation">
-      <ul>
-        <li className="home-icon">
-          <NavLink to="/">
-            <img src={homeIcon} alt="Home" className="home-image" />
-          </NavLink>
-        </li>
+      <div className="icon-container">
+        <NavLink to="/" className="home-icon">
+          {Paw()}
+        </NavLink>
         {isLoaded && (
-          <li className="profile-button">
-            <ProfileButton user={sessionUser} />
-          </li>
+          <div className="profile-button">
+            <ProfileButton />
+          </div>
         )}
-      </ul>
+      </div>
     </nav>
   );
 }

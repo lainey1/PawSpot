@@ -1,62 +1,79 @@
-.home-icon {
-  margin-right: auto; /* Pushes home icon to the left */
-}
-
-.home-image {
-  height: 32px; /* Adjusted height for navigation */
-  width: auto; /* Maintain aspect ratio */
-  padding-top: 15px;
-}
+/* frontend/src/store/components/Navigation/Navigation.css */
 
 .navigation {
-  background-color: white; /* Ensure visibility */
-  padding: 10px 20px;
-  z-index: 1000;
-}
-
-.navigation ul {
-  list-style: none !important;
-  padding: 0;
-  margin: 0;
-  display: flex; /* Keep items in a flex container */
-  flex-direction: row; /* Ensure items are in a row */
-  gap: 10px; /* Space between ul items */
-}
-
-.navigation li {
-  position: relative; /* Set position for dropdown */
-  color: rgb(79, 79, 79);
-}
-
-.navigation a {
-  text-decoration: none; /* Remove underline from links */
-  color: rgb(79, 79, 79); /* Link color */
-  padding: 10px; /* Add padding for clickable area */
-  transition: background-color 0.3s; /* Smooth transition on hover */
-}
-
-.navigation a:hover {
-  background-color: lightgrey; /* Change color on hover */
-}
-
-/* .profile-button {
-  /* background: white; Transparent background */
-/* border: 1px solid #ccc; */
-/* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); Darker shadow for testing */
-/* cursor: pointer; Pointer cursor */
-/* padding: 10px; Match padding */
-/* color: rgb(79, 79, 79); Match link color */
-/* transition: background-color 0.3s; Smooth transition */
-
-.profile-button {
-  padding: 15px; /* Adjust padding as needed */
-  border: 1px solid #ccc;
-  border-radius: 40px;
+  display: flex;
+  padding: 16px 32px;
+  background-color: #ffffff;
 }
 
 .icon-container {
-  color: rgb(133, 46, 133); /* Set icon color */
-  font-size: 32px; /* Increase font size for the icon */
+  display: flex;
+  align-items: center;
+}
+
+.home-icon {
+  text-decoration: none;
+  color: #4f4f4f;
+  font-size: 48px;
+  transition: color 0.3s ease;
+}
+
+.home-icon:hover {
+  color: #b965d7; /* Accent color on hover */
+}
+
+.profile-button {
+  position: absolute;
+  right: 32px; /* Aligns with the right padding of navigation */
+  padding: 15px; /* Adjust padding as needed */
+  border: 2px solid #dedede;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+  background-color: #ffffff; /* Ensure background color matches */
+  cursor: pointer; /* Indicate it's clickable */
+  min-width: 60px;
+  margin-left: 32px; /* Space between the icons and the profile button */
+}
+
+.profile-dropdown {
+  list-style: none;
+  position: absolute;
+  right: 0px; /* Aligns with the right padding of navigation */
+  top: 30px; /* Adjust according to navigation height */
+  background-color: #ffffff; /* Match the nav background */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Ensure it sits above other content */
+  min-width: 200px; /* Set a minimum width for the dropdown */
+  padding: 0; /* Remove default padding on the dropdown */
+}
+
+.profile-dropdown.hidden {
+  display: none; /* Hide the menu when not in use */
+}
+
+.profile-dropdown li {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.profile-dropdown li:hover {
+  background-color: #f7f7f7; /* Light gray on hover */
+}
+
+.hamburger-icon,
+.user-icon {
+  font-size: 24px;
+  color: #4f4f4f; /* Match the icon color */
+  margin-right: 8px; /* Space between icons */
+  cursor: pointer;
+}
+
+.site-name {
+  text-decoration: none;
+  color: #4f4f4f;
+  font-size: 32px;
 }
 
 button {
