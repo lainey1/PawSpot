@@ -3,8 +3,10 @@ import { NavLink } from "react-router-dom"; // NavLink component is used to crea
 import ProfileButton from "./ProfileButton"; // Handle user profile-related functionality
 import "./Navigation.css";
 import { IoPawOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 function Navigation({ isLoaded }) {
+  const user = useSelector((state) => state.session.user); // Ensure you are selecting the user from Redux state
   // accepts prop isLoaded to indicate whether the user profile data has been loaded
   const Paw = () => {
     // wrapper for the IoPawOutline icon.
@@ -23,7 +25,7 @@ function Navigation({ isLoaded }) {
         </NavLink>
         {isLoaded && (
           <div className="profile-button">
-            <ProfileButton />
+            <ProfileButton user={user} />
           </div>
         )}
       </div>

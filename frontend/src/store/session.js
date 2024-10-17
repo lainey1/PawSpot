@@ -60,8 +60,13 @@ export const signup = (user) => async (dispatch) => {
 
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
-  const data = await response.json();
-  dispatch(setUser(data.user));
+  if (response.ok) {
+    const data = await response.json();
+    console.log("Restored user:", data.user); // Log to check user data
+    dispatch(setUser(data.user));
+  } else {
+    console.error("Failed to restore user:", response.status);
+  }
   return response;
 };
 
@@ -74,15 +79,18 @@ export const logout = () => async (dispatch) => {
 };
 
 // Initial State
-const initialState = { user: null };
+const initialState = {
+  user: null,
+  isLoaded: false,
+};
 
 // Session Reducer
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, isLoaded: true };
     case REMOVE_USER:
-      return { ...state, user: null };
+      return { ...state, user: null, isLoaded: true };
     default:
       return state;
   }

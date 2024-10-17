@@ -55,21 +55,21 @@ function ProfileButton({ user }) {
           <FaUserCircle className="user-icon" />
         </span>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <p className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>
-              {user.firstName} {user.lastName}
-            </li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <p className="left-padding">Hello, {user.username}!</p>
+            <p className="left-padding">{user.email}</p>
+            <p className="left-padding">
+              <button className="logout-button" onClick={logout}>
+                Log Out
+              </button>
+            </p>
           </>
         ) : (
           <>
-            {/* Ensure these are direct children of the outer <ul> */}
+            {console.log("User logged in:", user)}{" "}
+            {/* Log user when logged in */}
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}
@@ -82,7 +82,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
+      </p>
     </>
   );
 }
