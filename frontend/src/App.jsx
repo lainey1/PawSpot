@@ -11,6 +11,7 @@ import * as sessionActions from "./store/session";
 //# IMPORT COMPONENT - reusable piece of UI that defines how a certain part of the application looks or behaves.
 import Navigation from "./components/Navigation/Navigation";
 import SpotsBrowser from "./components/SpotsBrowser";
+import SpotDetail from "./components/SpotDetail/SpotDetail";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         //* SET SPOT BROWSER AS THE LANDING PAGE
         path: "/",
         element: <SpotsBrowser />,
+      },
+      {
+        path: "/spots/:spotId", // Define the route for SpotDetail
+        element: <SpotDetail />,
       },
     ],
   },

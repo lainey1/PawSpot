@@ -1,0 +1,40 @@
+/* frontend/src/components/SpotDetail.css */
+.spot-detail {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.spot-detail img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.spot-detail h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.spot-detail p {
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+button:hover {
+  background-color: rgb(170, 67, 170);
+  border: 3px solid black;
+  box-shadow: 0px 2px 2px black;
+}
