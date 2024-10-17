@@ -22,14 +22,18 @@ const SpotDetail = () => {
 
   // #3 RENDER METHOD
   return (
-    <div className="spot-detail">
-      <h1>{spot.name}</h1>
-      <h2>
-        {spot.city}, {spot.state}, {spot.country}
-      </h2>
-      <p>{spot.description}</p>
-      <p className="price">${spot.price}night</p>
-      <button>Reserve</button>
+    <div className="spot-detail-container">
+      <div className="spot-detail">
+        <h1>{spot.title}</h1>
+        <h2>
+          {spot.city}, {spot.state}, {spot.country}
+        </h2>
+        <p>{spot.description}</p>
+      </div>
+
+      <div className="bookit-sidebar">
+        <p className="price">${spot.price} per night</p>
+      </div>
     </div>
   );
 };
