@@ -3,7 +3,7 @@
 // #1 IMPORT necessary hooks and components for building the browser interface
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { getSpots } from "../store/spots";
 
 // #2 DEFINE COMPONENT
@@ -11,13 +11,12 @@ const SpotsBrowser = () => {
   //* Hooks for State and Dispatch
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spot.list); // SELECT SPOTS FROM STATE
+  const loading = useSelector((state) => state.spot.loading);
 
   //* Effect Hook for Fetching Spots
   useEffect(() => {
     dispatch(getSpots());
   }, [dispatch]);
-
-  const loading = useSelector((state) => state.spot.loading);
 
   // #3 RENDER METHOD
   //* Inside the <nav>, each spot is rendered as a NavLink. When clicked, it navigates to the individual spot's details page.
@@ -32,7 +31,9 @@ const SpotsBrowser = () => {
           ) : spots.length > 0 ? (
             spots.map((spot) => (
               <div key={spot.id}>
-                <h3>{spot.name}</h3>
+                <Link to={`/spots/${spot.id}`}>
+                  <h3>{spot.name}</h3>
+                </Link>
                 <p>{spot.description}</p>
                 <p>Price: ${spot.price}</p>
                 <p>
