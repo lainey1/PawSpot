@@ -18,7 +18,7 @@ export const getSpots = () => async (dispatch) => {
     const response = await fetch(`api/spots`);
     if (response.ok) {
       const data = await response.json();
-      dispatch(loadSpots(data.Spots));
+      dispatch(loadSpots(data.Spots)); //! FIX IDENTIFIED. Updated from data to data.spots to access nested data.
     } else {
       console.error("Failed to fetch spots:", response.statusText);
     }
