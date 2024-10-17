@@ -41,7 +41,9 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     console.log("Logging out");
-    dispatch(sessionActions.logout());
+    dispatch(sessionActions.logout()).then(() => {
+      window.location.href = "/"; // Redirect to home page
+    });
     closeMenu();
   };
 
@@ -58,7 +60,7 @@ function ProfileButton({ user }) {
       <p className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <p className="left-padding">Hello, {user.username}!</p>
+            <p className="left-padding">Hello, {user.username}.</p>
             <p className="left-padding">{user.email}</p>
             <p className="left-padding">
               <button className="logout-button" onClick={logout}>

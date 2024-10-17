@@ -46,7 +46,7 @@ module.exports = {
         },
         {
           spotId: 4,
-          url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF2P5gHgWje_fE-hRxtdo7bKDe8v0WU6hXJNSV7tL4Td0zuKDH6m9bBYBQzew6JCqQev4T2MZb8mSrgpOa2jPH5YoS16FopFCZQebw4kX09EPKn_RmlQnfkygZ-js_cgVnPO9csX8G4o5jWLN6TEUQvAIBVJsK-K6ehaeiwQAOM8Ix1wF3wpUH5_UqKqf9/s16000/2024-03-03%2012.06.07-edit.jpg",
+          url: "https://i.pinimg.com/736x/38/36/2b/38362b33850aa9e31668788b8fe58df7.jpg",
           preview: false,
         },
         {

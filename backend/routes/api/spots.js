@@ -524,7 +524,7 @@ router.get("/", validateQueryParams, async (req, res) => {
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
         avgRating: spot.dataValues.avgStarRating
-          ? Number(spot.dataValues.avgStarRating).toFixed(2)
+          ? Number(spot.dataValues.avgStarRating).toFixed(1)
           : null,
         previewImage: spot.SpotImages.length ? spot.SpotImages[0].url : null,
         // images, // Add the images array

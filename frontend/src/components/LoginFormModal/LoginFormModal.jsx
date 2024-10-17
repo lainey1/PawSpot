@@ -15,9 +15,6 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({}); // initializes a state variable to store any validation or submission errors that may occur, and starts as an empty object
   const { closeModal } = useModal(); // uses the useModal context to extract the closeModal function
 
-  // //User session handling
-  // if (sessionUser) return <Navigate to="/" replace={true} />;
-
   const handleSubmit = (e) => {
     e.preventDefault(); // allows custom handling of the submit event.
     setErrors({}); // resets any existing errors to prepare for a new submission
@@ -29,6 +26,25 @@ function LoginFormModal() {
         // if (data?.errors) setErrors(data.errors);
         if (data && data.errors) {
           // IF ERROR data exists, it updates the state with the new error messages.
+          setErrors(data.errors);
+        }
+      });
+  };
+
+  //* Adding Demo login
+  const loginAsDemoUser = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    setErrors({}); // Reset errors
+    return dispatch(
+      sessionActions.login({
+        credential: "Demo-lition",
+        password: "password",
+      })
+    )
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
           setErrors(data.errors);
         }
       });
@@ -56,6 +72,11 @@ function LoginFormModal() {
         {errors.credential && <p>{errors.credential}</p>}
         <button type="submit">Log In</button>
       </form>
+      <div className="demo-login-link">
+        <a href="#" onClick={loginAsDemoUser} className="demo-link">
+          Log in as Demo User
+        </a>
+      </div>
     </>
   );
 }
