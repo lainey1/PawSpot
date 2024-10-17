@@ -52,21 +52,25 @@ const SpotDetail = () => {
           </div>
         </div>
 
-        <p className="host-info">
-          Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
-        </p>
+        <span className="third-layer">
+          <div className="spot-double-click">
+            <p className="host-info">
+              Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
+            </p>
 
-        <p>{spot.description}</p>
+            <p>{spot.description}</p>
+          </div>
 
-        <div className="bookit-sidebar">
-          <p className="price">${spot.price} per night</p>
-          <button className="reserve-button" onClick={handleReserveClick}>
-            Reserve
-          </button>
-          {showAlert && (
-            <span className="alert-message">Feature Coming Soon...</span>
-          )}
-        </div>
+          <div className="bookit-sidebar">
+            <p className="price">${spot.price} per night</p>
+            <button className="reserve-button" onClick={handleReserveClick}>
+              Reserve
+            </button>
+            {showAlert && (
+              <span className="alert-message">Feature Coming Soon...</span>
+            )}
+          </div>
+        </span>
       </div>
     </div>
   );
