@@ -1,6 +1,25 @@
-.spot-detail-container {
-  display: flex;
-  padding: 20px;
+.outer-container {
+  max-width: 1000px;
+  margin: 0 auto; /* Centers the container */
+  padding: 0 20px; /* Top/Bottom - Left/Right Horizontal padding */
+  width: 100%; /* Ensure it takes the full width below 1000px */
+}
+
+.alert-message {
+  color: red; /* Alert color */
+  font-weight: bold; /* Optional */
+  margin-left: 10px; /* Space between button and message */
+}
+
+.bookit-sidebar {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.5);
+  justify-content: flex-end;
+  margin-right: 50px;
+  margin-top: 1em;
+  padding: 15px;
+  width: 500px;
 }
 
 .details-container {
@@ -8,58 +27,187 @@
   margin-left: 20px; /* Space between images and details */
 }
 
+.host-info {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 .images-container {
-  display: flex; /* Flexbox to align large and small images */
+  display: flex; /* Keep large and small images in the same row */
   margin-top: 10px; /* Space between location and images */
 }
 
-.large-image {
-  width: 60%; /* Adjust the width of the large image */
-  height: auto;
-  margin-right: 10px; /* Space between large and small images */
+.image-large {
+  border-radius: 15px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
-.small-images {
+.image-large-container {
+  height: 400px; /* Set a fixed height for consistency */
+  margin-right: 5px;
+  overflow: hidden;
+  position: relative;
+  width: 55%; /* Occupies 55% of the container width */
+}
+
+.image-small {
+  border-radius: 4px;
+  height: 100%; /* Set to 100% to fill the height of the row */
+  object-fit: cover;
+  width: 48%; /* Adjust as necessary for your layout */
+}
+
+.images-small-container {
   display: flex;
-  flex-direction: column; /* Stack small images vertically */
-  justify-content: space-between; /* Space between small images */
-  width: 35%; /* Adjust to fit your layout */
+  flex-direction: column;
+  height: 400px; /* Match height of the large image */
+  width: 40%; /* Occupies 40% of the container width */
 }
 
-.small-image {
-  width: 100%; /* Full width for small images */
-  height: auto;
-  margin-bottom: 10px; /* Space between small images */
+.images-small-row {
+  display: flex;
+  height: 50%; /* Each row takes half the height */
+  justify-content: space-between;
+  margin: 5px; /* Consistent gap between small images */
+}
+
+.price-amount {
+  font-weight: bold; /* Make price bold */
+  font-size: 1.5em; /* Make price larger */
+  margin-right: 0.15em;
+}
+
+.price-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.price-per-night {
+  font-size: 1em;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between; /* Ensure price is on one side and rating on the other */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 1.5em; /* Space below price section */
+}
+
+.rating-average {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: flex-end; /* Ensure rating is aligned to the right */
+}
+
+.rating-average svg {
+  display: flex;
+  align-items: center;
+  font-size: 1.15em; /* Increase size of the star icon */
+}
+.ratings-number {
+  font-weight: bold; /* Make price bold */
+  font-size: 1em; /* Make price larger */
+}
+
+.reserve-button {
+  background-color: rgb(170, 67, 170);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em; /* Adjust size */
+  margin-top: 10px; /* Space above the button */
+  padding: 10px 15px; /* Padding for button */
+}
+
+.spot-double-click {
+  margin-right: 50px;
+}
+
+.spot-detail-container {
+  display: flex;
+  padding: 20px;
 }
 
 .spot-location {
   font-weight: bold; /* Make location stand out */
 }
 
-.bookit-sidebar {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 5px;
-  margin-top: 20px; /* Space above the sidebar */
+.third-layer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.price {
-  font-size: 1.5em; /* Make price larger */
+/* Media Query for medium screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bookit-sidebar {
+    margin-right: 30px; /* Less margin on the right */
+    width: 40%;
+  }
+
+  .details-container {
+    margin-left: 15px; /* Adjust margin for details */
+  }
+
+  .image-large-container {
+    width: 60%; /* Maintain 60% width on medium screens */
+  }
+
+  .images-small-container {
+    width: 40%; /* Maintain 40% width on medium screens */
+  }
+  .price-rating {
+    flex-direction: column; /* Stack price and rating on smaller screens */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .rating-average {
+    margin-top: 0.5em; /* Space between price and rating when stacked */
+  }
+
+  .spot-detail-container {
+    flex-direction: row; /* Keep items in a row */
+  }
+
+  .third-layer {
+    flex-direction: row; /* Keep in row for medium screens */
+    justify-content: space-between;
+  }
 }
 
-.alert-message {
-  margin-left: 10px; /* Space between button and message */
-  color: red; /* Alert color */
-  font-weight: bold; /* Optional */
-}
+/* Media Query for small screens */
+@media (max-width: 768px) {
+  .outer-container {
+    padding: 0 10px; /* Adjust padding for smaller screens */
+  }
 
-.reserve-button {
-  margin-top: 10px; /* Space above the button */
-  padding: 10px 15px; /* Padding for button */
-  color: white;
-  background-color: rgb(170, 67, 170);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.2em; /* Adjust size */
+  .bookit-sidebar {
+    margin-right: 0; /* Remove margin on small screens */
+    margin-top: 20px; /* Add margin above the sidebar for spacing */
+    width: 100%; /* Adjust sidebar width */
+  }
+
+  .images-container {
+    align-items: center; /* Center the large image */
+    flex-direction: column; /* Stack images vertically */
+    gap: 10px; /* Consistent gap between stacked images */
+  }
+
+  .image-large-container {
+    height: 300px; /* Adjust height as needed */
+    width: 100%; /* Full width on small screens */
+  }
+
+  .images-small-container {
+    display: none; /* Hide small images container */
+  }
+
+  .third-layer {
+    align-items: flex-start; /* Align items to the start */
+    flex-direction: column; /* Stack elements in third-layer vertically */
+    width: 95%; /* Adjust width */
+  }
 }

@@ -1,8 +1,7 @@
-// frontend/src/components/SpotDetail.jsx
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./SpotDetail.css";
+import { GoStarFill } from "react-icons/go";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -27,45 +26,85 @@ const SpotDetail = () => {
   };
 
   return (
-    <div className="spot-detail-container">
-      <div className="details-container">
-        <h2>{spot.name}</h2>
-        <p className="spot-location">
-          Location: {spot.city}, {spot.state}, {spot.country}
-        </p>
+    <div className="outer-container">
+      <div className="spot-detail-container">
+        <div className="details-container">
+          <h2>{spot.name}</h2>
+          <p className="spot-location">
+            Location: {spot.city}, {spot.state}, {spot.country}
+          </p>
 
-        <div className="images-container">
-          <img
-            className="large-image"
-            src={spot.SpotImages[0]?.url}
-            alt={spot.name}
-          />
-          <div className="small-images">
-            {spot.SpotImages.slice(1, 5).map((image) => (
+          <div className="images-container">
+            <div className="image-large-container">
               <img
-                key={image.id}
-                className="small-image"
-                src={image.url}
-                alt={`Thumbnail`}
+                className="image-large"
+                src={spot.SpotImages[0]?.url}
+                alt={spot.name}
               />
-            ))}
+            </div>
+
+            <div className="images-small-container">
+              <div className="images-small-row">
+                <img
+                  src={spot.SpotImages[1]?.url}
+                  className="image-small"
+                  alt="Small Image 1"
+                />
+                <img
+                  src={spot.SpotImages[2]?.url}
+                  className="image-small"
+                  alt="Small Image 2"
+                />
+              </div>
+              <div className="images-small-row">
+                <img
+                  src={spot.SpotImages[3]?.url}
+                  className="image-small"
+                  alt="Small Image 3"
+                />
+                <img
+                  src={spot.SpotImages[4]?.url}
+                  className="image-small"
+                  alt="Small Image 4"
+                />
+              </div>
+            </div>
           </div>
-        </div>
 
-        <p className="host-info">
-          Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
-        </p>
+          <span className="third-layer">
+            <div className="spot-double-click">
+              <p className="host-info">
+                Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
+              </p>
+              <p>{spot.description}</p>
+            </div>
 
-        <p>{spot.description}</p>
+            <div className="bookit-sidebar">
+              <div className="price-rating">
+                <div className="price-container">
+                  <span className="price-amount">${spot.price}</span>
+                  <span className="price-per-night"> per night</span>
+                </div>
+                <div className="rating-average">
+                  {spot.avgStarRating ? (
+                    <>
+                      <GoStarFill /> {spot.avgStarRating.toFixed(1)} ·{" "}
+                      {spot.numReviews} reviews
+                    </>
+                  ) : (
+                    <span className="ratings-number">0 reviews</span>
+                  )}
+                </div>
+              </div>
 
-        <div className="bookit-sidebar">
-          <p className="price">${spot.price} per night</p>
-          <button className="reserve-button" onClick={handleReserveClick}>
-            Reserve
-          </button>
-          {showAlert && (
-            <span className="alert-message">Feature Coming Soon...</span>
-          )}
+              <button className="reserve-button" onClick={handleReserveClick}>
+                Reserve
+              </button>
+              {showAlert && (
+                <span className="alert-message">Feature Coming Soon...</span>
+              )}
+            </div>
+          </span>
         </div>
       </div>
     </div>
