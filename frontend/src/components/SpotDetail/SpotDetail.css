@@ -1,11 +1,28 @@
 /* frontend/src/components/SpotDetail.css */
+
+.alert-message {
+  padding: 20px;
+  margin-left: 10px;
+  font-weight: bold;
+  background-color: rgb(222, 132, 222);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.1);
+}
+
+.bookit-sidebar {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.1);
+}
+
 .spot-detail {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .spot-detail img {
@@ -14,27 +31,31 @@
   margin-bottom: 20px;
 }
 
-.spot-detail h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
-
 .spot-detail p {
   margin: 10px 0;
 }
 
 .reserve-button {
+  margin: 5px;
   padding: 10px;
-  background-color: white;
+  color: white;
+  background-color: rgb(170, 67, 170);
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  border: 2px solid #ccc;
-  box-shadow: 2px 2px 2px #ccc;
+  border: 2px solid transparent;
+  box-shadow: none;
+  font-size: 1.5em;
+  transition: background-image 0.3s ease;
 }
 
 .reserve-button:hover {
-  background-color: rgb(170, 67, 170);
-  border: 3px solid black;
-  box-shadow: 0px 2px 2px black;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(170, 67, 170),
+    rgb(120, 30, 120)
+  );
+  border: 2px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+  font-size: 1.5em;
 }
