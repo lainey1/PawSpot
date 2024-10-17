@@ -69,22 +69,17 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            <ul className="profile-dropdown">
-              <li>
-                <OpenModalMenuItem
-                  itemText="Log In"
-                  onItemClick={closeMenu}
-                  modalComponent={<LoginFormModal />}
-                />
-              </li>
-              <li>
-                <OpenModalMenuItem
-                  itemText="Sign Up"
-                  onItemClick={closeMenu}
-                  modalComponent={<SignupFormModal />}
-                />
-              </li>
-            </ul>
+            {/* Ensure these are direct children of the outer <ul> */}
+            <OpenModalMenuItem
+              itemText="Log In"
+              onItemClick={closeMenu}
+              modalComponent={<LoginFormModal />}
+            />
+            <OpenModalMenuItem
+              itemText="Sign Up"
+              onItemClick={closeMenu}
+              modalComponent={<SignupFormModal />}
+            />
           </>
         )}
       </ul>
