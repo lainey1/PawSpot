@@ -19,7 +19,7 @@
   margin-right: 50px;
   margin-top: 1em;
   padding: 15px;
-  width: 450px;
+  width: 500px;
 }
 
 .details-container {
@@ -76,10 +76,38 @@
 .price-amount {
   font-weight: bold; /* Make price bold */
   font-size: 1.5em; /* Make price larger */
+  margin-right: 0.15em;
+}
+
+.price-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
 }
 
 .price-per-night {
-  font-weight: normal; /* Keep "per night" normal weight */
+  font-size: 1em;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between; /* Ensure price is on one side and rating on the other */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 1.5em; /* Space below price section */
+}
+
+.rating-average {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: flex-end; /* Ensure rating is aligned to the right */
+}
+
+.rating-average svg {
+  display: flex;
+  align-items: center;
+  font-size: 1.15em; /* Increase size of the star icon */
+}
+.ratings-number {
+  font-weight: bold; /* Make price bold */
   font-size: 1em; /* Make price larger */
 }
 
@@ -117,7 +145,7 @@
 @media (min-width: 769px) and (max-width: 1024px) {
   .bookit-sidebar {
     margin-right: 30px; /* Less margin on the right */
-    width: 350px; /* Adjust width for medium screens */
+    width: 40%;
   }
 
   .details-container {
@@ -130,6 +158,14 @@
 
   .images-small-container {
     width: 40%; /* Maintain 40% width on medium screens */
+  }
+  .price-rating {
+    flex-direction: column; /* Stack price and rating on smaller screens */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .rating-average {
+    margin-top: 0.5em; /* Space between price and rating when stacked */
   }
 
   .spot-detail-container {
@@ -167,10 +203,6 @@
 
   .images-small-container {
     display: none; /* Hide small images container */
-  }
-
-  .spot-detail-container {
-    flex-direction: column; /* Stack items vertically */
   }
 
   .third-layer {

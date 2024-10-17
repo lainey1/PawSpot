@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./SpotDetail.css";
-import { GoStarFill } from "react-icons/go"; // Importing the star icon
+import { GoStarFill } from "react-icons/go";
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -81,25 +81,22 @@ const SpotDetail = () => {
 
             <div className="bookit-sidebar">
               <div className="price-rating">
-                <div className="price">
-                  <span className="price-amount">${spot.price}</span>{" "}
-                  <span className="price-per-night">per night</span>
+                <div className="price-container">
+                  <span className="price-amount">${spot.price}</span>
+                  <span className="price-per-night"> per night</span>
                 </div>
-                <span className="average-rating">
-                  {spot.avgRating ? (
+                <div className="rating-average">
+                  {spot.avgStarRating ? (
                     <>
-                      <GoStarFill /> {spot.avgRating}
+                      <GoStarFill /> {spot.avgStarRating.toFixed(1)} ·{" "}
+                      {spot.numReviews} reviews
                     </>
                   ) : (
-                    <span
-                      className="no-ratings"
-                      style={{ fontStyle: "italic" }}
-                    >
-                      No ratings
-                    </span>
+                    <span className="ratings-number">0 reviews</span>
                   )}
-                </span>
+                </div>
               </div>
+
               <button className="reserve-button" onClick={handleReserveClick}>
                 Reserve
               </button>
@@ -113,4 +110,5 @@ const SpotDetail = () => {
     </div>
   );
 };
+
 export default SpotDetail;
