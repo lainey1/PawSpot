@@ -50,12 +50,7 @@ const SpotsBrowser = () => {
                           <GoStarFill /> {spot.avgRating}
                         </>
                       ) : (
-                        <span
-                          className="no-ratings"
-                          style={{ fontStyle: "italic" }}
-                        >
-                          No ratings
-                        </span>
+                        <span className="no-ratings">New</span>
                       )}
                     </span>
                   </div>
