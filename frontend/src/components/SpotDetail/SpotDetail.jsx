@@ -33,6 +33,7 @@ const SpotDetail = () => {
 
       <div className="bookit-sidebar">
         <p className="price">${spot.price} per night</p>
+        <button className="reserve-button">Reserve</button>
       </div>
     </div>
   );
