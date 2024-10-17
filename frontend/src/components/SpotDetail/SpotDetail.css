@@ -1,3 +1,9 @@
+.outer-container {
+  max-width: 1000px;
+  margin: 0 auto; /* Centers the container */
+  padding: 0 20px; /* Top/Bottom - Left/Right Horizontal padding */
+}
+
 .spot-detail-container {
   display: flex;
   padding: 20px;
@@ -8,7 +14,7 @@
   border: 1px solid #ccc;
   padding: 15px;
   border-radius: 5px;
-  margin-top: 20px; /* Space above the sidebar */
+  margin-top: 20px;
   margin-right: 50px;
   width: 450px;
 }
@@ -29,28 +35,37 @@
   padding-right: 50px;
   margin-right: 50px;
 }
+
 .images-container {
   display: flex; /* Flexbox to align large and small images */
   margin-top: 10px; /* Space between location and images */
 }
 
+.large-image-container {
+  width: 600px; /* or a fixed width like 600px */
+  height: 400px; /* Set a fixed height for consistency */
+  overflow: hidden;
+  position: relative;
+}
+
 .large-image {
-  width: 60%; /* Adjust the width of the large image */
-  height: auto;
-  margin-right: 10px; /* Space between large and small images */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 .small-images {
   display: flex;
-  flex-direction: column; /* Stack small images vertically */
-  justify-content: space-between; /* Space between small images */
-  width: 35%; /* Adjust to fit your layout */
+  justify-content: space-between;
+  margin-left: 10px; /* Adds space between large and small images */
 }
 
 .small-image {
-  width: 100%; /* Full width for small images */
-  height: auto;
-  margin-bottom: 10px; /* Space between small images */
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  object-fit: cover; /* Ensures the thumbnail maintains aspect ratio */
 }
 
 .spot-location {
@@ -76,4 +91,62 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 1.2em; /* Adjust size */
+}
+
+/* Media Query for medium screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .spot-detail-container {
+    flex-direction: row; /* Keep items in a row */
+  }
+
+  .bookit-sidebar {
+    width: 350px; /* Adjust width for medium screens */
+    margin-right: 30px; /* Less margin on the right */
+  }
+
+  .details-container {
+    margin-left: 15px; /* Adjust margin for details */
+  }
+
+  .large-image-container {
+    width: 100%; /* Full width on medium screens */
+  }
+
+  .third-layer {
+    flex-direction: row; /* Keep in row for medium screens */
+    justify-content: space-between;
+  }
+}
+
+/* Media Query for small screens */
+@media (max-width: 768px) {
+  .spot-detail-container {
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  .images-container {
+    flex-direction: column; /* Stack images vertically */
+    align-items: center; /* Center the large image */
+  }
+
+  .large-image-container {
+    width: 100%; /* Full width on small screens */
+    height: 300px; /* Adjust height as needed */
+  }
+
+  .small-images {
+    display: none; /* Hide small images */
+  }
+
+  .bookit-sidebar {
+    margin-right: 0; /* Remove margin on small screens */
+    width: 100%; /* Adjust sidebar width */
+    margin-top: 20px; /* Add margin above the sidebar for spacing */
+  }
+
+  .third-layer {
+    flex-direction: column; /* Stack elements in third-layer vertically */
+    align-items: flex-start; /* Align items to the start */
+    width: 95%; /* Adjust width */
+  }
 }
