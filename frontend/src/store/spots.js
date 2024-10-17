@@ -13,16 +13,19 @@ export const loadSpots = (spotsData) => ({
 // #3 THUNK ACTION
 //* Create thunk action to fetch list of Spots from the server
 export const getSpots = () => async (dispatch) => {
+  dispatch({ type: "spots/LOAD_START" }); // Set loading true before fetch
   try {
     const response = await fetch(`api/spots`);
     if (response.ok) {
-      const data = await response.json(); // Converts response to JSON
-      dispatch(loadSpots(data));
+      const data = await response.json();
+      dispatch(loadSpots(data.Spots));
     } else {
       console.error("Failed to fetch spots:", response.statusText);
     }
   } catch (error) {
     console.error("Error fetching spots:", error);
+  } finally {
+    dispatch({ type: "spots/LOAD_END" }); // Set loading false after fetch
   }
 };
 
@@ -41,6 +44,16 @@ const spotsReducer = (state = initialState, action) => {
         ...state,
         loading: false, // Consider setting loading here if needed
         list: action.list,
+      };
+    case "spots/LOAD_START":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "spots/LOAD_END":
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;

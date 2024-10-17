@@ -17,6 +17,8 @@ const SpotsBrowser = () => {
     dispatch(getSpots());
   }, [dispatch]);
 
+  const loading = useSelector((state) => state.spot.loading);
+
   // #3 RENDER METHOD
   //* Inside the <nav>, each spot is rendered as a NavLink. When clicked, it navigates to the individual spot's details page.
   return (
@@ -25,7 +27,9 @@ const SpotsBrowser = () => {
       <section>
         <h2>All Spots</h2>
         <div>
-          {spots.length > 0 ? (
+          {loading ? (
+            <p>Loading spots...</p>
+          ) : spots.length > 0 ? (
             spots.map((spot) => (
               <div key={spot.id}>
                 <h3>{spot.name}</h3>
@@ -34,7 +38,6 @@ const SpotsBrowser = () => {
                 <p>
                   {spot.city}, {spot.state}
                 </p>
-                {/* Add a NavLink to individual spot details if needed */}
               </div>
             ))
           ) : (
