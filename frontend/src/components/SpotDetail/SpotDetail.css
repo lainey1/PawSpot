@@ -3,11 +3,32 @@
   padding: 20px;
 }
 
+.bookit-sidebar {
+  justify-content: flex-end;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px; /* Space above the sidebar */
+  margin-right: 50px;
+  width: 450px;
+}
+
 .details-container {
   flex: 1; /* Allow details to take available space */
   margin-left: 20px; /* Space between images and details */
 }
 
+.third-layer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.third-layer spot-double-click {
+  justify-content: flex-start;
+  padding-right: 50px;
+  margin-right: 50px;
+}
 .images-container {
   display: flex; /* Flexbox to align large and small images */
   margin-top: 10px; /* Space between location and images */
@@ -34,13 +55,6 @@
 
 .spot-location {
   font-weight: bold; /* Make location stand out */
-}
-
-.bookit-sidebar {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 5px;
-  margin-top: 20px; /* Space above the sidebar */
 }
 
 .price {
