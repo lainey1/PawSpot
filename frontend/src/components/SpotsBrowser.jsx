@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import { getSpots } from "../store/spots";
+import "./SpotBrowser.css";
 
 // #2 DEFINE COMPONENT
 const SpotsBrowser = () => {
@@ -19,41 +20,40 @@ const SpotsBrowser = () => {
   }, [dispatch]);
 
   // #3 RENDER METHOD
-  //* Inside the <nav>, each spot is rendered as a NavLink. When clicked, it navigates to the individual spot's details page.
   return (
     <main>
       <nav></nav>
       <section>
         <h2>All Spots</h2>
-        <div>
-          {loading ? (
-            <p>Loading spots...</p>
-          ) : spots.length > 0 ? (
-            spots.map((spot) => (
-              <div key={spot.id}>
-                <Link to={`/spots/${spot.id}`}>
+        {loading ? (
+          <p>Loading spots...</p>
+        ) : spots.length > 0 ? (
+          <div className="spots-grid">
+            {spots.map((spot) => (
+              <div key={spot.id} className="spot-tile">
+                <Link to={`/spots/${spot.id}`} className="spot-link">
                   {spot.previewImage && (
                     <img
                       src={spot.previewImage}
                       alt={spot.name}
-                      style={{ width: "100%", height: "auto" }}
+                      className="spot-image"
                     />
                   )}
-                  <h3>{spot.name}</h3>
+                  <h3 className="spot-name">{spot.name}</h3>
                 </Link>
-                <p>{spot.description}</p>
+                <p className="spot-description">{spot.description}</p>
                 <p>
                   <strong>${spot.price}</strong>
                 </p>
-                <p>
+                <p className="spot-location">
                   {spot.city}, {spot.state}
                 </p>
               </div>
-            ))
-          ) : (
-            <p>No spots available.</p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p>No spots available.</p>
+        )}
       </section>
       <Outlet />
     </main>
