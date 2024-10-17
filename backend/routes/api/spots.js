@@ -484,9 +484,7 @@ router.get("/", validateQueryParams, async (req, res) => {
 
     // Query the database with filters and pagination
     const spots = await Spot.findAll({
-      where, // Apply filters
-      // limit: size,
-      // offset: (page - 1) * size,
+      where,
       include: [
         {
           model: Review,
@@ -504,14 +502,13 @@ router.get("/", validateQueryParams, async (req, res) => {
       attributes: {
         include: [[fn("AVG", col("Reviews.stars")), "avgStarRating"]], // Calculate average star rating
       },
-      // limit: size, // Limit for pagination
-      // offset: (page - 1) * size, // Offset for pagination
     });
     // Apply pagination manually
     const paginatedSpots = spots.slice((page - 1) * size, page * size);
 
     // Format the response
     const formattedSpots = paginatedSpots.map((spot) => {
+      const images = spot.SpotImages.map((img) => img.url); // Collect all image URLs
       return {
         id: spot.id,
         ownerId: spot.ownerId,
@@ -530,6 +527,7 @@ router.get("/", validateQueryParams, async (req, res) => {
           ? Number(spot.dataValues.avgStarRating).toFixed(2)
           : null,
         previewImage: spot.SpotImages.length ? spot.SpotImages[0].url : null,
+        // images, // Add the images array
       };
     });
 

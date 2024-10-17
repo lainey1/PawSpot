@@ -1,4 +1,5 @@
 // backend/db/seeders/20240924235125-demo-spotImages
+
 "use strict";
 
 const { SpotImage } = require("../models");
@@ -15,68 +16,68 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: "https://cdn.prod.website-files.com/5dcc7f8c449e597ed83356b8/5faae1191b673c881b077e1f_ogaa-min.png",
+          url: "https://img.sunset02.com/sunsetm/wp-content-uploads/2019-03-28UTC09/woof-ranch-doghouse-pd-workshop-pr-0718-900x506.jpg",
           preview: true,
         },
         {
           spotId: 1,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
+          url: "https://as1.ftcdn.net/v2/jpg/08/80/77/54/1000_F_880775408_VJGz4UZswguBWphqDKX9xFYmeIMXrP3I.jpg",
           preview: false,
         },
         {
           spotId: 2,
-          url: "https://cdn.prod.website-files.com/5dcc7f8c449e597ed83356b8/5faae1191b673c881b077e1f_ogaa-min.png",
+          url: "https://images.stockcake.com/public/4/f/3/4f375b6b-ccef-493b-9bcf-9a30d7a1fd68_large/enchanted-treehouse-scene-stockcake.jpg",
           preview: true,
         },
         {
           spotId: 2,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
+          url: "https://as2.ftcdn.net/v2/jpg/05/04/26/85/1000_F_504268518_xp08vOJercavAzWr5urFX6uQo2MGz9CI.jpg",
           preview: false,
         },
         {
           spotId: 3,
-          url: "https://cdn.prod.website-files.com/5dcc7f8c449e597ed83356b8/5faae1191b673c881b077e1f_ogaa-min.png",
+          url: "https://i.etsystatic.com/16097108/r/il/c7614d/3509021219/il_1588xN.3509021219_ansf.jpg",
           preview: true,
-        },
-        {
-          spotId: 3,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
         },
         {
           spotId: 4,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
+          url: "https://lifeonshadylane.com/wp-content/uploads/2017/04/5afaf69ab3518909fe575fe8de3d7f3d.jpg",
+          preview: true,
+        },
+        {
+          spotId: 4,
+          url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF2P5gHgWje_fE-hRxtdo7bKDe8v0WU6hXJNSV7tL4Td0zuKDH6m9bBYBQzew6JCqQev4T2MZb8mSrgpOa2jPH5YoS16FopFCZQebw4kX09EPKn_RmlQnfkygZ-js_cgVnPO9csX8G4o5jWLN6TEUQvAIBVJsK-K6ehaeiwQAOM8Ix1wF3wpUH5_UqKqf9/s16000/2024-03-03%2012.06.07-edit.jpg",
           preview: false,
         },
         {
           spotId: 5,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
+          url: "https://inhabitat.com/wp-content/blogs.dir/1/files/2016/04/Territorio-de-Zaguatas-Dog-Paradise-in-Costa-Rica-14-889x667.jpg",
+          preview: true,
         },
         {
           spotId: 6,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
+          url: "https://imgcdn.stablediffusionweb.com/2024/5/4/4f99254d-0104-43e3-bf45-f64f119ad6b9.jpg",
+          preview: true,
         },
         {
           spotId: 7,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
+          url: "https://deedoggy.com/cdn/shop/articles/vecteezy_playful-corgi-indulging-in-an-unexpected-treat-created-with_29841539.jpg",
+          preview: true,
         },
         {
           spotId: 8,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
+          url: "https://www.hollywoodkittyco.com/media/catalog/category/EFMC2.jpg",
+          preview: true,
         },
         {
           spotId: 9,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
+          url: "https://cdn.pixabay.com/photo/2024/05/08/08/25/forest-house-8747729_960_720.jpg",
+          preview: true,
         },
         {
           spotId: 10,
-          url: "https://www.computerworld.com/wp-content/uploads/2024/03/programming_coding_elements_lines_of_code_development_developers_teamwork_by_dean_mitchell_gettyimages-1055056840_2400x1600-100795791-orig-100918079-orig.jpg",
-          preview: false,
+          url: "https://www.chinoscaringkennel.com/wp-content/uploads/sites/11/2020/05/97550370_s.jpg",
+          preview: true,
         },
       ],
       options

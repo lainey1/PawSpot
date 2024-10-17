@@ -16,8 +16,8 @@ module.exports = {
         {
           ownerId: 1,
           address: "456 Serenity Street",
-          city: "Seattle",
-          state: "Washington",
+          city: "San Francisco",
+          state: "California",
           country: "United States of America",
           lat: 37.7749,
           lng: -122.4194,

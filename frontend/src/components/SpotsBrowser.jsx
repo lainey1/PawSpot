@@ -1,4 +1,4 @@
-//frontend/src/components/SpotsBrowser.jsx
+// frontend/src/components/SpotsBrowser.jsx
 
 // #1 IMPORT necessary hooks and components for building the browser interface
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import { getSpots } from "../store/spots";
 import "./SpotBrowser.css";
+import { GoStarFill } from "react-icons/go";
 
 // #2 DEFINE COMPONENT
 const SpotsBrowser = () => {
@@ -24,7 +25,6 @@ const SpotsBrowser = () => {
     <main>
       <nav></nav>
       <section>
-        <h2>All Spots</h2>
         {loading ? (
           <p>Loading spots...</p>
         ) : spots.length > 0 ? (
@@ -40,14 +40,29 @@ const SpotsBrowser = () => {
                     />
                   )}
                   <h3 className="spot-name">{spot.name}</h3>
+                  <div className="spot-location-rating">
+                    <p className="spot-location">
+                      {spot.city}, {spot.state}
+                    </p>
+                    <span className="average-rating">
+                      {spot.avgRating ? (
+                        <>
+                          <GoStarFill /> {spot.avgRating}
+                        </>
+                      ) : (
+                        <span
+                          className="no-ratings"
+                          style={{ fontStyle: "italic" }}
+                        >
+                          No ratings
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                  <p>
+                    <strong>${spot.price}</strong> night
+                  </p>
                 </Link>
-                <p className="spot-description">{spot.description}</p>
-                <p>
-                  <strong>${spot.price}</strong>
-                </p>
-                <p className="spot-location">
-                  {spot.city}, {spot.state}
-                </p>
               </div>
             ))}
           </div>
