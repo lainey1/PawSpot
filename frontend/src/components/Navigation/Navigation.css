@@ -22,6 +22,26 @@
   color: #b965d7; /* Accent color on hover */
 }
 
+.left-padding {
+  padding-left: 25px; /* Adjust the value as needed */
+}
+
+.logout-button {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.logout-button:hover {
+  background-color: rgb(170, 67, 170);
+  border: 3px solid black;
+  box-shadow: 0px 2px 2px black;
+}
+
 .profile-button {
   position: absolute;
   right: 32px; /* Aligns with the right padding of navigation */
