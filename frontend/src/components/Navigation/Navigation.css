@@ -50,7 +50,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 40px;
   background-color: #ffffff; /* Ensure background color matches */
-  cursor: pointer; /* Indicate it's clickable */
   min-width: 60px;
   margin-left: 32px; /* Space between the icons and the profile button */
 }

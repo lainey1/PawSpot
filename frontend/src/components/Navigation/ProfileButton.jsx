@@ -41,7 +41,9 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     console.log("Logging out");
-    dispatch(sessionActions.logout());
+    dispatch(sessionActions.logout()).then(() => {
+      window.location.href = "/"; // Redirect to home page
+    });
     closeMenu();
   };
 
