@@ -1,61 +1,65 @@
-/* frontend/src/components/SpotDetail.css */
-
-.alert-message {
+.spot-detail-container {
+  display: flex;
   padding: 20px;
-  margin-left: 10px;
-  font-weight: bold;
-  background-color: rgb(222, 132, 222);
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.1);
+}
+
+.details-container {
+  flex: 1; /* Allow details to take available space */
+  margin-left: 20px; /* Space between images and details */
+}
+
+.images-container {
+  display: flex; /* Flexbox to align large and small images */
+  margin-top: 10px; /* Space between location and images */
+}
+
+.large-image {
+  width: 60%; /* Adjust the width of the large image */
+  height: auto;
+  margin-right: 10px; /* Space between large and small images */
+}
+
+.small-images {
+  display: flex;
+  flex-direction: column; /* Stack small images vertically */
+  justify-content: space-between; /* Space between small images */
+  width: 35%; /* Adjust to fit your layout */
+}
+
+.small-image {
+  width: 100%; /* Full width for small images */
+  height: auto;
+  margin-bottom: 10px; /* Space between small images */
+}
+
+.spot-location {
+  font-weight: bold; /* Make location stand out */
 }
 
 .bookit-sidebar {
-  padding: 20px;
-  background-color: #f9f9f9;
   border: 1px solid #ccc;
+  padding: 15px;
   border-radius: 5px;
-  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Space above the sidebar */
 }
 
-.spot-detail {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
+.price {
+  font-size: 1.5em; /* Make price larger */
 }
 
-.spot-detail img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.spot-detail p {
-  margin: 10px 0;
+.alert-message {
+  margin-left: 10px; /* Space between button and message */
+  color: red; /* Alert color */
+  font-weight: bold; /* Optional */
 }
 
 .reserve-button {
-  margin: 5px;
-  padding: 10px;
+  margin-top: 10px; /* Space above the button */
+  padding: 10px 15px; /* Padding for button */
   color: white;
   background-color: rgb(170, 67, 170);
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  border: 2px solid transparent;
-  box-shadow: none;
-  font-size: 1.5em;
-  transition: background-image 0.3s ease;
-}
-
-.reserve-button:hover {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(170, 67, 170),
-    rgb(120, 30, 120)
-  );
-  border: 2px solid #ccc;
-  box-shadow: 2px 2px 2px #ccc;
-  font-size: 1.5em;
+  font-size: 1.2em; /* Adjust size */
 }

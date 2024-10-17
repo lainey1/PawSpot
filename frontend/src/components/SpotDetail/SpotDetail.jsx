@@ -1,59 +1,75 @@
 // frontend/src/components/SpotDetail.jsx
 
-// #1 IMPORT necessary hooks and components
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getSpots } from "../../store/spots";
 import "./SpotDetail.css";
 
-// #2 DEFINE COMPONENT
 const SpotDetail = () => {
-  //* Hooks for State and Dispatch
-  const dispatch = useDispatch();
   const { spotId } = useParams();
-  const spots = useSelector((state) => state.spot.list);
-  const spot = spots.find((spot) => spot.id === Number(spotId));
-
-  // Replace the traditional alert with a custom alert component
+  const [spot, setSpot] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    dispatch(getSpots());
-  }, [dispatch]);
+    const fetchSpot = async () => {
+      const response = await fetch(`/api/spots/${spotId}`);
+      const data = await response.json();
+      setSpot(data);
+    };
+
+    fetchSpot();
+  }, [spotId]);
 
   if (!spot) return <div>Loading...</div>;
-
-  //* CLICK HANDLER for the Reserve button
 
   const handleReserveClick = () => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
 
-  // #3 RENDER METHOD
   return (
     <div className="spot-detail-container">
-      <div className="spot-detail">
+      <div className="details-container">
         <h2>{spot.name}</h2>
         <p className="spot-location">
-          {spot.city}, {spot.state}, {spot.country}
+          Location: {spot.city}, {spot.state}, {spot.country}
         </p>
-        <p>{spot.description}</p>
-      </div>
 
-      <div className="bookit-sidebar">
-        <p className="price">${spot.price} per night</p>
-        <button className="reserve-button" onClick={handleReserveClick}>
-          Reserve
-        </button>
-        {showAlert && (
-          <span className="alert-message">Feature Coming Soon...</span>
-        )}
+        <div className="images-container">
+          <img
+            className="large-image"
+            src={spot.SpotImages[0]?.url}
+            alt={spot.name}
+          />
+          <div className="small-images">
+            {spot.SpotImages.slice(1, 5).map((image) => (
+              <img
+                key={image.id}
+                className="small-image"
+                src={image.url}
+                alt={`Thumbnail`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <p className="host-info">
+          Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
+        </p>
+
+        <p>{spot.description}</p>
+
+        <div className="bookit-sidebar">
+          <p className="price">${spot.price} per night</p>
+          <button className="reserve-button" onClick={handleReserveClick}>
+            Reserve
+          </button>
+          {showAlert && (
+            <span className="alert-message">Feature Coming Soon...</span>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-// #4 EXPORT
 export default SpotDetail;
