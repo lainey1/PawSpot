@@ -2,20 +2,23 @@
   max-width: 1000px;
   margin: 0 auto; /* Centers the container */
   padding: 0 20px; /* Top/Bottom - Left/Right Horizontal padding */
+  width: 100%; /* Ensure it takes the full width below 1000px */
 }
 
-.spot-detail-container {
-  display: flex;
-  padding: 20px;
+.alert-message {
+  color: red; /* Alert color */
+  font-weight: bold; /* Optional */
+  margin-left: 10px; /* Space between button and message */
 }
 
 .bookit-sidebar {
-  justify-content: flex-end;
   border: 1px solid #ccc;
-  padding: 15px;
   border-radius: 5px;
-  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.5);
+  justify-content: flex-end;
   margin-right: 50px;
+  margin-top: 1em;
+  padding: 15px;
   width: 450px;
 }
 
@@ -24,92 +27,113 @@
   margin-left: 20px; /* Space between images and details */
 }
 
-.third-layer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.third-layer spot-double-click {
-  justify-content: flex-start;
-  padding-right: 50px;
-  margin-right: 50px;
+.host-info {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .images-container {
-  display: flex; /* Flexbox to align large and small images */
+  display: flex; /* Keep large and small images in the same row */
   margin-top: 10px; /* Space between location and images */
 }
 
-.large-image-container {
-  width: 600px; /* or a fixed width like 600px */
-  height: 400px; /* Set a fixed height for consistency */
-  overflow: hidden;
-  position: relative;
-}
-
-.large-image {
-  width: 100%;
+.image-large {
+  border-radius: 15px;
   height: 100%;
   object-fit: cover;
-  border-radius: 15px;
+  width: 100%;
 }
 
-.small-images {
+.image-large-container {
+  height: 400px; /* Set a fixed height for consistency */
+  margin-right: 5px;
+  overflow: hidden;
+  position: relative;
+  width: 55%; /* Occupies 55% of the container width */
+}
+
+.image-small {
+  border-radius: 4px;
+  height: 100%; /* Set to 100% to fill the height of the row */
+  object-fit: cover;
+  width: 48%; /* Adjust as necessary for your layout */
+}
+
+.images-small-container {
   display: flex;
-  justify-content: space-between;
-  margin-left: 10px; /* Adds space between large and small images */
+  flex-direction: column;
+  height: 400px; /* Match height of the large image */
+  width: 40%; /* Occupies 40% of the container width */
 }
 
-.small-image {
-  width: 250px;
-  height: 250px;
-  border-radius: 15px;
-  object-fit: cover; /* Ensures the thumbnail maintains aspect ratio */
+.images-small-row {
+  display: flex;
+  height: 50%; /* Each row takes half the height */
+  justify-content: space-between;
+  margin: 5px; /* Consistent gap between small images */
+}
+
+.price-amount {
+  font-weight: bold; /* Make price bold */
+  font-size: 1.5em; /* Make price larger */
+}
+
+.price-per-night {
+  font-weight: normal; /* Keep "per night" normal weight */
+  font-size: 1em; /* Make price larger */
+}
+
+.reserve-button {
+  background-color: rgb(170, 67, 170);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em; /* Adjust size */
+  margin-top: 10px; /* Space above the button */
+  padding: 10px 15px; /* Padding for button */
+}
+
+.spot-double-click {
+  margin-right: 50px;
+}
+
+.spot-detail-container {
+  display: flex;
+  padding: 20px;
 }
 
 .spot-location {
   font-weight: bold; /* Make location stand out */
 }
 
-.price {
-  font-size: 1.5em; /* Make price larger */
-}
-
-.alert-message {
-  margin-left: 10px; /* Space between button and message */
-  color: red; /* Alert color */
-  font-weight: bold; /* Optional */
-}
-
-.reserve-button {
-  margin-top: 10px; /* Space above the button */
-  padding: 10px 15px; /* Padding for button */
-  color: white;
-  background-color: rgb(170, 67, 170);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.2em; /* Adjust size */
+.third-layer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Media Query for medium screens */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .spot-detail-container {
-    flex-direction: row; /* Keep items in a row */
-  }
-
   .bookit-sidebar {
-    width: 350px; /* Adjust width for medium screens */
     margin-right: 30px; /* Less margin on the right */
+    width: 350px; /* Adjust width for medium screens */
   }
 
   .details-container {
     margin-left: 15px; /* Adjust margin for details */
   }
 
-  .large-image-container {
-    width: 100%; /* Full width on medium screens */
+  .image-large-container {
+    width: 60%; /* Maintain 60% width on medium screens */
+  }
+
+  .images-small-container {
+    width: 40%; /* Maintain 40% width on medium screens */
+  }
+
+  .spot-detail-container {
+    flex-direction: row; /* Keep items in a row */
   }
 
   .third-layer {
@@ -120,33 +144,38 @@
 
 /* Media Query for small screens */
 @media (max-width: 768px) {
-  .spot-detail-container {
-    flex-direction: column; /* Stack items vertically */
-  }
-
-  .images-container {
-    flex-direction: column; /* Stack images vertically */
-    align-items: center; /* Center the large image */
-  }
-
-  .large-image-container {
-    width: 100%; /* Full width on small screens */
-    height: 300px; /* Adjust height as needed */
-  }
-
-  .small-images {
-    display: none; /* Hide small images */
+  .outer-container {
+    padding: 0 10px; /* Adjust padding for smaller screens */
   }
 
   .bookit-sidebar {
     margin-right: 0; /* Remove margin on small screens */
-    width: 100%; /* Adjust sidebar width */
     margin-top: 20px; /* Add margin above the sidebar for spacing */
+    width: 100%; /* Adjust sidebar width */
+  }
+
+  .images-container {
+    align-items: center; /* Center the large image */
+    flex-direction: column; /* Stack images vertically */
+    gap: 10px; /* Consistent gap between stacked images */
+  }
+
+  .image-large-container {
+    height: 300px; /* Adjust height as needed */
+    width: 100%; /* Full width on small screens */
+  }
+
+  .images-small-container {
+    display: none; /* Hide small images container */
+  }
+
+  .spot-detail-container {
+    flex-direction: column; /* Stack items vertically */
   }
 
   .third-layer {
-    flex-direction: column; /* Stack elements in third-layer vertically */
     align-items: flex-start; /* Align items to the start */
+    flex-direction: column; /* Stack elements in third-layer vertically */
     width: 95%; /* Adjust width */
   }
 }

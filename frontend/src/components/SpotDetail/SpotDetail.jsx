@@ -1,8 +1,7 @@
-// frontend/src/components/SpotDetail.jsx
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./SpotDetail.css";
+import { GoStarFill } from "react-icons/go"; // Importing the star icon
 
 const SpotDetail = () => {
   const { spotId } = useParams();
@@ -36,23 +35,39 @@ const SpotDetail = () => {
           </p>
 
           <div className="images-container">
-            <div className="large-image-container">
+            <div className="image-large-container">
               <img
-                className="large-image"
+                className="image-large"
                 src={spot.SpotImages[0]?.url}
                 alt={spot.name}
               />
             </div>
 
-            <div className="small-images">
-              {spot.SpotImages.slice(1, 5).map((image) => (
+            <div className="images-small-container">
+              <div className="images-small-row">
                 <img
-                  key={image.id}
-                  className="small-image"
-                  src={image.url}
-                  alt={`Thumbnail`}
+                  src={spot.SpotImages[1]?.url}
+                  className="image-small"
+                  alt="Small Image 1"
                 />
-              ))}
+                <img
+                  src={spot.SpotImages[2]?.url}
+                  className="image-small"
+                  alt="Small Image 2"
+                />
+              </div>
+              <div className="images-small-row">
+                <img
+                  src={spot.SpotImages[3]?.url}
+                  className="image-small"
+                  alt="Small Image 3"
+                />
+                <img
+                  src={spot.SpotImages[4]?.url}
+                  className="image-small"
+                  alt="Small Image 4"
+                />
+              </div>
             </div>
           </div>
 
@@ -61,12 +76,30 @@ const SpotDetail = () => {
               <p className="host-info">
                 Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
               </p>
-
               <p>{spot.description}</p>
             </div>
 
             <div className="bookit-sidebar">
-              <p className="price">${spot.price} per night</p>
+              <div className="price-rating">
+                <div className="price">
+                  <span className="price-amount">${spot.price}</span>{" "}
+                  <span className="price-per-night">per night</span>
+                </div>
+                <span className="average-rating">
+                  {spot.avgRating ? (
+                    <>
+                      <GoStarFill /> {spot.avgRating}
+                    </>
+                  ) : (
+                    <span
+                      className="no-ratings"
+                      style={{ fontStyle: "italic" }}
+                    >
+                      No ratings
+                    </span>
+                  )}
+                </span>
+              </div>
               <button className="reserve-button" onClick={handleReserveClick}>
                 Reserve
               </button>
@@ -80,5 +113,4 @@ const SpotDetail = () => {
     </div>
   );
 };
-
 export default SpotDetail;
