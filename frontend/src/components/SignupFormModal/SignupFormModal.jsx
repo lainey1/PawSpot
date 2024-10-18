@@ -46,13 +46,11 @@ function SignupFormModal() {
         });
     }
     return setErrors({
-      confirmPassword:
-        "Confirm Password field must be the same as the Password field",
+      confirmPassword: "Passwords must match. Please try again.",
     });
   };
 
   // FORM RENDERING
-
   return (
     <>
       <h1>Sign Up</h1>
@@ -64,7 +62,9 @@ function SignupFormModal() {
           required
           placeholder="First Name"
         />
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && (
+          <p className="error-message">{errors.firstName}</p>
+        )}
         <input
           type="text"
           value={lastName}
@@ -72,8 +72,7 @@ function SignupFormModal() {
           required
           placeholder="Last Name"
         />
-        {errors.lastName && <p>{errors.lastName}</p>}
-
+        {errors.lastName && <p className="error-message">{errors.lastName}</p>}
         <input
           type="text"
           value={email}
@@ -81,7 +80,7 @@ function SignupFormModal() {
           required
           placeholder="Email"
         />
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <input
           type="text"
           value={username}
@@ -89,7 +88,7 @@ function SignupFormModal() {
           required
           placeholder="Username"
         />
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className="error-message">{errors.username}</p>}
         <input
           type="password"
           value={password}
@@ -97,15 +96,29 @@ function SignupFormModal() {
           required
           placeholder="Password"
         />
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Confirm Password"
         />
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        {errors.confirmPassword && (
+          <p className="error-message">{errors.confirmPassword}</p>
+        )}
+        <button
+          type="submit"
+          disabled={
+            !firstName ||
+            !lastName ||
+            !email ||
+            !username ||
+            !password ||
+            !confirmPassword
+          }
+        >
+          Sign Up
+        </button>
       </form>
     </>
   );
