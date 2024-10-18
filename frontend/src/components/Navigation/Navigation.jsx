@@ -1,3 +1,4 @@
+//frontend/src/components/Navigation/Navigation.jsx
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -20,9 +21,17 @@ function Navigation({ isLoaded }) {
             <span className="site-name paw-purple">PawSpots</span>
           </div>
         </NavLink>
+
         {isLoaded && (
-          <div className="profile-button">
-            <ProfileButton user={user} />
+          <div className="nav-links">
+            {user && (
+              <NavLink to="/create-spot" className="nav-link">
+                Create a New Spot
+              </NavLink>
+            )}
+            <div className="profile-button">
+              <ProfileButton user={user} />
+            </div>
           </div>
         )}
       </div>
