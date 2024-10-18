@@ -3,7 +3,7 @@
   position: relative;
   text-decoration: none;
   color: #333;
-  text-align: left; /* Justify text to the left */
+  text-align: left;
 }
 
 /* Ensure that no link text is underlined */
@@ -12,10 +12,9 @@
   color: #333;
 }
 
-/* Rest of your existing CSS remains unchanged */
 .spots-grid {
   display: grid;
-  grid-template-columns: 1fr; /* 1 column for narrowest width */
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
@@ -67,7 +66,7 @@
 
 .spot-tile {
   overflow: hidden;
-  text-align: center; /* Keep this as center for the tile */
+  text-align: center;
   background: #fff;
   transition: box-shadow 0.3s;
   position: relative;
@@ -75,13 +74,13 @@
 
 @media (min-width: 640px) {
   .spots-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .spots-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
