@@ -15,6 +15,20 @@ module.exports = {
       [
         {
           ownerId: 1,
+          address: "123 Wanderlust Way",
+          city: "Nashville",
+          state: "Tennessee",
+          country: "United States of America",
+          lat: 36.1627,
+          lng: -86.7816,
+          name: "Trailblazer Trailer Park",
+          description:
+            "A vibrant community for adventurous pets and their owners. Enjoy cozy trailers with quirky decor and a welcoming atmosphere!",
+          price: 120.0,
+        },
+
+        {
+          ownerId: 1,
           address: "456 Serenity Street",
           city: "San Francisco",
           state: "California",
@@ -27,20 +41,21 @@ module.exports = {
           price: 150.0,
         },
         {
-          ownerId: 2,
-          address: "789 Woodland Ave",
-          city: "Sedona",
-          state: "Arizona",
+          ownerId: 1,
+          address: "500 Bark Boulevard",
+          city: "Chicago",
+          state: "Illinois",
           country: "United States of America",
-          lat: 34.8697,
-          lng: -111.7609,
-          name: "Tranquil Treehouse",
+          lat: 41.8781,
+          lng: -87.6298,
+          name: "Bark N' Breakfast",
           description:
-            "Experience the magic of nature in the Tranquil Treehouse, an enchanting escape perched among the treetops.",
-          price: 200.0,
+            "Enjoy a cozy stay with your furry friend. Breakfast included for humans and pets!",
+          price: 145.0,
         },
+
         {
-          ownerId: 3,
+          ownerId: 1,
           address: "101 Beachside Blvd",
           city: "Charleston",
           state: "South Carolina",
@@ -53,7 +68,20 @@ module.exports = {
           price: 180.0,
         },
         {
-          ownerId: 4,
+          ownerId: 1,
+          address: "789 Woodland Ave",
+          city: "Sedona",
+          state: "Arizona",
+          country: "United States of America",
+          lat: 34.8697,
+          lng: -111.7609,
+          name: "Tranquil Treehouse",
+          description:
+            "Experience the magic of nature in the Tranquil Treehouse, an enchanting escape perched among the treetops.",
+          price: 200.0,
+        },
+        {
+          ownerId: 2,
           address: "202 Cozy Cottage Ct",
           city: "Asheville",
           state: "North Carolina",
@@ -66,7 +94,7 @@ module.exports = {
           price: 140.0,
         },
         {
-          ownerId: 5,
+          ownerId: 2,
           address: "300 Happy Paws Ave",
           city: "Austin",
           state: "Texas",
@@ -79,7 +107,7 @@ module.exports = {
           price: 160.0,
         },
         {
-          ownerId: 6,
+          ownerId: 3,
           address: "400 Catnip Lane",
           city: "Portland",
           state: "Oregon",
@@ -91,21 +119,9 @@ module.exports = {
             "A delightful getaway for cats, featuring cat trees and sunny spots for lounging.",
           price: 130.0,
         },
+
         {
-          ownerId: 7,
-          address: "500 Bark Boulevard",
-          city: "Chicago",
-          state: "Illinois",
-          country: "United States of America",
-          lat: 41.8781,
-          lng: -87.6298,
-          name: "Bark N' Breakfast",
-          description:
-            "Enjoy a cozy stay with your furry friend. Breakfast included for humans and pets!",
-          price: 145.0,
-        },
-        {
-          ownerId: 8,
+          ownerId: 3,
           address: "600 Whisker Way",
           city: "Savannah",
           state: "Georgia",
@@ -118,7 +134,7 @@ module.exports = {
           price: 125.0,
         },
         {
-          ownerId: 1,
+          ownerId: 4,
           address: "700 Tail Trails Road",
           city: "Denver",
           state: "Colorado",
@@ -131,7 +147,7 @@ module.exports = {
           price: 175.0,
         },
         {
-          ownerId: 2,
+          ownerId: 4,
           address: "800 Furry Friends Dr",
           city: "New Orleans",
           state: "Louisiana",
@@ -142,6 +158,19 @@ module.exports = {
           description:
             "A spacious lodge for all pets, featuring play areas, pools, and relaxing spots.",
           price: 190.0,
+        },
+        {
+          ownerId: 5,
+          address: "350 Ranch Road",
+          city: "Bozeman",
+          state: "Montana",
+          country: "United States of America",
+          lat: 45.676,
+          lng: -111.0429,
+          name: "Paws & Hooves Ranch",
+          description:
+            "Experience life on the ranch with your furry companions. Enjoy wide-open spaces, scenic views, and plenty of room to roam.",
+          price: 160.0,
         },
       ],
 

@@ -3,6 +3,9 @@
   margin: 0 auto; /* Centers the container */
   padding: 0 20px; /* Top/Bottom - Left/Right Horizontal padding */
   width: 100%; /* Ensure it takes the full width below 1000px */
+  display: flex; /* Use flex to manage inner layout */
+  flex-direction: column; /* Stack child elements */
+  height: auto; /* Adjust height for smaller/larger screens */
 }
 
 .alert-message {
@@ -73,6 +76,36 @@
   margin: 5px; /* Consistent gap between small images */
 }
 
+.pagination {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center pagination controls */
+  align-items: center; /* Center items vertically */
+  margin-top: 20px; /* Space above pagination */
+  padding: 10px; /* Padding around pagination */
+}
+
+.pagination button {
+  background-color: rgb(170, 67, 170); /* Match reserve button color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  color: white; /* Text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 1em; /* Font size for button */
+  margin: 0 5px; /* Space between buttons */
+  padding: 8px 12px; /* Padding for button */
+  transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.pagination button:disabled {
+  background-color: #ccc; /* Grey out disabled buttons */
+  cursor: not-allowed; /* Change cursor to indicate unavailability */
+}
+
+.pagination span {
+  font-weight: bold; /* Bold text for the current page info */
+  margin: 0 10px; /* Space around page info */
+}
+
 .price-amount {
   font-weight: bold; /* Make price bold */
   font-size: 1.5em; /* Make price larger */
@@ -111,6 +144,29 @@
   font-size: 1em; /* Make price larger */
 }
 
+.reviews-section {
+  width: 100%; /* Cover the full width */
+  padding: 20px; /* Add some padding */
+  border-top: 2px solid #ccc; /* A subtle border to separate */
+  margin-top: 20px; /* Space above the reviews section */
+}
+
+.reviews-list {
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+}
+
+.review-item {
+  margin-bottom: 15px; /* Space between reviews */
+  padding: 10px; /* Padding around each review */
+  border-bottom: 1px solid #ddd; /* Separate reviews with a border */
+}
+
+.review-date {
+  font-size: 0.9em; /* Slightly smaller font for date */
+  color: #666; /* Lighter color for the date text */
+}
+
 .reserve-button {
   background-color: rgb(170, 67, 170);
   border: none;
@@ -127,8 +183,10 @@
 }
 
 .spot-detail-container {
-  display: flex;
-  padding: 20px;
+  flex-grow: 1; /* Allow the detail container to grow */
+  display: flex; /* Enable flexbox for details */
+  flex-direction: column; /* Stack children vertically */
+  width: 100%; /* Full width */
 }
 
 .spot-location {
@@ -141,15 +199,27 @@
   justify-content: space-between;
 }
 
-/* Media Query for medium screens */
+/* Media Query for Medium Screens */
 @media (min-width: 769px) and (max-width: 1024px) {
+  .spot-detail-container {
+    display: flex; /* Maintain flex display */
+    flex-direction: column; /* Stack items vertically */
+    height: 100vh; /* Full viewport height */
+  }
+
+  .reviews-section {
+    height: 50%; /* Set height to occupy the bottom part of the screen */
+    overflow-y: auto; /* Allow scrolling if reviews exceed the height */
+  }
+
   .bookit-sidebar {
     margin-right: 30px; /* Less margin on the right */
-    width: 40%;
+    width: 40%; /* Sidebar width adjustment */
   }
 
   .details-container {
     margin-left: 15px; /* Adjust margin for details */
+    flex: 1; /* Allow details to take available space */
   }
 
   .image-large-container {
@@ -159,6 +229,7 @@
   .images-small-container {
     width: 40%; /* Maintain 40% width on medium screens */
   }
+
   .price-rating {
     flex-direction: column; /* Stack price and rating on smaller screens */
     align-items: flex-start; /* Align items to the start */
@@ -166,10 +237,6 @@
 
   .rating-average {
     margin-top: 0.5em; /* Space between price and rating when stacked */
-  }
-
-  .spot-detail-container {
-    flex-direction: row; /* Keep items in a row */
   }
 
   .third-layer {

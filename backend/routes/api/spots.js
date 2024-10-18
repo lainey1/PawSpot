@@ -423,7 +423,7 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
   }
 });
 
-//* GET all reviews for a spot (CHECKED)
+//* GET all reviews for a spot
 router.get("/:spotId/reviews", async (req, res) => {
   const { spotId } = req.params;
 
