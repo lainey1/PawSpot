@@ -1,3 +1,5 @@
+/* frontend/src/components/SpotDetail/SpotDetail.css */
+
 .outer-container {
   max-width: 1000px;
   margin: 0 auto; /* Centers the container */
@@ -10,8 +12,8 @@
 
 .alert-message {
   color: red; /* Alert color */
-  font-weight: bold; /* Optional */
-  margin-left: 10px; /* Space between button and message */
+  font-weight: bold;
+  margin-left: 10px;
 }
 
 .bookit-sidebar {
@@ -35,86 +37,15 @@
   font-size: 1.2em;
 }
 
-.images-container {
-  display: flex; /* Keep large and small images in the same row */
-  margin-top: 10px; /* Space between location and images */
-}
-
-.image-large {
-  border-radius: 15px;
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
-.image-large-container {
-  height: 400px; /* Set a fixed height for consistency */
-  margin-right: 5px;
-  overflow: hidden;
-  position: relative;
-  width: 55%; /* Occupies 55% of the container width */
-}
-
-.image-small {
-  border-radius: 4px;
-  height: 100%; /* Set to 100% to fill the height of the row */
-  object-fit: cover;
-  width: 48%; /* Adjust as necessary for your layout */
-}
-
-.images-small-container {
-  display: flex;
-  flex-direction: column;
-  height: 400px; /* Match height of the large image */
-  width: 40%; /* Occupies 40% of the container width */
-}
-
-.images-small-row {
-  display: flex;
-  height: 50%; /* Each row takes half the height */
-  justify-content: space-between;
-  margin: 5px; /* Consistent gap between small images */
-}
-
-.pagination {
-  display: flex; /* Use flexbox for layout */
-  justify-content: center; /* Center pagination controls */
-  align-items: center; /* Center items vertically */
-  margin-top: 20px; /* Space above pagination */
-  padding: 10px; /* Padding around pagination */
-}
-
-.pagination button {
-  background-color: rgb(170, 67, 170); /* Match reserve button color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  color: white; /* Text color */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 1em; /* Font size for button */
-  margin: 0 5px; /* Space between buttons */
-  padding: 8px 12px; /* Padding for button */
-  transition: background-color 0.3s; /* Smooth transition on hover */
-}
-
-.pagination button:disabled {
-  background-color: #ccc; /* Grey out disabled buttons */
-  cursor: not-allowed; /* Change cursor to indicate unavailability */
-}
-
-.pagination span {
-  font-weight: bold; /* Bold text for the current page info */
-  margin: 0 10px; /* Space around page info */
-}
-
 .price-amount {
-  font-weight: bold; /* Make price bold */
-  font-size: 1.5em; /* Make price larger */
+  font-weight: bold;
+  font-size: 1.5em;
   margin-right: 0.15em;
 }
 
 .price-container {
   display: flex;
-  align-items: center; /* Center items vertically */
+  align-items: center;
 }
 
 .price-per-night {
@@ -124,47 +55,25 @@
 .price-rating {
   display: flex;
   justify-content: space-between; /* Ensure price is on one side and rating on the other */
-  align-items: center; /* Center items vertically */
-  margin-bottom: 1.5em; /* Space below price section */
+  align-items: center;
+  margin-bottom: 1.5em;
 }
 
 .rating-average {
   display: flex;
-  align-items: center; /* Center items vertically */
-  justify-content: flex-end; /* Ensure rating is aligned to the right */
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .rating-average svg {
   display: flex;
   align-items: center;
-  font-size: 1.15em; /* Increase size of the star icon */
+  font-size: 1.15em;
 }
+
 .ratings-number {
-  font-weight: bold; /* Make price bold */
-  font-size: 1em; /* Make price larger */
-}
-
-.reviews-section {
-  width: 100%; /* Cover the full width */
-  padding: 20px; /* Add some padding */
-  border-top: 2px solid #ccc; /* A subtle border to separate */
-  margin-top: 20px; /* Space above the reviews section */
-}
-
-.reviews-list {
-  list-style-type: none; /* Remove default list styles */
-  padding: 0; /* Remove padding */
-}
-
-.review-item {
-  margin-bottom: 15px; /* Space between reviews */
-  padding: 10px; /* Padding around each review */
-  border-bottom: 1px solid #ddd; /* Separate reviews with a border */
-}
-
-.review-date {
-  font-size: 0.9em; /* Slightly smaller font for date */
-  color: #666; /* Lighter color for the date text */
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .reserve-button {
@@ -173,9 +82,9 @@
   border-radius: 4px;
   color: white;
   cursor: pointer;
-  font-size: 1.2em; /* Adjust size */
-  margin-top: 10px; /* Space above the button */
-  padding: 10px 15px; /* Padding for button */
+  font-size: 1.2em;
+  margin-top: 10px;
+  padding: 10px 15px;
 }
 
 .spot-double-click {
@@ -183,14 +92,14 @@
 }
 
 .spot-detail-container {
-  flex-grow: 1; /* Allow the detail container to grow */
-  display: flex; /* Enable flexbox for details */
-  flex-direction: column; /* Stack children vertically */
-  width: 100%; /* Full width */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .spot-location {
-  font-weight: bold; /* Make location stand out */
+  font-weight: bold;
 }
 
 .third-layer {
@@ -202,79 +111,42 @@
 /* Media Query for Medium Screens */
 @media (min-width: 769px) and (max-width: 1024px) {
   .spot-detail-container {
-    display: flex; /* Maintain flex display */
-    flex-direction: column; /* Stack items vertically */
-    height: 100vh; /* Full viewport height */
-  }
-
-  .reviews-section {
-    height: 50%; /* Set height to occupy the bottom part of the screen */
-    overflow-y: auto; /* Allow scrolling if reviews exceed the height */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
   }
 
   .bookit-sidebar {
-    margin-right: 30px; /* Less margin on the right */
-    width: 40%; /* Sidebar width adjustment */
+    margin-right: 30px;
+    width: 40%;
   }
 
   .details-container {
-    margin-left: 15px; /* Adjust margin for details */
-    flex: 1; /* Allow details to take available space */
-  }
-
-  .image-large-container {
-    width: 60%; /* Maintain 60% width on medium screens */
-  }
-
-  .images-small-container {
-    width: 40%; /* Maintain 40% width on medium screens */
-  }
-
-  .price-rating {
-    flex-direction: column; /* Stack price and rating on smaller screens */
-    align-items: flex-start; /* Align items to the start */
-  }
-
-  .rating-average {
-    margin-top: 0.5em; /* Space between price and rating when stacked */
+    margin-left: 15px;
+    flex: 1;
   }
 
   .third-layer {
-    flex-direction: row; /* Keep in row for medium screens */
+    flex-direction: row;
     justify-content: space-between;
   }
 }
 
-/* Media Query for small screens */
+/* Media Query for Small screens */
 @media (max-width: 768px) {
   .outer-container {
     padding: 0 10px; /* Adjust padding for smaller screens */
   }
 
   .bookit-sidebar {
-    margin-right: 0; /* Remove margin on small screens */
-    margin-top: 20px; /* Add margin above the sidebar for spacing */
-    width: 100%; /* Adjust sidebar width */
-  }
-
-  .images-container {
-    align-items: center; /* Center the large image */
-    flex-direction: column; /* Stack images vertically */
-    gap: 10px; /* Consistent gap between stacked images */
-  }
-
-  .image-large-container {
-    height: 300px; /* Adjust height as needed */
-    width: 100%; /* Full width on small screens */
-  }
-
-  .images-small-container {
-    display: none; /* Hide small images container */
+    margin-right: 0;
+    margin-top: 20px;
+    width: 100%;
   }
 
   .third-layer {
-    align-items: flex-start; /* Align items to the start */
-    flex-direction: column; /* Stack elements in third-layer vertically */
-    width: 95%; /* Adjust width */
+    align-items: flex-start;
+    flex-direction: column;
+    width: 95%;
   }
 }
