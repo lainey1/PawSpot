@@ -23,7 +23,7 @@ module.exports = {
           lng: -86.7816,
           name: "Trailblazer Trailer Park",
           description:
-            "A vibrant community for adventurous pets and their owners. Enjoy cozy trailers with quirky decor and a welcoming atmosphere!",
+            "Nestled in the heart of Nashville, Trailblazer Trailer Park offers a vibrant community for adventurous pets and their owners. Enjoy cozy trailers adorned with quirky decor, a welcoming atmosphere, and easy access to local attractions. Perfect for those seeking fun and connection!",
           price: 120.0,
         },
 
@@ -37,7 +37,7 @@ module.exports = {
           lng: -122.4194,
           name: "Serenity Haven",
           description:
-            "Welcome to Serenity Haven, your peaceful retreat in the heart of nature. Ideal for furry friends who enjoy outdoor adventures.",
+            "Welcome to Serenity Haven, your peaceful retreat in the heart of nature. This tranquil escape is ideal for furry friends who love outdoor adventures, featuring lush landscapes and serene spots for relaxation. Experience the perfect blend of comfort and natural beauty.",
           price: 150.0,
         },
         {
@@ -50,7 +50,7 @@ module.exports = {
           lng: -87.6298,
           name: "Bark N' Breakfast",
           description:
-            "Enjoy a cozy stay with your furry friend. Breakfast included for humans and pets!",
+            "Enjoy a cozy stay at Bark N' Breakfast, where your furry friend is always welcome. Delight in complimentary breakfasts for both humans and pets, all while surrounded by a charming atmosphere in the heart of Chicago. A true home away from home!",
           price: 145.0,
         },
 
@@ -64,7 +64,7 @@ module.exports = {
           lng: -79.9311,
           name: "Beachfront Bungalow",
           description:
-            "Relax in a cozy beachfront bungalow. A paradise for dogs who love the sand!",
+            "Relax in the Beachfront Bungalow, a cozy retreat where the soothing sound of waves and the warm sand await. A paradise for dogs who love the beach, enjoy sun-soaked days and evening strolls along the shore while creating unforgettable memories.",
           price: 180.0,
         },
         {
@@ -77,7 +77,7 @@ module.exports = {
           lng: -111.7609,
           name: "Tranquil Treehouse",
           description:
-            "Experience the magic of nature in the Tranquil Treehouse, an enchanting escape perched among the treetops.",
+            "Experience the magic of nature in the Tranquil Treehouse, an enchanting escape perched among the treetops. With breathtaking views and serene surroundings, this unique getaway is perfect for those seeking peace, adventure, and a touch of whimsy!",
           price: 200.0,
         },
         {
@@ -90,7 +90,7 @@ module.exports = {
           lng: -82.5515,
           name: "Purrfect Retreat",
           description:
-            "A charming cottage designed for cat lovers. Enjoy a serene environment with plenty of napping spots.",
+            "Discover Purrfect Retreat, a charming cottage designed specifically for cat lovers. Enjoy a serene environment filled with cozy napping spots and delightful decor. This tranquil getaway in Asheville is the ideal escape for feline friends and their humans.",
           price: 140.0,
         },
         {
@@ -103,7 +103,7 @@ module.exports = {
           lng: -97.7431,
           name: "Paws Paradise",
           description:
-            "A fun-filled home for dogs, complete with a dog park and plenty of toys.",
+            "Welcome to Paws Paradise, a fun-filled home for dogs in the heart of Austin. With a spacious dog park and plenty of toys, your furry friend will have the time of their life. Experience a vibrant atmosphere where fun meets comfort!",
           price: 160.0,
         },
         {
@@ -116,7 +116,7 @@ module.exports = {
           lng: -122.6793,
           name: "Catnip Cottage",
           description:
-            "A delightful getaway for cats, featuring cat trees and sunny spots for lounging.",
+            "Catnip Cottage is a delightful getaway for your feline friends, featuring cat trees, interactive toys, and sunny spots for lounging. This cozy retreat in Portland ensures your cat has a purr-fect vacation, complete with all the amenities for relaxation and play.",
           price: 130.0,
         },
 
@@ -130,7 +130,7 @@ module.exports = {
           lng: -81.0912,
           name: "Whisker Wonderland",
           description:
-            "A cat-friendly haven with multiple play areas and cozy nooks for relaxation.",
+            "Step into Whisker Wonderland, a cat-friendly haven filled with multiple play areas and cozy nooks for relaxation. This charming retreat in Savannah provides a delightful environment where your feline companions can explore, play, and unwind.",
           price: 125.0,
         },
         {
@@ -143,7 +143,7 @@ module.exports = {
           lng: -104.9903,
           name: "Tail Trails Retreat",
           description:
-            "Perfect for dogs who love to hike. Surrounded by nature with beautiful trails.",
+            "Tail Trails Retreat is the perfect destination for dogs who love to hike. Surrounded by stunning natural beauty and beautiful trails, this retreat in Denver offers plenty of space for exploration and unforgettable adventures with your furry friend.",
           price: 175.0,
         },
         {
@@ -156,7 +156,7 @@ module.exports = {
           lng: -90.0715,
           name: "Furry Friends Lodge",
           description:
-            "A spacious lodge for all pets, featuring play areas, pools, and relaxing spots.",
+            "Welcome to Furry Friends Lodge, a spacious haven for all pets located in vibrant New Orleans. Featuring play areas, refreshing pools, and relaxing spots, this lodge offers a blend of fun and comfort for your furry companions to enjoy during their stay.",
           price: 190.0,
         },
         {
@@ -169,7 +169,7 @@ module.exports = {
           lng: -111.0429,
           name: "Paws & Hooves Ranch",
           description:
-            "Experience life on the ranch with your furry companions. Enjoy wide-open spaces, scenic views, and plenty of room to roam.",
+            "Experience life on the ranch at Paws & Hooves Ranch, where furry companions can roam freely in wide-open spaces. Enjoy breathtaking scenic views and outdoor activities that will create unforgettable memories for pet lovers seeking adventure!",
           price: 160.0,
         },
       ],
