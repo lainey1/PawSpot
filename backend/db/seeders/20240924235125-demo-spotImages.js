@@ -84,7 +84,7 @@ module.exports = {
         },
         {
           spotId: 5,
-          url: "https://as2.ftcdn.net/v2/jpg/05/04/26/85/1000_F_504268518_xp08vOJercavAzWr5urFX6uQo2MGz9CI.jpg",
+          url: "https://www.pawsandstay.co.uk/upload/2023/3/15/medium_Treehouse_beneath_the_branches_1_44908573d0.jpg",
           preview: false,
         },
 
@@ -95,7 +95,12 @@ module.exports = {
         },
         {
           spotId: 5,
-          url: " https://www.canopyandstars.co.uk/upload/2023/1/31/Dog_friendly_treehouse_holidays_1_ee16be2440.jpg",
+          url: "https://www.canopyandstars.co.uk/upload/2023/1/31/Dog_friendly_treehouse_holidays_1_ee16be2440.jpg",
+          preview: false,
+        },
+        {
+          spotId: 5,
+          url: "https://as2.ftcdn.net/v2/jpg/05/04/26/85/1000_F_504268518_xp08vOJercavAzWr5urFX6uQo2MGz9CI.jpg",
           preview: false,
         },
 
