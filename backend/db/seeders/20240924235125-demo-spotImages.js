@@ -47,7 +47,7 @@ module.exports = {
 
         {
           spotId: 2,
-          url: "https://www.petluv.com/cdn/shop/articles/create-zen-zone.jpg",
+          url: "https://cdn.shopify.com/s/files/1/0549/5806/3713/files/japandi_cat_tree_indoor.jpg",
           preview: false,
         },
         {
@@ -89,12 +89,18 @@ module.exports = {
         },
 
         {
-          spotId: 6,
-          url: "https://lifeonshadylane.com/wp-content/uploads/2017/04/5afaf69ab3518909fe575fe8de3d7f3d.jpg",
-          preview: true,
+          spotId: 5,
+          url: "https://www.hauspanther.com/wp-content/uploads/2019/07/NekoModernCatTree4.jpg",
+          preview: false,
         },
         {
           spotId: 5,
+          url: " https://www.canopyandstars.co.uk/upload/2023/1/31/Dog_friendly_treehouse_holidays_1_ee16be2440.jpg",
+          preview: false,
+        },
+
+        {
+          spotId: 6,
           url: "https://i.pinimg.com/736x/38/36/2b/38362b33850aa9e31668788b8fe58df7.jpg",
           preview: false,
         },
