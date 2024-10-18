@@ -1,45 +1,65 @@
-/* frontend/src/components/Navigation/Navigation.css */
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.paw-purple {
+  color: #b965d7; /* Common purple color for both the icon and text */
+}
 
 .demo-login-link {
   display: flex;
-  justify-content: flex-end; /* Center horizontally */
-  margin-top: 10px; /* Space above the link */
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
-.icon-container {
-  display: flex;
-  align-items: center;
+.hamburger-icon,
+.user-icon {
+  font-size: 24px;
+  color: #4f4f4f;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .home-icon {
   text-decoration: none;
-  color: #4f4f4f;
   font-size: 48px;
   transition: color 0.3s ease;
+
+  &:hover {
+    color: #4f4f4f;
+  }
 }
 
-.home-icon:hover {
-  color: #b965d7; /* Accent color on hover */
+.hover-effect {
+  transition: color 0.3s ease;
+
+  &:hover .paw-purple,
+  &:hover .site-name {
+    color: #4f4f4f;
+  }
 }
 
-.left-padding {
-  padding-left: 25px; /* Adjust the value as needed */
+.icon-container,
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logout-button {
   padding: 10px;
-  background-color: white;
-  border: none;
+  background: white;
+  border: 2px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
-  border: 2px solid #ccc;
   box-shadow: 2px 2px 2px #ccc;
-}
 
-.logout-button:hover {
-  background-color: rgb(170, 67, 170);
-  border: 3px solid black;
-  box-shadow: 0px 2px 2px black;
+  &:hover {
+    background-color: #b965d7;
+    border: 3px solid black;
+    box-shadow: 0px 2px 2px black;
+  }
 }
 
 .navigation {
@@ -50,59 +70,47 @@
 
 .profile-button {
   position: absolute;
-  right: 32px; /* Aligns with the right padding of navigation */
-  padding: 15px; /* Adjust padding as needed */
+  right: 32px;
+  padding: 15px;
+  background: #ffffff;
   border: 2px solid #dedede;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 40px;
-  background-color: #ffffff; /* Ensure background color matches */
   min-width: 60px;
-  margin-left: 32px; /* Space between the icons and the profile button */
+  margin-left: 32px;
 }
 
 .profile-dropdown {
   list-style: none;
   position: absolute;
-  right: 0px; /* Aligns with the right padding of navigation */
-  top: 30px; /* Adjust according to navigation height */
-  background-color: #ffffff; /* Match the nav background */
+  right: 0;
+  top: 30px;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Ensure it sits above other content */
-  min-width: 200px; /* Set a minimum width for the dropdown */
-  padding: 0; /* Remove default padding on the dropdown */
-}
+  z-index: 10;
+  min-width: 200px;
+  margin-top: 35px;
+  padding: 10px 0 10px 16px;
 
-.profile-dropdown.hidden {
-  display: none; /* Hide the menu when not in use */
-}
+  &.hidden {
+    display: none;
+  }
 
-.profile-dropdown li {
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+  li {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 
-.profile-dropdown li:hover {
-  background-color: #f7f7f7; /* Light gray on hover */
-}
-
-.hamburger-icon,
-.user-icon {
-  font-size: 24px;
-  color: #4f4f4f; /* Match the icon color */
-  margin-right: 8px; /* Space between icons */
-  cursor: pointer;
+    &:hover {
+      background-color: #f7f7f7;
+    }
+  }
 }
 
 .site-name {
   text-decoration: none;
-  color: #4f4f4f;
-  font-size: 32px;
-}
-
-button {
-  border: none;
-  outline: none;
-  background: transparent;
+  font-size: 0.5em;
+  margin-left: 8px;
+  font-weight: bold;
 }

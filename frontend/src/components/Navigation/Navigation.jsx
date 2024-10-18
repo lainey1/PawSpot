@@ -1,27 +1,24 @@
-//frontend/src/components/Navigation/Navigation.jsx //for react
-import { NavLink } from "react-router-dom"; // NavLink component is used to create links that navigate to different routes in the app
-import ProfileButton from "./ProfileButton"; // Handle user profile-related functionality
+import { NavLink } from "react-router-dom";
+import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { IoPawOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 function Navigation({ isLoaded }) {
-  const user = useSelector((state) => state.session.user); // Ensure you are selecting the user from Redux state
-  // accepts prop isLoaded to indicate whether the user profile data has been loaded
+  const user = useSelector((state) => state.session.user);
+
   const Paw = () => {
-    // wrapper for the IoPawOutline icon.
-    return (
-      <div>
-        <IoPawOutline />
-      </div>
-    );
+    return <IoPawOutline className="paw-purple" />;
   };
 
   return (
     <nav className="navigation">
       <div className="icon-container">
         <NavLink to="/" className="home-icon">
-          {Paw()}
+          <div className="logo-container hover-effect">
+            <Paw />
+            <span className="site-name paw-purple">PawSpots</span>
+          </div>
         </NavLink>
         {isLoaded && (
           <div className="profile-button">
