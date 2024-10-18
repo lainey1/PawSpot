@@ -6,16 +6,27 @@ import { GoStarFill } from "react-icons/go";
 const SpotDetail = () => {
   const { spotId } = useParams();
   const [spot, setSpot] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 5; // Number of reviews per page
 
   useEffect(() => {
     const fetchSpot = async () => {
       const response = await fetch(`/api/spots/${spotId}`);
       const data = await response.json();
       setSpot(data);
+      // console.log("Fetched Spot Data =======>:", data);
+    };
+
+    const fetchReviews = async () => {
+      const response = await fetch(`/api/spots/${spotId}/reviews`);
+      const data = await response.json();
+      setReviews(data.Reviews);
     };
 
     fetchSpot();
+    fetchReviews();
   }, [spotId]);
 
   if (!spot) return <div>Loading...</div>;
@@ -24,6 +35,20 @@ const SpotDetail = () => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
+
+  // Helper function to format the date
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Pagination Logic
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = reviews
+    .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+    .slice(indexOfFirstReview, indexOfLastReview);
 
   return (
     <div className="outer-container">
@@ -34,6 +59,7 @@ const SpotDetail = () => {
             Location: {spot.city}, {spot.state}, {spot.country}
           </p>
 
+          {/* IMAGES CONTAINER */}
           <div className="images-container">
             <div className="image-large-container">
               <img
@@ -71,6 +97,7 @@ const SpotDetail = () => {
             </div>
           </div>
 
+          {/* HOST AND SPOT DESCRIPTION */}
           <span className="third-layer">
             <div className="spot-double-click">
               <p className="host-info">
@@ -79,6 +106,7 @@ const SpotDetail = () => {
               <p>{spot.description}</p>
             </div>
 
+            {/*BOOK IT SIDE BAR SECTION */}
             <div className="bookit-sidebar">
               <div className="price-rating">
                 <div className="price-container">
@@ -105,6 +133,54 @@ const SpotDetail = () => {
               )}
             </div>
           </span>
+        </div>
+
+        {/* REVIEWS SECTION*/}
+        <div className="reviews-section">
+          <div className="reviews-rating">
+            {spot.avgStarRating ? (
+              <>
+                <GoStarFill /> {spot.avgStarRating.toFixed(1)} ·{" "}
+                {spot.numReviews} reviews
+              </>
+            ) : (
+              <span className="ratings-number">0 reviews</span>
+            )}
+          </div>
+          <ul className="reviews-list">
+            {currentReviews.map((review) => (
+              <li key={review.id} className="review-item">
+                <p>
+                  <strong>
+                    {review.User.firstName} {review.User.lastName}
+                  </strong>
+                </p>
+                <p className="review-date">{formatDate(review.updatedAt)}</p>
+                <p>{review.review}</p>
+              </li>
+            ))}
+          </ul>
+
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
