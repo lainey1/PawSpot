@@ -16,7 +16,6 @@ function ProfileButton({ user }) {
 
   const toggleMenu = (e) => {
     e.stopPropagation();
-    console.log("Toggling menu");
     setShowMenu(!showMenu);
   };
 
@@ -34,13 +33,11 @@ function ProfileButton({ user }) {
   }, [showMenu]);
 
   const closeMenu = () => {
-    console.log("Closing menu");
     setShowMenu(false);
   };
 
   const logout = (e) => {
     e.preventDefault();
-    console.log("Logging out");
     dispatch(sessionActions.logout()).then(() => {
       window.location.href = "/"; // Redirect to home page
     });
@@ -70,7 +67,6 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            {console.log("User logged in:", user)}{" "}
             {/* Log user when logged in */}
             <OpenModalMenuItem
               itemText="Log In"

@@ -306,7 +306,6 @@ router.post(
     try {
       // Get the current user's ID (Assuming authentication middleware sets req.user)
       const userId = req.user.id;
-      console.log("Received request to create a spot"); //DEBUGGING
 
       // Destructure the spot data from the request body
       const {
@@ -363,7 +362,6 @@ router.post(
         updatedAt: newSpot.updatedAt,
       });
     } catch (err) {
-      console.error(err); // DEBUGGING
       return res.status(401).json({ message: "Unauthorized" });
     }
   }
