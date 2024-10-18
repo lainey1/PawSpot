@@ -46,11 +46,11 @@ const router = createBrowserRouter([
         element: <SpotsBrowser />,
       },
       {
-        path: "/spots/:spotId", // Define the route for SpotDetail
+        path: "/spots/:spotId",
         element: <SpotDetail />,
       },
       {
-        path: "/create-spot", // Define the route for SpotDetail
+        path: "/create-spot",
         element: <CreateSpot />,
       },
     ],

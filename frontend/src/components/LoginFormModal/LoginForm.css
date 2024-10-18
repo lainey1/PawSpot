@@ -1,5 +1,20 @@
 /* frontend/src/components/LoginFormPage/LoginForm.css */
 
+.demo-link {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  color: rgb(170, 67, 170);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.demo-link:hover {
+  margin-top: 10px;
+  text-decoration: underline;
+  color: black;
+}
+
 h1 {
   text-align: center; /* Center the text */
   margin-bottom: 20px; /* Optional: add some space below the heading */

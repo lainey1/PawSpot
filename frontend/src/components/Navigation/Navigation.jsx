@@ -21,14 +21,20 @@ function Navigation({ isLoaded }) {
             <span className="site-name paw-purple">PawSpots</span>
           </div>
         </NavLink>
+      </div>
+
+      <div className="profile-actions">
+        {isLoaded && user && (
+          <NavLink to="/create-spot" className="create-spot-link">
+            Create a Spot
+          </NavLink>
+        )}
+        <div className="profile-button">
+          <ProfileButton user={user} />
+        </div>
 
         {isLoaded && (
           <div className="nav-links">
-            {user && (
-              <NavLink to="/create-spot" className="nav-link">
-                Create a New Spot
-              </NavLink>
-            )}
             <div className="profile-button">
               <ProfileButton user={user} />
             </div>
