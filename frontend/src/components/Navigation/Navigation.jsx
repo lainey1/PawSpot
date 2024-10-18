@@ -1,3 +1,4 @@
+//frontend/src/components/Navigation/Navigation.jsx
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -31,6 +32,14 @@ function Navigation({ isLoaded }) {
         <div className="profile-button">
           <ProfileButton user={user} />
         </div>
+
+        {isLoaded && (
+          <div className="nav-links">
+            <div className="profile-button">
+              <ProfileButton user={user} />
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
