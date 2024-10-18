@@ -1,13 +1,23 @@
 //frontend/src/store/spots.js
 
+import { csrfFetch } from "./csrf";
+
 // #1 ACTION TYPES
 const LOAD = "spots/LOAD";
+const CREATE = "spots/CREATE";
 
 // #2 ACTION CREATORS
 //* Create Action with LOAD type that returns action type and list of spots:
 export const loadSpots = (spotsData) => ({
   type: LOAD,
   list: spotsData, // Pass the data in the expected structure
+});
+
+//* Create Action to add created spot to the store
+
+export const createSpot = (spotsData) => ({
+  type: LOAD,
+  list: spotsData,
 });
 
 // #3 THUNK ACTION
@@ -29,6 +39,40 @@ export const getSpots = () => async (dispatch) => {
   }
 };
 
+//* Create thunk actio to to add spot to the server
+export const createNewSpot = (spotData) => async (dispatch, getState) => {
+  const state = getState();
+  const token = state.session.user?.token;
+  console.log(state.session.user);
+  console.log("User Token:", token);
+
+  if (!token) {
+    throw new Error("User not authenticated");
+  }
+
+  try {
+    const response = await csrfFetch("/api/spots", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`, // Use the retrieved token
+      },
+      body: JSON.stringify(spotData),
+    });
+
+    if (response.ok) {
+      const newSpot = await response.json();
+      dispatch(createSpot(newSpot));
+      return newSpot;
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to create spot");
+    }
+  } catch (error) {
+    console.error("Failed to create spot:", error);
+    throw error;
+  }
+};
+
 //* Initial State
 const initialState = {
   list: [],
@@ -42,7 +86,7 @@ const spotsReducer = (state = initialState, action) => {
     case LOAD:
       return {
         ...state,
-        loading: false, // Consider setting loading here if needed
+        loading: false,
         list: action.list,
       };
     case "spots/LOAD_START":
@@ -54,6 +98,11 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case CREATE:
+      return {
+        ...state,
+        list: [...state.list, action.spot], // Add the new spot to the list
       };
     default:
       return state;

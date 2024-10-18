@@ -13,7 +13,6 @@ function OpenModalMenuItem({
   const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
-    console.log("Modal opening:", itemText); // Check if this is called
     if (typeof onItemClick === "function") onItemClick();
   };
 

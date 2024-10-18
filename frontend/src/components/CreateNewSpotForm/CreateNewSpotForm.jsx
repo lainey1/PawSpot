@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateNewSpotForm.css";
+import { useDispatch } from "react-redux";
+import { createNewSpot } from "../../store/spots";
 
 const CreateSpot = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +21,7 @@ const CreateSpot = () => {
     imageUrls: ["", "", "", ""],
   });
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -51,35 +54,19 @@ const CreateSpot = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
     try {
-      const response = await fetch("/api/spots", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          lat: formData.lat || null,
-          lng: formData.lng || null,
-          imageUrls: formData.imageUrls, // FIXED did not include imageUrls in the fetch req
-        }),
-      });
-
-      if (response.ok) {
-        const newSpot = await response.json();
-        navigate(`/spots/${newSpot.id}`);
-      } else {
-        // Handle error response
-        const errorData = await response.json();
-        setErrors(errorData.errors || {});
-      }
+      const newSpot = await dispatch(createNewSpot(formData)); // Dispatch the thunk with form data
+      navigate(`/spots/${newSpot.id}`); // Navigate to the new spot's detail page
     } catch (error) {
       console.error("Error creating spot:", error);
+      // Handle error (e.g., display an error message)
+      setErrors({ submit: error.message });
     }
   };
 

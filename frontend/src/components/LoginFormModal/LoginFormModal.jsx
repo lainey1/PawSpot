@@ -33,15 +33,18 @@ function LoginFormModal() {
 
   //* Adding Demo login
   const loginAsDemoUser = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setErrors({}); // Reset errors
+    e.preventDefault();
+    setErrors({});
     return dispatch(
       sessionActions.login({
         credential: "Demo-lition",
         password: "password",
       })
     )
-      .then(closeModal)
+      .then(() => {
+        console.log("Demo user logged in successfully."); // Confirm success
+        closeModal();
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {

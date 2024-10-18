@@ -298,7 +298,7 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
   return res.status(200).json(spot);
 });
 
-//* Create a Spot (v2) (CHECKED)
+//* Create a Spot
 router.post(
   "/",
   validateSpot, // Use validateSpot middleware to handle validation
@@ -306,6 +306,7 @@ router.post(
     try {
       // Get the current user's ID (Assuming authentication middleware sets req.user)
       const userId = req.user.id;
+      console.log("Received request to create a spot"); //DEBUGGING
 
       // Destructure the spot data from the request body
       const {
@@ -318,6 +319,7 @@ router.post(
         name,
         description,
         price,
+        imageUrls, // FIXED need to ensure server can handle this in form submission
       } = req.body;
 
       // Create the new spot in the database
@@ -334,6 +336,16 @@ router.post(
         price,
       });
 
+      // FIXED CREATE spot images in database
+      if (imageUrls && imageUrls.length) {
+        const spotImages = imageUrls.map((url, index) => ({
+          spotId: newSpot.id,
+          url,
+          preview: index === 0, // Set first image as the preview image
+        }));
+
+        await SpotImage.bulkCreate({ spotImages });
+      }
       // Return the newly created spot
       return res.status(201).json({
         id: newSpot.id,
@@ -351,6 +363,7 @@ router.post(
         updatedAt: newSpot.updatedAt,
       });
     } catch (err) {
+      console.error(err); // DEBUGGING
       return res.status(401).json({ message: "Unauthorized" });
     }
   }

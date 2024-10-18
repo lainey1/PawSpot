@@ -19,13 +19,15 @@ export const removeUser = () => ({
 // Thunk Action Creator for Login
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
+  console.log("Logging in with:", { credential, password }); // Log credentials
   const response = await csrfFetch("/api/session", {
     method: "POST",
     body: JSON.stringify({ credential, password }),
   });
-
+  console.log("Response status:", response.status); // Log the response status
   if (response.ok) {
     const data = await response.json();
+    console.error("Login error:", data); // Log error details
     dispatch(setUser(data.user));
     return response;
   } else {
@@ -50,7 +52,9 @@ export const signup = (user) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    console.log("LOOKING FOR TOKEN ====> Login Response:", data); // Check if the token is here
     dispatch(setUser(data.user));
+
     return response;
   } else {
     const data = await response.json();
