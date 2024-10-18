@@ -91,17 +91,16 @@ const CreateSpot = () => {
       <p>
         Guests will only get your exact address once they booked a reservation.
       </p>
-      {["country", "streetAddress", "city", "state"].map((field) => (
+      {["Country", "Street Address", "City", "State"].map((field) => (
         <div key={field} className="location-container">
-          <label className="input-label">
-            {field.charAt(0).toUpperCase() + field.slice(1)}:
-          </label>
+          <label className="input-label">{field}:</label>
           <input
             className="input-field"
             name={field}
             value={formData[field]}
             onChange={handleChange}
-            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+            placeholder={field}
+            required
           />
           {errors[field] && <p className="error-message">{errors[field]}</p>}
         </div>
