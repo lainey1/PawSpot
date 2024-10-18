@@ -66,6 +66,7 @@ const CreateSpot = () => {
           ...formData,
           lat: formData.lat || null,
           lng: formData.lng || null,
+          imageUrls: formData.imageUrls, // FIXED did not include imageUrls in the fetch req
         }),
       });
 
