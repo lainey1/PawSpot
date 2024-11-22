@@ -1,4 +1,5 @@
 // frontend/src/store/session.js
+import { createSelector } from "reselect";
 import { csrfFetch } from "./csrf";
 
 // ***************************************************
@@ -22,6 +23,18 @@ const removeUser = () => {
     type: REMOVE_USER,
   };
 };
+
+// ***************************************************
+// * Selectors
+// ***************************************************
+// Basic selector to get session slice of state
+const selectSession = (state) => state.session;
+
+// Memoized selector to get user
+export const selectSessionUser = createSelector(
+  [selectSession],
+  (session) => session.user
+);
 
 // ***************************************************
 // * Thunk Action Creator
@@ -77,7 +90,30 @@ export const logout = () => async (dispatch) => {
     // IF ERROR
   } catch (error) {
     // Log unexpected errors for debugging
-    console.error("LOGOUT ACTION FAILED ", error);
+    console.error("LOGOUT ACTION FAILED: ", error);
+  }
+};
+
+export const restoreUser = () => async (dispatch) => {
+  // Send request to restore user session
+  try {
+    const response = await csrfFetch("/api/session");
+
+    // Handle non-ok response
+    if (!response.ok) {
+      console.error("Failed to restore user session");
+      return;
+    }
+
+    // ELSE dispatch setUser action
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    return response;
+
+    // IF ERROR
+  } catch (error) {
+    // Log unexpected effor
+    console.error("RESTORE USER SESSION FAILED: ", error);
   }
 };
 
