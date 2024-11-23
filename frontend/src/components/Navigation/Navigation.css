@@ -1,0 +1,123 @@
+/* frontend/src/components/Navigation/Navigation.css */
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.button-logout {
+  width: 75%;
+  padding: 10px;
+  margin-left: 25px;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px #ccc;
+
+  &:hover {
+    background-color: #b965d7;
+    border: 2px solid black;
+    box-shadow: 0px 2px 2px black;
+  }
+}
+
+.container-home {
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  font-size: 48px;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #4f4f4f;
+  }
+}
+
+.container-profile {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.icon-user {
+  font-size: 2.25em;
+  color: #4f4f4f;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  padding: 16px 32px;
+  background-color: #ffffff;
+}
+
+.navigation ul {
+  list-style: none;
+}
+
+.navigation li {
+  display: inline;
+  padding: 0 10px;
+}
+
+.navigation a {
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Pushes links to the right */
+}
+
+.nav-link {
+  color: #4f4f4f;
+  text-decoration: none;
+  font-size: 1em;
+  margin-right: 20px;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #b965d7;
+}
+
+.profile-dropdown {
+  position: absolute;
+  text-align: left;
+  right: 40px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  min-width: 200px;
+  background: #ffffff;
+  padding: 0px 0px 1em 0px;
+}
+
+.profile-dropdown.hidden {
+  display: none;
+}
+
+.profile-dropdown li {
+  display: flex;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.profile-dropdown li:hover {
+  background-color: #f7f7f7;
+}
+
+.profile-dropdown ul {
+  display: flex;
+}
+
+.site-name {
+  text-decoration: none;
+  font-size: 0.5em;
+  margin-left: 8px;
+  font-weight: bold;
+}

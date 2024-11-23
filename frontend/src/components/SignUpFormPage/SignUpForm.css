@@ -1,0 +1,53 @@
+/* frontend/src/components/SignUpFormPage/SignUpForm.css */
+
+/* frontend/src/components/SignupFormPage/SignupForm.css */
+
+h1 {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Optional: add some space below the heading */
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.signup-form input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signup-form button {
+  padding: 10px;
+  color: #4f4f4f;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.signup-form button:hover {
+  background-color: rgb(170, 67, 170);
+  color: black;
+  border: 3px solid black;
+  box-shadow: 0px 2px 2px black;
+}
+
+.error {
+  color: red;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em; /* Optional: adjust the font size */
+}
