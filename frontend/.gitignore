@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+!dist #* typically ignored - putting ! to access during deployment
 dist-ssr
 *.local
 
