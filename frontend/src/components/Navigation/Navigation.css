@@ -6,9 +6,9 @@ button {
 }
 
 .button-logout {
-  width: 100%;
+  width: 75%;
   padding: 10px;
-  margin: 0px;
+  margin-left: 25px;
   background: white;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -17,14 +17,9 @@ button {
 
   &:hover {
     background-color: #b965d7;
-    border: 3px solid black;
+    border: 2px solid black;
     box-shadow: 0px 2px 2px black;
   }
-}
-.container-profile {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
 }
 
 .container-home {
@@ -37,6 +32,12 @@ button {
   &:hover {
     color: #4f4f4f;
   }
+}
+
+.container-profile {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
 .icon-user {
@@ -83,27 +84,35 @@ button {
 .nav-link:hover {
   color: #b965d7;
 }
+
 .profile-dropdown {
   position: absolute;
+  text-align: left;
   right: 40px;
   border: 2px solid #ccc;
   border-radius: 4px;
   min-width: 200px;
   background: #ffffff;
+  padding: 0px 0px 1em 0px;
 }
 
 .profile-dropdown.hidden {
   display: none;
 }
 
-.profile-dropdown p {
+.profile-dropdown li {
   display: flex;
   padding: 12px 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
 .profile-dropdown li:hover {
   background-color: #f7f7f7;
+}
+
+.profile-dropdown ul {
+  display: flex;
 }
 
 .site-name {

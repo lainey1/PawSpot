@@ -3,10 +3,8 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import OpenModalButton from "../OpenModalButton/OpenModalButton";
-import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import { IoPawOutline } from "react-icons/io5";
-import SignupFormModal from "../SignUpFormPage/SignUpFormModal";
+import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,34 +13,20 @@ function Navigation({ isLoaded }) {
     return <IoPawOutline className="paw-purple" />;
   };
 
-  const sessionLinks = sessionUser ? (
-    <li>
-      <ProfileButton user={sessionUser} />
-    </li>
-  ) : (
-    <>
-      <li>
-        <OpenModalButton
-          buttonText={"Log In"}
-          modalComponent={<LoginFormModal />}
-        />
-      </li>
-      <li>
-        <OpenModalButton
-          buttonText={"Sign Up"}
-          modalComponent={<SignupFormModal />}
-        />
-      </li>
-    </>
-  );
-
   return (
     <nav className="navigation">
       <NavLink to="/" className="container-home">
         <Paw />
         <span className="site-name paw-purple">PawSpots</span>
       </NavLink>
-      <div className="container-profile">{isLoaded && sessionLinks}</div>
+
+      <div className="container-profile">
+        {isLoaded && (
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+        )}
+      </div>
     </nav>
   );
 }
