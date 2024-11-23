@@ -6,6 +6,7 @@ import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import { IoPawOutline } from "react-icons/io5";
+import SignupFormModal from "../SignUpFormPage/SignUpFormModal";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -27,7 +28,10 @@ function Navigation({ isLoaded }) {
         />
       </li>
       <li>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <OpenModalButton
+          buttonText={"Sign Up"}
+          modalComponent={<SignupFormModal />}
+        />
       </li>
     </>
   );
