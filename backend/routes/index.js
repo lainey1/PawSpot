@@ -6,7 +6,8 @@ const router = express.Router();
 const apiRouter = require("./api");
 router.use("/api", apiRouter);
 
-// STATIC ROUTES - Serve React build files in production
+//* STATIC ROUTES
+//Serve React build files in production
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
 
