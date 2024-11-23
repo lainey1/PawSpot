@@ -39,7 +39,6 @@ export const selectSessionUser = createSelector(
 // ***************************************************
 // * Thunk Action Creator
 // ***************************************************
-
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
 
@@ -114,6 +113,39 @@ export const restoreUser = () => async (dispatch) => {
   } catch (error) {
     // Log unexpected effor
     console.error("RESTORE USER SESSION FAILED: ", error);
+  }
+};
+
+export const signup = (user) => async (dispatch) => {
+  const { username, firstName, lastName, email, password } = user;
+
+  try {
+    // Make a POST request to sign up user
+    const response = await csrfFetch("/api/users", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        firstName,
+        lastName,
+        email,
+        password,
+      }),
+    });
+
+    // Hande non-ok response
+    if (!response.ok) {
+      console.error("Failed to sign up user");
+      return;
+    }
+
+    // Parse response data and dispatch setUser action
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    return response;
+
+    // Catch errors
+  } catch (error) {
+    console.error("SIGN UP ACTION FAILED: ", error);
   }
 };
 
