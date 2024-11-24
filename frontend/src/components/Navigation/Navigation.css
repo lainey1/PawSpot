@@ -1,56 +1,72 @@
 /* frontend/src/components/Navigation/Navigation.css */
+
 button {
-  border: none;
-  outline: none;
-  background: transparent;
+  padding: 5px 10px;
+
+  color: #6a6a6a;
+  background: white;
+
+  border: 1px solid rgba(100, 100, 111, 0.2);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 2.125em;
+
+  cursor: pointer;
 }
 
 .button-logout {
-  width: 75%;
-  padding: 10px;
   margin-left: 25px;
+  padding: 10px;
+  width: 75%;
+
   background: white;
-  border: 2px solid #ccc;
+  color: black;
+
+  border: 1px solid #ccc;
   border-radius: 4px;
+  box-shadow: 1px 1px 1px #ccc;
+
   cursor: pointer;
-  box-shadow: 2px 2px 2px #ccc;
 
   &:hover {
     background-color: #b965d7;
-    border: 2px solid black;
+    border: 1px solid black;
     box-shadow: 0px 2px 2px black;
   }
 }
 
 .container-home {
   display: flex;
-  align-items: flex-end;
-  text-decoration: none;
-  font-size: 48px;
-  transition: color 0.3s ease;
+  align-items: center;
 
-  &:hover {
-    color: #4f4f4f;
-  }
+  font-size: 3em;
+  text-decoration: none;
+
+  transition: color 0.3s ease;
 }
 
 .container-profile {
   display: flex;
   align-items: center;
+
   margin-left: auto;
 }
 
+.icon-hamburger {
+  padding-right: 10px;
+
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
 .icon-user {
-  font-size: 2.25em;
-  color: #4f4f4f;
-  margin-right: 8px;
+  font-size: 2.125em;
   cursor: pointer;
 }
 
 .navigation {
   display: flex;
-  padding: 16px 32px;
   background-color: #ffffff;
+  padding: 16px 32px;
 }
 
 .navigation ul {
@@ -73,11 +89,13 @@ button {
 }
 
 .nav-link {
+  font-size: 1em;
   color: #4f4f4f;
   text-decoration: none;
-  font-size: 1em;
+
   margin-right: 20px;
   padding: 8px;
+
   transition: color 0.3s ease;
 }
 
@@ -87,40 +105,49 @@ button {
 
 .profile-dropdown {
   position: absolute;
-  text-align: left;
   right: 40px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  z-index: 1;
+
   min-width: 200px;
+  margin-top: 8px;
+
   background: #ffffff;
-  padding: 0px 0px 1em 0px;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.25) 0px 7px 15px 0px;
+
+  text-align: left;
 }
 
 .profile-dropdown.hidden {
   display: none;
 }
 
+.profile-dropdown ul {
+  display: flex;
+}
+
 .profile-dropdown li {
   display: flex;
+
   padding: 12px 16px;
+
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .profile-dropdown li:hover {
-  background-color: #f7f7f7;
-}
-
-.profile-dropdown ul {
-  display: flex;
+  background-color: #faf7f7;
 }
 
 .paw-purple {
   color: #b965d7;
 }
+
 .site-name {
-  text-decoration: none;
   font-size: 0.5em;
+  font-weight: 600;
+
   margin-left: 8px;
-  font-weight: bold;
+
+  text-decoration: none;
 }

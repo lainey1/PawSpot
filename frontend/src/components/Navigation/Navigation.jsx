@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
     <nav className="navigation">
       <NavLink to="/" className="container-home">
         <Paw />
-        <span className="site-name paw-purple">PawSpots</span>
+        <span className="site-name paw-purple">pawspot</span>
       </NavLink>
 
       <div className="container-profile">
