@@ -2,15 +2,11 @@
 import { createSelector } from "reselect";
 import { csrfFetch } from "./csrf";
 
-// ***************************************************
-// * Action Types
-// ***************************************************
+// * Action Types *************************
 const SET_USER = "/session/setUser";
 const REMOVE_USER = "/session/removeUser";
 
-// ***************************************************
-// * Action Creator
-// ***************************************************
+// * Action Creators **********************
 const setUser = (user) => {
   return {
     type: SET_USER,
@@ -24,21 +20,7 @@ const removeUser = () => {
   };
 };
 
-// ***************************************************
-// * Selectors
-// ***************************************************
-// Basic selector to get session slice of state
-const selectSession = (state) => state.session;
-
-// Memoized selector to get user
-export const selectSessionUser = createSelector(
-  [selectSession],
-  (session) => session.user
-);
-
-// ***************************************************
-// * Thunk Action Creator
-// ***************************************************
+// * Thunk Action Creators ****************
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
 
@@ -149,10 +131,7 @@ export const signup = (user) => async (dispatch) => {
   }
 };
 
-// ***************************************************
-// * Reducer
-// ***************************************************
-
+// * Reducers ***************************
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
@@ -167,3 +146,13 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 export default sessionReducer;
+
+// * Selectors **************************
+// Basic selector to get session slice of state
+const selectSession = (state) => state.session;
+
+// Memoized selector to get user
+export const selectSessionUser = createSelector(
+  [selectSession],
+  (session) => session.user
+);
