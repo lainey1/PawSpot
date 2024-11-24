@@ -22,9 +22,9 @@ function Navigation({ isLoaded }) {
 
       <div className="container-profile">
         {isLoaded && (
-          <li>
+          <div>
             <ProfileButton user={sessionUser} />
-          </li>
+          </div>
         )}
       </div>
     </nav>
