@@ -1,10 +1,9 @@
-// frontend/src/components/SpotsList/SpotsList.jsx
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import { GoStarFill } from "react-icons/go";
+import "./SpotsList.css";
 
 const SpotsList = () => {
   const dispatch = useDispatch();
