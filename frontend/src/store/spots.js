@@ -2,7 +2,7 @@
 const LOAD_SPOTS = "/spots/load";
 
 // * Action Creators **********************
-export const loadSpots = (list) => ({
+const loadSpots = (list) => ({
   type: LOAD_SPOTS,
   list,
 });
@@ -41,3 +41,5 @@ const spotsReducer = (state = initialState, action) => {
 };
 
 export default spotsReducer;
+
+// * Selectors **************************
