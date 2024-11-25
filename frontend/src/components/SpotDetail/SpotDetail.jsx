@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { fetchSpot } from "../../store/spots";
+
 import "./SpotDetail.css";
 
 function SpotDetail() {
   const { spotId } = useParams();
-  const [spot, setSpot] = useState(null);
+  const dispatch = useDispatch();
+  const spot = useSelector((state) => state.spots.currentSpot);
 
   useEffect(() => {
-    const fetchSpot = async () => {
-      const response = await fetch(`/api/spots/${spotId}`);
-      const data = await response.json();
-      setSpot(data);
-    };
-    fetchSpot();
-  }, [spotId]);
+    dispatch(fetchSpot(spotId));
+  }, [dispatch, spotId]);
 
   return (
     <div className="container-spot">
