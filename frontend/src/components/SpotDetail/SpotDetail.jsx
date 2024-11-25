@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Reviews from "../Reviews";
 import { fetchSpot } from "../../store/spots";
 import "./SpotDetail.css";
 
@@ -51,7 +52,7 @@ function SpotDetail() {
         </span>
       </div>
 
-      <div className="reviews"></div>
+      <Reviews spot={spot} />
     </div>
   );
 }
