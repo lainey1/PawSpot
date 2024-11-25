@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Reviews from "../Reviews";
 import { fetchSpot } from "../../store/spots";
+import { fetchReviews } from "../../store/reviews";
+import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 
 function SpotDetail() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const [showAlert, setShowAlert] = useState(false);
-  const spot = useSelector((state) => state.spots.currentSpot);
 
-  const handleReserveClick = () => {
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
-  };
+  const spot = useSelector((state) => state.spots.currentSpot);
+  const reviews = useSelector((state) => state.reviews.Reviews);
 
   useEffect(() => {
     dispatch(fetchSpot(spotId));
+    dispatch(fetchReviews(spotId));
   }, [dispatch, spotId]);
 
   return (
@@ -42,17 +40,11 @@ function SpotDetail() {
                 <span className="price-per-night"> per night</span>
               </div>
             </div>
-            <button className="reserve-button" onClick={handleReserveClick}>
-              Reserve
-            </button>
-            {showAlert && (
-              <span className="alert-message">Feature Coming Soon...</span>
-            )}
+            <button className="reserve-button">Reserve</button>
           </div>
         </span>
       </div>
-
-      <Reviews spot={spot} />
+      <Reviews spot={spot} reviews={reviews} />
     </div>
   );
 }

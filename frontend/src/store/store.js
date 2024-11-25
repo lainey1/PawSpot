@@ -2,11 +2,13 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import spotsReducer from "./spots";
+import reviewsReducer from "./reviews";
 
 // * 1 Create Root Reducer *********
 const rootReducer = combineReducers({
   session: sessionReducer,
   spots: spotsReducer,
+  reviews: reviewsReducer,
 });
 
 // * 2 Enhancer ********************
