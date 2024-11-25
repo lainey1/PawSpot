@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./SpotDetail.css";
 
 function SpotDetail() {
   const { spotId } = useParams();
@@ -19,14 +20,14 @@ function SpotDetail() {
       <h2>{spot?.name}</h2>
       <p>
         {" "}
-        Location: {spot?.city}, {spot?.state}, {spot?.country}
+        {spot?.city}, {spot?.state}, {spot?.country}
       </p>
 
       <div className="container-images"></div>
 
       <div className="description">
         <h3>
-          Hosted by {spot?.firstName} {spot?.lastName}
+          Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
         </h3>
         <p>{spot?.description}</p>
 
