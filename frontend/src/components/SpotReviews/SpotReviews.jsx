@@ -6,6 +6,7 @@ function Reviews({ spot, reviews }) {
 
   return (
     <>
+      <div id="section-divider"></div>
       <div id="header">
         <GoStarFill />
         <h2>
@@ -23,14 +24,14 @@ function Reviews({ spot, reviews }) {
         </h3>
       </div>
 
-      <div className="list">
-        <ul className="reviews-list">
+      <div id="section">
+        <ul className="list">
           {reviews?.map((review) => (
-            <li key={review.id} className="review-item">
+            <li key={review.id} className="item">
               <p>
                 <strong>{review.User.firstName}</strong>
               </p>
-              <p className="review-date">{review.updatedAt}</p>
+              <p className="date">{review.updatedAt}</p>
               <p>{review.review}</p>
             </li>
           ))}
