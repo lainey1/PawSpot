@@ -1,9 +1,9 @@
-import "./SpotReviews.css";
 import { GoStarFill } from "react-icons/go";
+import { formatDate } from "../../utils/reviewUtils";
+
+import "./SpotReviews.css";
 
 function Reviews({ spot, reviews }) {
-  console.log(reviews);
-
   return (
     <>
       <div id="section-divider"></div>
@@ -31,7 +31,7 @@ function Reviews({ spot, reviews }) {
               <p>
                 <strong>{review.User.firstName}</strong>
               </p>
-              <p className="date">{review.updatedAt}</p>
+              <p className="date">{formatDate(review.updatedAt)}</p>
               <p>{review.review}</p>
             </li>
           ))}
