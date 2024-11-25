@@ -1,5 +1,3 @@
-// frontend/src/App.jsx
-
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";

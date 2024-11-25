@@ -1,4 +1,3 @@
-// frontend/src/store/session.js
 import { createSelector } from "reselect";
 import { csrfFetch } from "./csrf";
 
