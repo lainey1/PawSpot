@@ -1,19 +1,15 @@
-/* frontend/src/components/SignUpFormPage/SignUpForm.css */
-
-/* frontend/src/components/SignupFormPage/SignupForm.css */
-
-h1 {
-  text-align: center; /* Center the text */
-  margin-bottom: 20px; /* Optional: add some space below the heading */
-}
-
 .signup-form {
   display: flex;
   flex-direction: column;
+
   min-width: 300px;
   max-width: 500px;
   margin: auto;
   padding: 20px;
+}
+
+h1 {
+  text-align: center;
 }
 
 .signup-form input {
@@ -25,20 +21,25 @@ h1 {
 
 .signup-form button {
   padding: 10px;
-  color: #4f4f4f;
-  background-color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 2px solid #ccc;
-  box-shadow: 2px 2px 2px #ccc;
-}
 
-.signup-form button:hover {
-  background-color: rgb(170, 67, 170);
-  color: black;
-  border: 3px solid black;
-  box-shadow: 0px 2px 2px black;
+  background-image: linear-gradient(to right, #b965d7, #4a90e2);
+  color: white;
+  font-weight: bold;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px #ccc;
+
+  cursor: pointer;
+
+  /* Reverse the gradient on hover */
+  &:hover {
+    background-image: linear-gradient(
+      to right,
+      #4a90e2,
+      #b965d7
+    ); /* Blue to light purple */
+  }
 }
 
 .error {

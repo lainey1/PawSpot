@@ -1,5 +1,3 @@
-// frontend/src/store/spots.js
-
 // * Action Types *************************
 const LOAD_SPOTS = "/spots/load";
 

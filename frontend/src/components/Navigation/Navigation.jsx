@@ -1,5 +1,3 @@
-// frontend/src/components/Navigation/Navigation.jsx
-
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -17,7 +15,7 @@ function Navigation({ isLoaded }) {
     <nav className="navigation">
       <NavLink to="/" className="container-home">
         <Paw />
-        <span className="site-name paw-purple">PawSpots</span>
+        <span className="site-name paw-purple">pawspot</span>
       </NavLink>
 
       <div className="container-profile">

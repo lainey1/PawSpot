@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 import * as sessionActions from "../../store/session";
-import OpenModalMenuItem from "../OpenModalMenuItem/OpenModalMenuItem";
+import OpenModalMenuItem from "../OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignUpFormModal from "../SignUpFormPage/SignUpFormModal";
 import "./Navigation.css";
@@ -45,7 +46,10 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={toggleMenu}>
-        <FaUserCircle className="icon-user" />
+        <span className="container-profile">
+          <GiHamburgerMenu className="icon-hamburger" />
+          <FaUserCircle className="icon-user" />
+        </span>
       </button>
 
       <div className={ulClassName} ref={ulRef}>

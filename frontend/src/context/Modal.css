@@ -1,7 +1,5 @@
-/* frontend/src/context/Modal.css */
-
 #modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -23,4 +21,5 @@
 #modal-content {
   position: absolute;
   background-color: white;
+  border-radius: 8px;
 }
