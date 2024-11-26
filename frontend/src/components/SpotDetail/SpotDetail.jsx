@@ -11,7 +11,8 @@ function SpotDetail() {
   const { spotId } = useParams();
 
   const reviews = useSelector((state) => state.reviews.Reviews);
-  const spot = useSelector((state) => state.spots);
+  const [spot, setSpot] = useState(null);
+  const currentSpot = useSelector((state) => state.spots);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -21,7 +22,8 @@ function SpotDetail() {
   };
 
   useEffect(() => {
-    dispatch(fetchSpot(spotId));
+    const spot = dispatch(fetchSpot(spotId));
+    setSpot(spot);
   }, [dispatch, spotId]);
 
   useEffect(() => {
@@ -35,22 +37,24 @@ function SpotDetail() {
   return (
     <div className="container-spot">
       <div>
-        <h2>{spot?.name}</h2>
+        <h2>{currentSpot.name}</h2>
         <p className="location">
-          Location: {spot.city}, {spot.state}, {spot.country}
+          Location: {currentSpot.city}, {currentSpot.state},{" "}
+          {currentSpot.country}
         </p>
         <div className="images"></div>
         <span className="container-layer">
           <div className="details">
             <p className="host-info">
-              Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
+              Hosted by: {currentSpot?.Owner.firstName}{" "}
+              {currentSpot?.Owner.lastName}
             </p>
-            <p>{spot.description}</p>
+            <p>{currentSpot.description}</p>
           </div>
           <div className="bookit-sidebar">
             <div className="price-rating">
               <div className="price-container">
-                <span className="price-amount">${spot.price}</span>
+                <span className="price-amount">${currentSpot.price}</span>
                 <span className="price-per-night"> per night</span>
               </div>
             </div>
