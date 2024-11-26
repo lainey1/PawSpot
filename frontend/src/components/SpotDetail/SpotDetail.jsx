@@ -28,7 +28,7 @@ function SpotDetail() {
   return (
     <div className="container-spot">
       <div>
-        <h2>{spot.name}</h2>
+        <h2>{spot?.name}</h2>
         <p className="location">
           Location: {spot?.city}, {spot?.state}, {spot?.country}
         </p>
