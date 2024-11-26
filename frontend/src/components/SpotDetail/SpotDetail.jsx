@@ -11,8 +11,7 @@ function SpotDetail() {
   const { spotId } = useParams();
 
   const reviews = useSelector((state) => state.reviews.Reviews);
-  const [spot, setSpot] = useState(null);
-  const currentSpot = useSelector((state) => state.spots);
+  const currSpot = useSelector((state) => state.spots);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -22,39 +21,36 @@ function SpotDetail() {
   };
 
   useEffect(() => {
-    const spot = dispatch(fetchSpot(spotId));
-    setSpot(spot);
-  }, [dispatch, spotId]);
-
-  useEffect(() => {
+    dispatch(fetchSpot(spotId));
     dispatch(fetchReviews(spotId));
   }, [dispatch, spotId]);
 
-  if (!spot) {
+  //! BUG FIX START! ********************************
+  //  Wait for Redux State Updates: Use currSpot from the Redux store directly instead of relying on the local spot state
+  if (!currSpot || !currSpot.Owner) {
     return <div>Loading...</div>;
   }
+  //! BUG FIX END! ***********************************
 
   return (
     <div className="container-spot">
       <div>
-        <h2>{currentSpot.name}</h2>
+        <h2>{currSpot.name}</h2>
         <p className="location">
-          Location: {currentSpot.city}, {currentSpot.state},{" "}
-          {currentSpot.country}
+          Location: {currSpot.city}, {currSpot.state}, {currSpot.country}
         </p>
         <div className="images"></div>
         <span className="container-layer">
           <div className="details">
             <p className="host-info">
-              Hosted by: {currentSpot?.Owner.firstName}{" "}
-              {currentSpot?.Owner.lastName}
+              Hosted by: {currSpot.Owner.firstName} {currSpot.Owner.lastName}
             </p>
-            <p>{currentSpot.description}</p>
+            <p>{currSpot.description}</p>
           </div>
           <div className="bookit-sidebar">
             <div className="price-rating">
               <div className="price-container">
-                <span className="price-amount">${currentSpot.price}</span>
+                <span className="price-amount">${currSpot.price}</span>
                 <span className="price-per-night"> per night</span>
               </div>
             </div>
@@ -67,7 +63,7 @@ function SpotDetail() {
           </div>
         </span>
       </div>
-      <Reviews spot={spot} reviews={reviews} />
+      <Reviews spot={currSpot} reviews={reviews} />
     </div>
   );
 }
