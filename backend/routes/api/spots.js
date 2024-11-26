@@ -199,11 +199,25 @@ router.get("/:spotId", async (req, res) => {
       },
     ],
     // Group by required attributes
-    group: ["Spot.id", "Owner.id", "SpotImages.id", "Reviews.id"], // Group by spot ID to aggregate correctly
+    group: ["Spot.id", "Owner.id", "SpotImages.id"], // Group by spot ID to aggregate correctly
     attributes: {
       include: [
-        [fn("COUNT", col("Reviews.id")), "reviewCount"],
-        [fn("AVG", col("Reviews.stars")), "avgStarRating"],
+        [
+          literal(`(
+          SELECT COUNT(*)
+          FROM Reviews
+          WHERE Reviews.spotId = Spot.id
+        )`),
+          "reviewCount",
+        ],
+        [
+          literal(`(
+          SELECT AVG(stars)
+          FROM Reviews
+          WHERE Reviews.spotId = Spot.id
+        )`),
+          "avgStarRating",
+        ],
       ],
     },
   });
