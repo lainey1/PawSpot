@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
@@ -9,9 +9,10 @@ import "./SpotDetail.css";
 function SpotDetail() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const spot = useSelector((store) => store.spots);
 
+  const spot = useSelector((store) => store.spots.currentSpot);
   const reviews = useSelector((state) => state.reviews.Reviews);
+
   const [showAlert, setShowAlert] = useState(false);
 
   const handleReserveClick = () => {
@@ -27,7 +28,7 @@ function SpotDetail() {
   return (
     <div className="container-spot">
       <div>
-        <h2>{spot?.name}</h2>
+        <h2>{spot.name}</h2>
         <p className="location">
           Location: {spot?.city}, {spot?.state}, {spot?.country}
         </p>
