@@ -8,9 +8,9 @@ export const loadSpots = (spots) => ({
   spots,
 });
 
-const loadSpot = (spotId) => ({
+export const loadSpot = (spot) => ({
   type: LOAD_SPOT,
-  spotId,
+  spot,
 });
 
 // * Thunk Action Creators ****************
@@ -28,33 +28,27 @@ export const fetchSpots = () => async (dispatch) => {
 };
 
 export const fetchSpot = (spotId) => async (dispatch) => {
-  try {
-    const response = await fetch(`/api/spots/${spotId}`);
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(loadSpot(data));
-      return data;
-    } else {
-      console.error("Failed to fetch spot:", response.statusText);
-    }
-  } catch (error) {
-    console.error("Error fetching spot:", error);
+  const response = await fetch(`/api/spots/${spotId}`);
+
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(loadSpot(spot));
+    return spot;
+  } else {
+    const errors = await response.json();
+    return errors;
   }
 };
-
 // * Reducers ***************************
-const initialState = { entries: [], currentSpot: null };
+const initialState = { entries: [], singleSpot: null };
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SPOTS:
       return { ...action.spots };
 
-    case LOAD_SPOT: {
-      return {
-        currentSpot: { ...action.spotId },
-      };
-    }
+    case LOAD_SPOT:
+      return { ...state, singleSpot: action.spot };
 
     default:
       return state;

@@ -7,10 +7,11 @@ import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 
 function SpotDetail() {
-  const { spotId } = useParams();
   const dispatch = useDispatch();
+  const { spotId } = useParams();
 
-  const spot = useSelector((store) => store.spots.currentSpot);
+  // Access the spot and reviews from Redux state
+  const spot = useSelector((state) => state.spots.singleSpot);
   const reviews = useSelector((state) => state.reviews.Reviews);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -21,29 +22,35 @@ function SpotDetail() {
   };
 
   useEffect(() => {
+    // Fetch the spot details and reviews
     dispatch(fetchSpot(spotId));
     dispatch(fetchReviews(spotId));
   }, [dispatch, spotId]);
+
+  if (!spot) {
+    // Render a loading message while fetching data
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container-spot">
       <div>
         <h2>{spot.name}</h2>
         <p className="location">
-          Location: {spot?.city}, {spot?.state}, {spot?.country}
+          Location: {spot.city}, {spot.state}, {spot.country}
         </p>
         <div className="images"></div>
         <span className="container-layer">
           <div className="details">
             <p className="host-info">
-              Hosted by: {spot?.Owner?.firstName} {spot?.Owner?.lastName}
+              Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
             </p>
             <p>{spot?.description}</p>
           </div>
           <div className="bookit-sidebar">
             <div className="price-rating">
               <div className="price-container">
-                <span className="price-amount">${spot?.price}</span>
+                <span className="price-amount">${spot.price}</span>
                 <span className="price-per-night"> per night</span>
               </div>
             </div>
