@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -13,21 +13,26 @@ function Reviews({ spot }) {
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
+  const [loading, setLoading] = useState(true);
   const reviews = useSelector((state) => state.reviews.Reviews);
-
   const currentUser = useSelector((state) => state.session.user);
-  const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
 
+  const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
   const hasCurrentUserReviewed = reviews?.some(
     (review) => review.User?.id === currentUser?.id
   );
-
   const canPostReview =
     currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
 
   useEffect(() => {
-    dispatch(fetchReviews(spotId));
+    setLoading(true);
+    dispatch(fetchReviews(spotId))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [dispatch, spotId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!reviews) return <div>Review not found.</div>;
 
   return (
     <>

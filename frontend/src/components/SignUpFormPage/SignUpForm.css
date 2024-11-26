@@ -12,36 +12,6 @@ h1 {
   text-align: center;
 }
 
-.signup-form input {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.signup-form button {
-  padding: 10px;
-
-  background-image: linear-gradient(to right, #b965d7, #4a90e2);
-  color: white;
-  font-weight: bold;
-
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 1px 1px 1px #ccc;
-
-  cursor: pointer;
-
-  /* Reverse the gradient on hover */
-  &:hover {
-    background-image: linear-gradient(
-      to right,
-      #4a90e2,
-      #b965d7
-    ); /* Blue to light purple */
-  }
-}
-
 .error {
   color: red;
   margin-top: -15px;

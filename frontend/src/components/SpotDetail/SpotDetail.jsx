@@ -20,21 +20,16 @@ function SpotDetail() {
   };
 
   useEffect(() => {
-    setLoading(true); // Set loading to true when starting fetch
+    setLoading(true);
     dispatch(fetchSpot(spotId))
-      .then(() => setLoading(false)) // Set loading to false on successful fetch
-      .catch(() => setLoading(false)); // Also handle failure
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [dispatch, spotId]);
 
   if (loading) return <div>Loading...</div>;
   if (!spot) return <div>Spot not found.</div>;
 
   return (
-    // <>
-    //   <h2>{spot?.name}</h2>
-    //   <Reviews spot={spot} />
-    // </>
-
     <div className="container-spot">
       <div>
         <h2>{spot.name}</h2>
