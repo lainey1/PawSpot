@@ -10,8 +10,8 @@ function SpotDetail() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
-  const [spot, setSpot] = useState(null);
   const reviews = useSelector((state) => state.reviews.Reviews);
+  const spot = useSelector((state) => state.spots);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -21,13 +21,8 @@ function SpotDetail() {
   };
 
   useEffect(() => {
-    const fetchSpot = async () => {
-      const response = await fetch(`/api/spots/${spotId}`);
-      const data = await response.json();
-      setSpot(data);
-    };
-    fetchSpot();
-  }, [spotId]);
+    dispatch(fetchSpot(spotId));
+  }, [dispatch, spotId]);
 
   useEffect(() => {
     dispatch(fetchReviews(spotId));
@@ -48,7 +43,7 @@ function SpotDetail() {
         <span className="container-layer">
           <div className="details">
             <p className="host-info">
-              {/* Hosted by: {spot.Owner.firstName} {spot.Owner.lastName} */}
+              Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
             </p>
             <p>{spot.description}</p>
           </div>
