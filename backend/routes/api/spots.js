@@ -230,8 +230,8 @@ router.get("/:spotId", async (req, res) => {
     price: spot.price,
     createdAt: spot.createdAt,
     updatedAt: spot.updatedAt,
-    numReviews: spot.dataValues.reviewCount || 0, // Default to 0 if no reviews
-    avgStarRating: spot.dataValues.avgStarRating || 0, // Default to 0 if no ratings
+    numReviews: spot.reviewCount || 0, // Default to 0 if no reviews
+    avgStarRating: spot.avgStarRating || 0, // Default to 0 if no ratings
     SpotImages: spot.SpotImages, // Directly include the SpotImages
     Owner: {
       id: spot.Owner.id,
