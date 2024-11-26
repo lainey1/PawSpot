@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
@@ -9,7 +9,7 @@ function SpotDetail() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
-  // Use selectors to retrieve state data
+  const [loading, setLoading] = useState(true);
   const spot = useSelector((state) => state.spots.currentSpot);
 
   // const [showAlert, setShowAlert] = useState(false);
@@ -19,10 +19,15 @@ function SpotDetail() {
   //   setTimeout(() => setShowAlert(false), 3000);
   // };
 
-  // Fetch spot and reviews on component mount
   useEffect(() => {
-    dispatch(fetchSpot(spotId));
+    setLoading(true); // Set loading to true when starting fetch
+    dispatch(fetchSpot(spotId))
+      .then(() => setLoading(false)) // Set loading to false on successful fetch
+      .catch(() => setLoading(false)); // Also handle failure
   }, [dispatch, spotId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!spot) return <div>Spot not found.</div>;
 
   return (
     <>
