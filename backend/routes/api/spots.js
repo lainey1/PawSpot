@@ -183,6 +183,11 @@ router.get("/:spotId", async (req, res) => {
   const spot = await Spot.findByPk(spotId, {
     include: [
       {
+        model: Review,
+        attributes: [],
+        required: false,
+      },
+      {
         model: SpotImage,
         as: "SpotImages",
         attributes: ["id", "url", "preview"],
@@ -193,24 +198,12 @@ router.get("/:spotId", async (req, res) => {
         attributes: ["id", "firstName", "lastName"],
       },
     ],
+    // Group by required attributes
+    group: ["Spot.id", "Owner.id", "SpotImages.id", "Reviews.id"], // Group by spot ID to aggregate correctly
     attributes: {
       include: [
-        [
-          literal(`(
-          SELECT COUNT(*)
-          FROM Reviews
-          WHERE Reviews.spotId = Spot.id
-        )`),
-          "reviewCount",
-        ],
-        [
-          literal(`(
-          SELECT AVG(stars)
-          FROM Reviews
-          WHERE Reviews.spotId = Spot.id
-        )`),
-          "avgStarRating",
-        ],
+        [fn("COUNT", col("Reviews.id")), "reviewCount"],
+        [fn("AVG", col("Reviews.stars")), "avgStarRating"],
       ],
     },
   });
@@ -237,8 +230,8 @@ router.get("/:spotId", async (req, res) => {
     price: spot.price,
     createdAt: spot.createdAt,
     updatedAt: spot.updatedAt,
-    numReviews: parseInt(spot.getDataValue("reviewCount")) || 0, // Default to 0 if no reviews
-    avgStarRating: parseFloat(spot.getDataValue("avgStarRating")) || 0, // Default to 0 if no ratings
+    numReviews: spot.dataValues.reviewCount || 0, // Default to 0 if no reviews
+    avgStarRating: spot.dataValues.avgStarRating || 0, // Default to 0 if no ratings
     SpotImages: spot.SpotImages, // Directly include the SpotImages
     Owner: {
       id: spot.Owner.id,
