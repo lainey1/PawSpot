@@ -36,7 +36,11 @@ function Reviews({ spot }) {
       <div id="header">
         <GoStarFill />
         <h2>
-          {spot?.avgStarRating ? spot?.avgStarRating.toFixed(1) : <p>New</p>}
+          {spot?.avgStarRating !== "undefined" ? (
+            spot?.avgStarRating.toFixed(1)
+          ) : (
+            <p>New</p>
+          )}
         </h2>
         <h3 id="divider"> | </h3>
         <h3>
