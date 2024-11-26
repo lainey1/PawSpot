@@ -37,7 +37,7 @@ function Reviews({ spot }) {
         <GoStarFill />
         <h2>
           {spot?.avgStarRating !== "undefined" ? (
-            spot?.avgStarRating.toFixed(1)
+            Number(spot?.avgStarRating).toFixed(1)
           ) : (
             <p>New</p>
           )}
