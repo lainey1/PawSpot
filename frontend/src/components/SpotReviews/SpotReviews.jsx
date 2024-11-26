@@ -1,9 +1,20 @@
-import { GoStarFill } from "react-icons/go";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { fetchReviews } from "../../store/reviews";
+
 import { formatDate } from "../../utils/reviewUtils";
+
+import { GoStarFill } from "react-icons/go";
 import "./SpotReviews.css";
 
-function Reviews({ spot, reviews }) {
+function Reviews({ spot }) {
+  const dispatch = useDispatch();
+  const { spotId } = useParams();
+
+  const reviews = useSelector((state) => state.reviews.Reviews);
+
   const currentUser = useSelector((state) => state.session.user);
 
   // Check if the current user is the owner of the spot
@@ -17,6 +28,10 @@ function Reviews({ spot, reviews }) {
   // Allow review posting if the user is logged in, not the owner, and has not reviewed
   const canPostReview =
     currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
+
+  useEffect(() => {
+    dispatch(fetchReviews(spotId));
+  }, [dispatch, spotId]);
 
   return (
     <>

@@ -52,6 +52,7 @@ const spotsReducer = (state = initialState, action) => {
 
     case LOAD_SPOT: {
       return {
+        ...state.entries,
         ...action.spotId,
       };
     }
