@@ -3,28 +3,27 @@ const LOAD_SPOTS = "/spots/load-spots";
 const LOAD_SPOT = "/spots/load-spot";
 
 // * Action Creators **********************
-const loadSpots = (list) => ({
+export const loadSpots = (spots) => ({
   type: LOAD_SPOTS,
-  list,
+  spots,
 });
-const loadSpot = (spot) => ({
+
+const loadSpot = (spotId) => ({
   type: LOAD_SPOT,
-  spot,
+  spotId,
 });
 
 // * Thunk Action Creators ****************
-export const getSpots = () => async (dispatch) => {
-  try {
-    const response = await fetch(`api/spots`);
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(loadSpots(data.Spots));
-      return data.spot;
-    } else {
-      console.error("Failed to fetch spots:", response.statusText);
-    }
-  } catch (error) {
-    console.error("Error fetching spots:", error);
+export const fetchSpots = () => async (dispatch) => {
+  const response = await fetch("/api/spots");
+
+  if (response.ok) {
+    const spots = await response.json();
+    dispatch(loadSpots(spots));
+    return spots;
+  } else {
+    const errors = await response.json();
+    return errors;
   }
 };
 
@@ -44,32 +43,16 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 };
 
 // * Reducers ***************************
-const initialState = {
-  spots: {},
-  currentSpot: null,
-};
+const initialState = { entries: [] };
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_SPOTS: {
-      const spotsById = {};
-      action.list.forEach((spot) => {
-        spotsById[spot.id] = spot;
-      });
-      return {
-        ...state,
-        spots: spotsById,
-      };
-    }
+    case LOAD_SPOTS:
+      return { ...action.spots };
 
     case LOAD_SPOT: {
       return {
-        ...state,
-        spots: {
-          ...state.spots,
-          [action.spot.id]: action.spot,
-        },
-        currentSpot: action.spot,
+        ...action.spotId,
       };
     }
 

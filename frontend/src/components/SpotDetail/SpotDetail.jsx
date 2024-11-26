@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
 import { fetchReviews } from "../../store/reviews";
-// import { selectSessionUser } from "../../store/session";
 import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 
 function SpotDetail() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const spot = useSelector((state) => state.spots.currentSpot);
+  const spot = useSelector((store) => store.spots);
+
   const reviews = useSelector((state) => state.reviews.Reviews);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -35,7 +35,7 @@ function SpotDetail() {
         <span className="container-layer">
           <div className="details">
             <p className="host-info">
-              Hosted by: {spot?.Owner.firstName} {spot?.Owner.lastName}
+              Hosted by: {spot?.Owner?.firstName} {spot?.Owner?.lastName}
             </p>
             <p>{spot?.description}</p>
           </div>

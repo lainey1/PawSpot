@@ -1,24 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getSpots } from "../../store/spots";
+import { fetchSpots } from "../../store/spots";
 
 import { GoStarFill } from "react-icons/go";
 import "./SpotsList.css";
 
 const SpotsList = () => {
   const dispatch = useDispatch();
+  const spots = useSelector((state) => state.spots.Spots);
 
-  const spots = useSelector((state) => state.spots.spots);
-  const spotsList = Object.values(spots);
+  // const spots = useSelector((state) => state.spots.spots);
+  // const spotsList = Object.values(spots);
 
   useEffect(() => {
-    dispatch(getSpots());
+    dispatch(fetchSpots());
   }, [dispatch]);
 
   return (
     <div className="spots-grid">
-      {spotsList?.map((spot) => (
+      {spots?.map((spot) => (
         <div key={spot.id} className="spot-tile">
           <Link to={`/spots/${spot.id}`} className="spot-link">
             {spot.previewImage && (
