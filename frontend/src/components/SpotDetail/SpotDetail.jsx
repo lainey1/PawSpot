@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
-import { fetchReviews } from "../../store/reviews";
 import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 
@@ -11,7 +10,7 @@ function SpotDetail() {
   const { spotId } = useParams();
 
   // Use selectors to retrieve state data
-  const spot = useSelector((state) => state.spots.spot);
+  const spot = useSelector((state) => state.spots.currentSpot);
 
   // const [showAlert, setShowAlert] = useState(false);
 
@@ -27,8 +26,7 @@ function SpotDetail() {
 
   return (
     <>
-      <h2>TEST</h2>
-
+      <h2>{spot?.name}</h2>
       <Reviews spot={spot} />
     </>
 

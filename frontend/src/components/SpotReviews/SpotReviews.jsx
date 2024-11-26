@@ -16,16 +16,12 @@ function Reviews({ spot }) {
   const reviews = useSelector((state) => state.reviews.Reviews);
 
   const currentUser = useSelector((state) => state.session.user);
-
-  // Check if the current user is the owner of the spot
   const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
 
-  // Check if the current user has already reviewed this spot
   const hasCurrentUserReviewed = reviews?.some(
     (review) => review.User?.id === currentUser?.id
   );
 
-  // Allow review posting if the user is logged in, not the owner, and has not reviewed
   const canPostReview =
     currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
 

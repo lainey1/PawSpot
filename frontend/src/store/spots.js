@@ -43,7 +43,7 @@ export const fetchSpot = (spotId) => async (dispatch) => {
 };
 
 // * Reducers ***************************
-const initialState = { entries: [] };
+const initialState = { entries: [], currentSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -53,7 +53,7 @@ const spotsReducer = (state = initialState, action) => {
     case LOAD_SPOT: {
       return {
         ...state.entries,
-        ...action.spotId,
+        currentSpot: { ...action.spotId },
       };
     }
 
