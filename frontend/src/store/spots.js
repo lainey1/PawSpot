@@ -1,3 +1,5 @@
+// import { ValidationError } from "../utils/validationError";
+
 // * Action Types *************************
 const LOAD_SPOTS = "/spots/load-spots";
 const LOAD_SPOT = "/spots/load-spot";
@@ -9,7 +11,7 @@ export const loadSpots = (spots) => ({
 });
 
 export const loadSpot = (spot) => ({
-  type: LOAD_SPOT,
+  type: LOAD_SPOTS,
   spot,
 });
 
@@ -33,14 +35,17 @@ export const fetchSpot = (spotId) => async (dispatch) => {
   if (response.ok) {
     const spot = await response.json();
     dispatch(loadSpot(spot));
+    console.log(spot);
     return spot;
   } else {
     const errors = await response.json();
-    return errors;
+
+    console.log(errors);
+    return;
   }
 };
 // * Reducers ***************************
-const initialState = { entries: [], singleSpot: null };
+const initialState = { entries: [] };
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -48,7 +53,9 @@ const spotsReducer = (state = initialState, action) => {
       return { ...action.spots };
 
     case LOAD_SPOT:
-      return { ...state, singleSpot: action.spot };
+      return {
+        ...action.spot,
+      };
 
     default:
       return state;
