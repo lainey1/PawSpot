@@ -10,8 +10,7 @@ function SpotDetail() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
-  // Access the spot and reviews from Redux state
-  const spot = useSelector((state) => state.spots.singleSpot);
+  const [spot, setSpot] = useState(null);
   const reviews = useSelector((state) => state.reviews.Reviews);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -22,13 +21,19 @@ function SpotDetail() {
   };
 
   useEffect(() => {
-    // Fetch the spot details and reviews
-    dispatch(fetchSpot(spotId));
+    const fetchSpot = async () => {
+      const response = await fetch(`/api/spots/${spotId}`);
+      const data = await response.json();
+      setSpot(data);
+    };
+    fetchSpot();
+  }, [spotId]);
+
+  useEffect(() => {
     dispatch(fetchReviews(spotId));
   }, [dispatch, spotId]);
 
   if (!spot) {
-    // Render a loading message while fetching data
     return <div>Loading...</div>;
   }
 
@@ -43,9 +48,9 @@ function SpotDetail() {
         <span className="container-layer">
           <div className="details">
             <p className="host-info">
-              Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}
+              {/* Hosted by: {spot.Owner.firstName} {spot.Owner.lastName} */}
             </p>
-            <p>{spot?.description}</p>
+            <p>{spot.description}</p>
           </div>
           <div className="bookit-sidebar">
             <div className="price-rating">
