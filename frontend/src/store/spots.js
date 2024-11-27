@@ -2,12 +2,18 @@ import { csrfFetch } from "./csrf";
 
 // * Action Types *************************
 const LOAD_SPOTS = "/spots/LOAD_SPOTS";
+const LOAD_SPOT = "/spots/LOAD_SPOT";
 const CREATE_SPOT = "spots/CREATE";
 
 // * Action Creators **********************
 export const loadSpots = (spots) => ({
   type: LOAD_SPOTS,
   spots,
+});
+
+export const loadSpot = (spot) => ({
+  type: LOAD_SPOT,
+  spot,
 });
 
 const createSpot = (spot) => ({
@@ -34,7 +40,7 @@ export const fetchSpot = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
       const data = await response.json();
-      dispatch(loadSpots(data));
+      dispatch(loadSpot(data));
       return data;
     } else {
       console.error("Failed to fetch spot:", response.statusText);
@@ -76,6 +82,15 @@ const spotsReducer = (state = initialState, action) => {
     case LOAD_SPOTS:
       return { ...action.spots };
 
+    case LOAD_SPOT:
+      return { ...state.entries, currentSpot: action.spot };
+
+    case CREATE_SPOT:
+      return {
+        ...state,
+        list: [...state, action.spot],
+      };
+
     case "spots/LOAD_START":
       return {
         ...state,
@@ -86,12 +101,6 @@ const spotsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-      };
-
-    case CREATE_SPOT:
-      return {
-        ...state,
-        list: [...state, action.spot],
       };
 
     default:
