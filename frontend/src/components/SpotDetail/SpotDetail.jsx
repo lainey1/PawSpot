@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import { fetchSpot } from "../../store/spots";
 import Reviews from "../SpotReviews";
+import ImagesContainer from "../ImagesContainer";
 import "./SpotDetail.css";
 
 function SpotDetail() {
@@ -49,7 +50,7 @@ function SpotDetail() {
         <p className="location">
           {spot.city}, {spot.state}, {spot.country}
         </p>
-        <div className="images"></div>
+        <ImagesContainer spot={spot} />
         <span className="container-layer">
           <div className="details">
             <p className="host-info">

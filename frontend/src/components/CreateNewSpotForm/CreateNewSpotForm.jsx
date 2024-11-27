@@ -1,5 +1,3 @@
-// frontend/src/components/CreateNewSpotForm/CreateNewSpotForm.jsx
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateNewSpotForm.css";
