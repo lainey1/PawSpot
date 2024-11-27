@@ -1,14 +1,15 @@
-// frontend/src/components/Navigation/ProfileButton.jsx
-
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { FaUserCircle } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
+
 import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "../OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignUpFormModal from "../SignUpFormPage/SignUpFormModal";
+
 import "./Navigation.css";
+import { FaUserCircle } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -55,13 +56,16 @@ function ProfileButton({ user }) {
       <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>Hello, {user.username}.</li>
-            <li>{user.email}</li>
-            <p>
-              <button className="button-logout" onClick={logout}>
-                Log Out
-              </button>
-            </p>
+            <p>Hello, {user.username}.</p>
+            <p>{user.email}</p>
+
+            <NavLink to="/create-spot" onClick={closeMenu} className="nav-link">
+              Create Spot
+            </NavLink>
+
+            <button className="button-logout" onClick={logout}>
+              Log Out
+            </button>
           </>
         ) : (
           <div>

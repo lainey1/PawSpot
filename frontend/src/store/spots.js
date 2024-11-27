@@ -1,6 +1,8 @@
+import { csrfFetch } from "./csrf";
+
 // * Action Types *************************
-const LOAD_SPOTS = "/spots/load-spots";
-const LOAD_SPOT = "/spots/load-spot";
+const LOAD_SPOTS = "/spots/LOAD_SPOTS";
+const CREATE_SPOT = "spots/CREATE";
 
 // * Action Creators **********************
 export const loadSpots = (spots) => ({
@@ -8,9 +10,9 @@ export const loadSpots = (spots) => ({
   spots,
 });
 
-const loadSpot = (spotId) => ({
-  type: LOAD_SPOT,
-  spotId,
+const createSpot = (spot) => ({
+  type: CREATE_SPOT,
+  spot,
 });
 
 // * Thunk Action Creators ****************
@@ -32,13 +34,37 @@ export const fetchSpot = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
       const data = await response.json();
-      dispatch(loadSpot(data));
+      dispatch(loadSpots(data));
       return data;
     } else {
       console.error("Failed to fetch spot:", response.statusText);
     }
   } catch (error) {
     console.error("Error fetching spot:", error);
+  }
+};
+
+export const createNewSpot = (spotData) => async (dispatch) => {
+  const response = await csrfFetch("/api/spots", {
+    method: "POST",
+    body: JSON.stringify(spotData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  console.log("========>Response from server:", response);
+
+  if (response.ok) {
+    const data = await response.json();
+    // const existingSpots = getState().spots.list;
+    dispatch(createSpot(data));
+    // dispatch(loadSpots([...existingSpots, data.spot]));
+
+    return data;
+  } else {
+    const errorData = await response.json();
+    return Promise.reject(errorData);
   }
 };
 
@@ -50,12 +76,23 @@ const spotsReducer = (state = initialState, action) => {
     case LOAD_SPOTS:
       return { ...action.spots };
 
-    case LOAD_SPOT: {
+    case "spots/LOAD_START":
       return {
-        ...state.entries,
-        currentSpot: { ...action.spotId },
+        ...state,
+        loading: true,
       };
-    }
+
+    case "spots/LOAD_END":
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case CREATE_SPOT:
+      return {
+        ...state,
+        list: [...state, action.spot],
+      };
 
     default:
       return state;
