@@ -178,15 +178,12 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 
 //* GET details of a Spot by ID (CHECKED)
 router.get("/:spotId", async (req, res) => {
-  const { spotId } = req.params; // GET from URL
+  // GET from URL
+  const { spotId } = req.params;
 
+  //Query the Spot by ID
   const spot = await Spot.findByPk(spotId, {
     include: [
-      {
-        model: Review,
-        attributes: [],
-        required: false,
-      },
       {
         model: SpotImage,
         as: "SpotImages",
@@ -198,36 +195,24 @@ router.get("/:spotId", async (req, res) => {
         attributes: ["id", "firstName", "lastName"],
       },
     ],
-    // Group by required attributes
-    group: ["Spot.id", "Owner.id", "SpotImages.id"], // Group by spot ID to aggregate correctly
-    attributes: {
-      include: [
-        [
-          literal(`(
-          SELECT COUNT(*)
-          FROM Reviews
-          WHERE Reviews.spotId = Spot.id
-        )`),
-          "reviewCount",
-        ],
-        [
-          literal(`(
-          SELECT AVG(stars)
-          FROM Reviews
-          WHERE Reviews.spotId = Spot.id
-        )`),
-          "avgStarRating",
-        ],
-      ],
-    },
   });
 
   // Check if the spot exists
-  if (!spot) {
+  if (!spot)
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
-  }
+
+  // Query Reviews table for aggregation
+  const reviews = await Review.findAll({
+    where: { spotId },
+    attributes: [
+      [Sequelize.fn("COUNT", Sequelize.col("id")), "reviewCount"],
+      [Sequelize.fn("AVG", Sequelize.col("stars")), "avgStarRating"],
+    ],
+  });
+
+  const reviewStats = reviews[0].dataValues; // Extract the aggregated values
 
   // Prepare response object
   const response = {
@@ -244,9 +229,9 @@ router.get("/:spotId", async (req, res) => {
     price: spot.price,
     createdAt: spot.createdAt,
     updatedAt: spot.updatedAt,
-    numReviews: spot.dataValues.reviewCount || 0, // Default to 0 if no reviews
-    avgStarRating: spot.dataValues.avgStarRating || 0, // Default to 0 if no ratings
-    SpotImages: spot.SpotImages, // Directly include the SpotImages
+    avgStarRating: reviewStats.avgStarRating || 0,
+    numReviews: reviewStats.reviewCount || 0,
+    SpotImages: spot.SpotImages,
     Owner: {
       id: spot.Owner.id,
       firstName: spot.Owner.firstName,
@@ -254,6 +239,7 @@ router.get("/:spotId", async (req, res) => {
     },
   };
 
+  // Send the response
   return res.status(200).json(response);
 });
 
