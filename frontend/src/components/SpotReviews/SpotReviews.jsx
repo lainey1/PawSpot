@@ -1,22 +1,38 @@
-import { GoStarFill } from "react-icons/go";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { fetchReviews } from "../../store/reviews";
+
 import { formatDate } from "../../utils/reviewUtils";
+
+import { GoStarFill } from "react-icons/go";
 import "./SpotReviews.css";
 
-function Reviews({ spot, reviews }) {
+function Reviews({ spot }) {
+  const dispatch = useDispatch();
+  const { spotId } = useParams();
+
+  const [loading, setLoading] = useState(true);
+  const reviews = useSelector((state) => state.reviews.Reviews);
   const currentUser = useSelector((state) => state.session.user);
 
-  // Check if the current user is the owner of the spot
   const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
-
-  // Check if the current user has already reviewed this spot
   const hasCurrentUserReviewed = reviews?.some(
     (review) => review.User?.id === currentUser?.id
   );
-
-  // Allow review posting if the user is logged in, not the owner, and has not reviewed
   const canPostReview =
     currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(fetchReviews(spotId))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, [dispatch, spotId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!reviews) return <div>Review not found.</div>;
 
   return (
     <>
@@ -25,7 +41,11 @@ function Reviews({ spot, reviews }) {
       <div id="header">
         <GoStarFill />
         <h2>
-          {spot?.avgStarRating ? spot?.avgStarRating.toFixed(1) : <p>New</p>}
+          {spot?.avgStarRating !== "undefined" ? (
+            Number(spot?.avgStarRating).toFixed(1)
+          ) : (
+            <p>New</p>
+          )}
         </h2>
         <h3 id="divider"> | </h3>
         <h3>

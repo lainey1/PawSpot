@@ -1,5 +1,3 @@
-// import { ValidationError } from "../utils/validationError";
-
 // * Action Types *************************
 const LOAD_SPOTS = "/spots/load-spots";
 const LOAD_SPOT = "/spots/load-spot";
@@ -10,9 +8,9 @@ export const loadSpots = (spots) => ({
   spots,
 });
 
-export const loadSpot = (spot) => ({
-  type: LOAD_SPOTS,
-  spot,
+const loadSpot = (spotId) => ({
+  type: LOAD_SPOT,
+  spotId,
 });
 
 // * Thunk Action Creators ****************
@@ -30,32 +28,34 @@ export const fetchSpots = () => async (dispatch) => {
 };
 
 export const fetchSpot = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spots/${spotId}`);
-
-  if (response.ok) {
-    const spot = await response.json();
-    dispatch(loadSpot(spot));
-    console.log(spot);
-    return spot;
-  } else {
-    const errors = await response.json();
-
-    console.log(errors);
-    return;
+  try {
+    const response = await fetch(`/api/spots/${spotId}`);
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(loadSpot(data));
+      return data;
+    } else {
+      console.error("Failed to fetch spot:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error fetching spot:", error);
   }
 };
+
 // * Reducers ***************************
-const initialState = { entries: [] };
+const initialState = { entries: [], currentSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SPOTS:
       return { ...action.spots };
 
-    case LOAD_SPOT:
+    case LOAD_SPOT: {
       return {
-        ...action.spot,
+        ...state.entries,
+        currentSpot: { ...action.spotId },
       };
+    }
 
     default:
       return state;

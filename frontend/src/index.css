@@ -1,3 +1,31 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+button {
+  background-image: linear-gradient(to right, #b965d7, #4a90e2);
+  color: white;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  padding: 10px 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px #ccc;
+
+  cursor: pointer;
+
+  &:hover {
+    background-image: linear-gradient(to right, #4a90e2, #b965d7);
+  }
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  font-weight: 1rem;
+}
