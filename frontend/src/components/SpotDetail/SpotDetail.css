@@ -8,32 +8,38 @@
   padding: 0 15px;
 }
 
-.container-layer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.bookit-sidebar {
-  min-width: 300px;
-  max-height: 100px;
-
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.5);
-  padding: 15px;
+.title {
+  font-size: 2em;
 }
 
 .location {
   font-weight: bold;
 }
 
+.container-layer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .details {
   max-width: 600px;
 }
+
 .host-info {
   font-weight: bold;
   font-size: 1.2em;
+}
+
+.bookit-sidebar {
+  min-width: 300px;
+  max-height: 100px;
+
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.5);
+  margin-top: 25px;
 }
 
 .price-amount {
