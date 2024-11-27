@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
-import { fetchReviews } from "../../store/reviews";
-=======
 import { fetchSpot } from "../../store/spots";
->>>>>>> scrub-style
 import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 
