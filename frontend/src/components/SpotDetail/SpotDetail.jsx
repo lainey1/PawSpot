@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchSpot } from "../../store/spots";
+// import { fetchSpot } from "../../store/spots";
 import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 
 function SpotDetail() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { spotId } = useParams();
 
   const [loading, setLoading] = useState(true);
-  const spot = useSelector((state) => state.spots.currentSpot);
+  // const spot = useSelector((state) => state.spots.currentSpot);
+  const [spot, setSpot] = useState(null);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -20,11 +21,24 @@ function SpotDetail() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(fetchSpot(spotId))
+    const fetchSpot = async () => {
+      setLoading(true);
+      const response = await fetch(`/api/spots/${spotId}`);
+      const data = await response.json();
+      setSpot(data);
+    };
+
+    fetchSpot()
       .then(() => setLoading(false))
       .catch(() => setLoading(false));
-  }, [dispatch, spotId]);
+  }, [spotId]);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   dispatch(fetchSpot(spotId))
+  //     .then(() => setLoading(false))
+  //     .catch(() => setLoading(false));
+  // }, [dispatch, spotId]);
 
   if (loading) return <div>Loading...</div>;
 
