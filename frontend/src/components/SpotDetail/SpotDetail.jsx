@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchSpot } from "../../store/spots";
 import { fetchReviews } from "../../store/reviews";
 import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
