@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
     <>
       <button onClick={toggleMenu} id="profile-dropdown-button">
         <span className="container-profile">
-          <GiHamburgerMenu className="icon-hamburger" />
+          <GiHamburgerMenu />
           <FaUserCircle className="icon-user" />
         </span>
       </button>

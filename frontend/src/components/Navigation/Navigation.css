@@ -46,24 +46,28 @@
    Profile Dropdown Button
 ================================ */
 #profile-dropdown-button {
-  padding: 0.5em 1em;
   color: #6a6a6a;
   background: #ffffff;
+
+  padding: 0.5em 1em;
   border: 1px solid rgba(100, 100, 111, 0.2);
   box-shadow: 0px 7px 29px rgba(100, 100, 111, 0.2);
   border-radius: 2.125em;
-  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.icon-hamburger {
-  padding-right: 0.625em;
-  font-size: 1.25em;
-  cursor: pointer;
+#profile-dropdown-button > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-user {
+  padding-left: 0.25em;
   font-size: 2.125em;
-  cursor: pointer;
 }
 
 /* ================================
