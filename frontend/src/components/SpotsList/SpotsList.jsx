@@ -41,7 +41,7 @@ const SpotsList = () => {
               </span>
             </div>
             <p>
-              <strong>${spot.price}</strong> night
+              <strong>${spot.price.toFixed(2)}</strong> night
             </p>
           </Link>
         </div>

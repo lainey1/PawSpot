@@ -11,18 +11,13 @@ import Reviews from "../SpotReviews";
 import "./SpotDetail.css";
 import ReservationLauncher from "./ReservationLauncher";
 
-//* Component to display detailed info about a specific spot
 function SpotDetail() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
-  // State for loading indicator
   const [loading, setLoading] = useState(true);
-
-  // Selector to access the current spot data from Redux store
   const spot = useSelector((state) => state.spots.currentSpot);
 
-  // Fetch spot data on component mount or what spotId changes
   useEffect(() => {
     setLoading(true);
     dispatch(fetchSpot(spotId))
@@ -30,22 +25,28 @@ function SpotDetail() {
       .catch(() => setLoading(false));
   }, [dispatch, spotId]);
 
-  // Display loading message while fetching data
+  const handleReserveClick = () => {
+    alert("Feature coming soon...");
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="container-spot">
+    <div id="spot-page">
       <div>
         <SpotHeader spot={spot} />
         <ImagesContainer spot={spot} />
-        <span className="container-layer">
+        <span id="description-reservation-launcher">
           <div className="details">
             <p className="host-info">
-              Hosted by: {spot?.Owner?.firstName} {spot?.Owner?.lastName}
+              Hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}
             </p>
             <p>{spot?.description}</p>
           </div>
-          <ReservationLauncher spot={spot} />
+          <ReservationLauncher
+            spot={spot}
+            onReserveClick={handleReserveClick}
+          />
         </span>
       </div>
       <Reviews spot={spot} />

@@ -1,32 +1,36 @@
-import { useState } from "react";
+import { GoStarFill } from "react-icons/go";
 
-function ReservationLauncher({ spot }) {
-  // State for loading reservation feature alert
-  const [isReserveAlertVisible, setIsReserveAlertVisible] = useState(false);
-
-  // Handler for "Reserve" button click
-  const handleReserveClick = () => {
-    setIsReserveAlertVisible(true);
-    setTimeout(() => setIsReserveAlertVisible(false), 3000);
-  };
-
+function ReservationLauncher({ spot, onReserveClick }) {
   return (
-    <>
-      <div className="bookit-sidebar">
-        <div className="price-rating">
-          <div className="price-container">
-            <span className="price-amount">${spot?.price}</span>
-            <span className="price-per-night"> per night</span>
-          </div>
+    <div id="reservation-launcher">
+      <div id="reservation-header">
+        <div>
+          <span className="price-amount">${spot.price.toFixed(2)}</span>
+          <span> night</span>
         </div>
-        <button className="reserve-button" onClick={handleReserveClick}>
-          Reserve
-        </button>
-        {isReserveAlertVisible && (
-          <span className="alert-message">Feature Coming Soon...</span>
-        )}
+
+        <div>
+          <GoStarFill />
+          {spot?.avgStarRating !== undefined ? (
+            <span>{Number(spot?.avgStarRating).toFixed(1)}</span>
+          ) : (
+            <span>New</span>
+          )}
+
+          {spot?.numReviews > 0 && (
+            <>
+              <span style={{ padding: "0 0.5em" }}>•</span>
+              <span>
+                {spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}
+              </span>
+            </>
+          )}
+        </div>
       </div>
-    </>
+      <button className="reserve-button" onClick={onReserveClick}>
+        Reserve
+      </button>
+    </div>
   );
 }
 

@@ -34,6 +34,11 @@ function Reviews({ spot }) {
   if (loading) return <div>Loading...</div>;
   if (!reviews) return <div>Review not found.</div>;
 
+  // Sort reviews by updatedAt in descending order (newest first)
+  const sortedReviews = [...reviews].sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  );
+
   return (
     <>
       <div id="section-divider"></div>
@@ -53,7 +58,7 @@ function Reviews({ spot }) {
             {spot?.numReviews === 0
               ? "No reviews"
               : `${spot?.numReviews} ${
-                  spot?.numReviews === 1 ? "review" : "reviews"
+                  spot?.numReviews === 1 ? "Review" : "Reviews"
                 } `}
           </p>
         </h3>
@@ -67,7 +72,7 @@ function Reviews({ spot }) {
 
       <div id="section">
         <ul className="list">
-          {reviews?.map((review) => (
+          {sortedReviews?.map((review) => (
             <li key={review.id} className="item">
               <p>
                 <strong>{review.User.firstName}</strong>
