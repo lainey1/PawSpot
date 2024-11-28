@@ -15,92 +15,226 @@ function SignUpFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+  // Function to check if all required fields are filled and valid
+  const isFormValid = () => {
+    return (
+      email &&
+      username &&
+      firstName &&
+      lastName &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword && // Ensure passwords match
+      Object.keys(errors).length === 0 // Make sure no validation errors exist
+    );
+  };
+
+  // General function to validate fields and set errors
+  const validateField = (fieldName, value) => {
+    let error = "";
+    switch (fieldName) {
+      case "email":
+        if (!value.includes("@")) error = "Email must include '@'.";
+        break;
+      case "username":
+        if (value.length < 4) error = "Username must be at least 4 characters.";
+        break;
+      case "password":
+        if (value.length < 6) error = "Password must be at least 6 characters.";
+        break;
+      case "confirmPassword":
+        if (value !== password) error = "Passwords must match.";
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
+  // Handle input changes and validate immediately after input
+  const handleInputChange = (setter, fieldName, value) => {
+    setter(value);
+    const error = validateField(fieldName, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: error,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
-        sessionActions.signup({
-          email,
-          username,
-          firstName,
-          lastName,
-          password,
-        })
-      )
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data?.errors) {
-            setErrors(data.errors);
-          }
-        });
-    }
-    return setErrors({
-      confirmPassword:
-        "Confirm Password field must be the same as the Password field",
+
+    // Final validation before API call
+    const finalErrors = {};
+    [
+      "email",
+      "username",
+      "firstName",
+      "lastName",
+      "password",
+      "confirmPassword",
+    ].forEach((field) => {
+      const error = validateField(field, eval(field));
+      if (error) finalErrors[field] = error;
     });
+
+    // If there are any errors, don't submit the form
+    if (Object.keys(finalErrors).length > 0) {
+      setErrors(finalErrors);
+      return;
+    }
+
+    // Make the API call to sign up
+    return dispatch(
+      sessionActions.signup({
+        email,
+        username,
+        firstName,
+        lastName,
+        password,
+      })
+    )
+      .then(() => {
+        closeModal();
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data?.errors) {
+          setErrors(data.errors);
+        }
+      });
   };
+
+  // Collect all error messages into an array for display
+  const errorMessages = Object.values(errors);
 
   return (
     <>
-      <h1>Sign Up</h1>
-
       <form className="signup-form" onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        {errors.email && <p>{errors.email}</p>}
+        <h1>Sign Up</h1>
 
-        <input
-          placeholder="Username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        {errors.username && <p>{errors.username}</p>}
+        {/* Display "All fields are required" message if form is not valid */}
+        {!isFormValid() && (
+          <p className="required-message">All fields are required.</p>
+        )}
+
+        {/* Display all error messages at the top of the form */}
+        {errorMessages.length > 0 && (
+          <div className="error-messages">
+            {errorMessages.map((error, index) => (
+              <p key={index} className="error">
+                {error}
+              </p>
+            ))}
+          </div>
+        )}
 
         <input
           placeholder="First Name"
           type="text"
           value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          onBlur={() =>
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              firstName: validateField("firstName", firstName),
+            }))
+          }
+          onChange={(e) =>
+            handleInputChange(setFirstName, "firstName", e.target.value)
+          }
           required
         />
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && <p className="error">{errors.firstName}</p>}
 
         <input
           placeholder="Last Name"
           type="text"
           value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          onBlur={() =>
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              lastName: validateField("lastName", lastName),
+            }))
+          }
+          onChange={(e) =>
+            handleInputChange(setLastName, "lastName", e.target.value)
+          }
           required
         />
-        {errors.lastName && <p>{errors.lastName}</p>}
+        {errors.lastName && <p className="error">{errors.lastName}</p>}
+
+        <input
+          placeholder="Email"
+          type="text"
+          value={email}
+          onBlur={() =>
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              email: validateField("email", email),
+            }))
+          }
+          onChange={(e) => handleInputChange(setEmail, "email", e.target.value)}
+          required
+        />
+
+        <input
+          placeholder="Username"
+          type="text"
+          value={username}
+          onBlur={() =>
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              username: validateField("username", username),
+            }))
+          }
+          onChange={(e) =>
+            handleInputChange(setUsername, "username", e.target.value)
+          }
+          required
+        />
 
         <input
           placeholder="Password"
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onBlur={() =>
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              password: validateField("password", password),
+            }))
+          }
+          onChange={(e) =>
+            handleInputChange(setPassword, "password", e.target.value)
+          }
           required
         />
-        {errors.password && <p>{errors.password}</p>}
 
         <input
           placeholder="Confirm Password"
           type="password"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onBlur={() =>
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              confirmPassword: validateField(
+                "confirmPassword",
+                confirmPassword
+              ),
+            }))
+          }
+          onChange={(e) =>
+            handleInputChange(
+              setConfirmPassword,
+              "confirmPassword",
+              e.target.value
+            )
+          }
           required
         />
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+
+        <button type="submit" disabled={!isFormValid()}>
+          Sign Up
+        </button>
       </form>
     </>
   );

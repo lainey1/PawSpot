@@ -22,6 +22,8 @@ function LoginFormModal() {
       });
   };
 
+  const isButtonDisabled = credential.length < 4 || password.length < 6;
+
   const loginAsDemoUser = (e) => {
     e.preventDefault();
     setErrors({});
@@ -39,8 +41,6 @@ function LoginFormModal() {
         }
       });
   };
-
-  const isButtonDisabled = credential.length < 4 || password.length < 6;
 
   return (
     <>
