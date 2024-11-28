@@ -1,7 +1,23 @@
-.images-container {
-  height: 400px;
+/* ================================
+   Container for All Images
+================================ */
+#images-container {
   display: flex;
+  justify-content: space-between;
+  height: 400px;
+  width: 100%;
   margin-top: 10px;
+}
+
+/* ================================
+   Large Image
+================================ */
+#image-large-container {
+  height: 100%;
+  margin-right: 5px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 .image-large {
@@ -11,12 +27,23 @@
   width: 100%;
 }
 
-.image-large-container {
+/* ================================
+   Small Images
+================================ */
+#images-small-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  margin-right: 5px;
-  overflow: hidden;
-  position: relative;
-  width: 55%;
+  width: 100%;
+}
+
+.images-small-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 49%;
+  margin: 5px;
 }
 
 .image-small {
@@ -24,40 +51,4 @@
   height: 100%;
   object-fit: cover;
   width: 49%;
-}
-
-.images-small-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: 100%;
-  width: 45%;
-}
-
-.images-small-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-direction: row;
-  height: 49%;
-  justify-content: space-between;
-  margin: 5px;
-}
-
-/* Responsive Design for Mobile Screens */
-@media (max-width: 768px) {
-  .images-container {
-    height: auto;
-    flex-direction: column;
-  }
-
-  .image-large-container {
-    width: 100%;
-    margin-right: 0;
-  }
-
-  .images-small-container {
-    display: none; /* Hide the smaller images */
-  }
 }
