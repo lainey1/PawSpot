@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 
 // * Action Types *************************
 const SET_USER = "/session/SETUSER";
-const REMOVE_USER = "/session/REMOVEUSER";
+const REMOVE_USER = "/session/REMOVE_USER";
 
 // * Action Creators **********************
 const setUser = (user) => {
@@ -23,111 +23,85 @@ const removeUser = () => {
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
 
-  try {
-    // Make a POST request to the login endpoint
-    const response = await csrfFetch("/api/session", {
-      method: "POST",
-      body: JSON.stringify({
-        credential,
-        password,
-      }),
-    });
+  // Make a POST request to the login endpoint
+  const response = await csrfFetch("/api/session", {
+    method: "POST",
+    body: JSON.stringify({
+      credential,
+      password,
+    }),
+  });
 
-    // Handle non-ok response
-    if (!response.ok) {
-      console.error("Failed to log in user");
-      return;
-    }
-
-    // Parse response data and dispatch setUser action
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
-
-    // Catch any errors (e.g. network issues)
-  } catch (error) {
-    console.error("LOGIN ACTION FAILED: ", error);
+  // Handle non-ok response
+  if (!response.ok) {
+    console.error("Failed to log in user");
+    return;
   }
+
+  // Parse response data and dispatch setUser action
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
 };
 
 export const logout = () => async (dispatch) => {
-  try {
-    // Send a DELETE request to log the user out
-    const response = await csrfFetch("/api/session", {
-      method: "DELETE",
-    });
+  // Send a DELETE request to log the user out
+  const response = await csrfFetch("/api/session", {
+    method: "DELETE",
+  });
 
-    // Handle non-ok response
-    if (!response.ok) {
-      console.error("Failed to log out user");
-      return;
-    }
-
-    // Dispatch the removeUser action
-    dispatch(removeUser());
-    return response;
-
-    // IF ERROR
-  } catch (error) {
-    // Log unexpected errors for debugging
-    console.error("LOGOUT ACTION FAILED: ", error);
+  // Handle non-ok response
+  if (!response.ok) {
+    console.error("Failed to log out user");
+    return;
   }
+
+  // Dispatch the removeUser action
+  dispatch(removeUser());
+  return response;
 };
 
 export const restoreUser = () => async (dispatch) => {
   // Send request to restore user session
-  try {
-    const response = await csrfFetch("/api/session");
+  const response = await csrfFetch("/api/session");
 
-    // Handle non-ok response
-    if (!response.ok) {
-      console.error("Failed to restore user session");
-      return;
-    }
-
-    // ELSE dispatch setUser action
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
-
-    // IF ERROR
-  } catch (error) {
-    // Log unexpected effor
-    console.error("RESTORE USER SESSION FAILED: ", error);
+  // Handle non-ok response
+  if (!response.ok) {
+    console.error("Failed to restore user session");
+    return;
   }
+
+  // ELSE dispatch setUser action
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
+
+  // IF ERROR
 };
 
 export const signup = (user) => async (dispatch) => {
   const { username, firstName, lastName, email, password } = user;
+  const response = await csrfFetch("/api/users", {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+    }),
+  });
 
-  try {
-    // Make a POST request to sign up user
-    const response = await csrfFetch("/api/users", {
-      method: "POST",
-      body: JSON.stringify({
-        username,
-        firstName,
-        lastName,
-        email,
-        password,
-      }),
-    });
-
-    // Hande non-ok response
-    if (!response.ok) {
-      console.error("Failed to sign up user");
-      return;
-    }
-
-    // Parse response data and dispatch setUser action
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
-
-    // Catch errors
-  } catch (error) {
-    console.error("SIGN UP ACTION FAILED: ", error);
+  // Hande non-ok response
+  if (!response.ok) {
+    console.error("Failed to sign up user");
+    return;
   }
+
+  // Parse response data and dispatch setUser action
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
 };
 
 // * Reducers ***************************

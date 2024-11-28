@@ -40,11 +40,12 @@ function LoginFormModal() {
       });
   };
 
+  const isButtonDisabled = credential.length < 4 || password.length < 6;
+
   return (
     <>
-      <h1>Log In</h1>
-
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1>Log In</h1>
         <input
           placeholder="Username or Email"
           type="text"
@@ -60,9 +61,11 @@ function LoginFormModal() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {errors.credential && <p>{errors.credential}</p>}
+        {errors.credential && <p className="error">{errors.credential}</p>}
 
-        <button type="submit">Log In</button>
+        <button type="submit" disabled={isButtonDisabled}>
+          Log In
+        </button>
       </form>
 
       <a href="#" onClick={loginAsDemoUser} className="demo-link">
