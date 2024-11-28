@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "../OpenModalMenuItem";
@@ -16,6 +16,7 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const navigate = useNavigate();
 
   const toggleMenu = (e) => {
     e.stopPropagation();
@@ -28,6 +29,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    navigate("/");
   };
 
   useEffect(() => {
@@ -56,7 +58,7 @@ function ProfileButton({ user }) {
       <div className={ulClassName} ref={ulRef}>
         {user ? (
           <div className="profile-text">
-            <p>Hello, {user.username}.</p>
+            <p>Hello, {user.username}</p>
             <p>{user.email}</p>
 
             <NavLink to="/create-spot" onClick={closeMenu} className="nav-link">
