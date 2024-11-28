@@ -2,8 +2,8 @@ import { createSelector } from "reselect";
 import { csrfFetch } from "./csrf";
 
 // * Action Types *************************
-const SET_USER = "/session/setUser";
-const REMOVE_USER = "/session/removeUser";
+const SET_USER = "/session/SETUSER";
+const REMOVE_USER = "/session/REMOVEUSER";
 
 // * Action Creators **********************
 const setUser = (user) => {
