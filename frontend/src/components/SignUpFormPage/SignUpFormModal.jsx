@@ -109,26 +109,9 @@ function SignUpFormModal() {
   const errorMessages = Object.values(errors);
 
   return (
-    <>
+    <div id="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
-
-        {/* Display "All fields are required" message if form is not valid */}
-        {!isFormValid() && (
-          <p className="required-message">All fields are required.</p>
-        )}
-
-        {/* Display all error messages at the top of the form */}
-        {errorMessages.length > 0 && (
-          <div className="error-messages">
-            {errorMessages.map((error, index) => (
-              <p key={index} className="error">
-                {error}
-              </p>
-            ))}
-          </div>
-        )}
-
         <input
           placeholder="First Name"
           type="text"
@@ -236,7 +219,23 @@ function SignUpFormModal() {
           Sign Up
         </button>
       </form>
-    </>
+
+      <div id="errors-container">
+        {!isFormValid() && (
+          <p className="required-message">All fields are required.</p>
+        )}
+
+        {errorMessages.length > 0 && (
+          <div className="error-messages">
+            {errorMessages.map((error, index) => (
+              <p key={index} className="error">
+                {error}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
