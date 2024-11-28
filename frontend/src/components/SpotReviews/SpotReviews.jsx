@@ -44,44 +44,50 @@ function Reviews({ spot }) {
       <div id="section-divider"></div>
 
       <div id="header">
-        <GoStarFill />
-        <h2>
-          {spot?.avgStarRating !== "undefined" ? (
-            Number(spot?.avgStarRating).toFixed(1)
-          ) : (
-            <p>New</p>
+        <GoStarFill style={{ fontSize: "1.5em", paddingRight: ".25em" }} />
+
+        {spot?.avgStarRating > 0 ? (
+          <span>{Number(spot?.avgStarRating).toFixed(1)}</span>
+        ) : (
+          <span>New</span>
+        )}
+
+        <p>
+          {spot?.numReviews > 0 && (
+            <>
+              <span style={{ padding: "0 0.5em" }}>•</span>
+              <span>
+                {spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}
+              </span>
+            </>
           )}
-        </h2>
-        <h3 id="divider"> | </h3>
-        <h3>
-          <p>
-            {spot?.numReviews === 0
-              ? "No reviews"
-              : `${spot?.numReviews} ${
-                  spot?.numReviews === 1 ? "Review" : "Reviews"
-                } `}
-          </p>
-        </h3>
+        </p>
       </div>
 
       {canPostReview && (
         <div>
-          <button className="post-review-button">Post Your Review</button>
+          <button id="post-review-button">Post Your Review</button>
         </div>
       )}
 
       <div id="section">
-        <ul className="list">
-          {sortedReviews?.map((review) => (
-            <li key={review.id} className="item">
-              <p>
-                <strong>{review.User.firstName}</strong>
-              </p>
-              <p className="date">{formatDate(review.updatedAt)}</p>
-              <p>{review.review}</p>
-            </li>
-          ))}
-        </ul>
+        {spot?.numReviews > 0 &&
+        !isCurrentUserOwner &&
+        !hasCurrentUserReviewed ? (
+          <p>Be the first to post a review!</p>
+        ) : (
+          <ul className="list">
+            {sortedReviews?.map((review) => (
+              <li key={review.id} className="item">
+                <p>
+                  <strong>{review.User.firstName}</strong>
+                </p>
+                <p className="date">{formatDate(review.updatedAt)}</p>
+                <p>{review.review}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );

@@ -10,8 +10,8 @@ function ReservationLauncher({ spot, onReserveClick }) {
         </div>
 
         <div>
-          <GoStarFill />
-          {spot?.avgStarRating !== undefined ? (
+          <GoStarFill style={{ paddingRight: ".25em" }} />
+          {spot?.avgStarRating > 0 ? (
             <span>{Number(spot?.avgStarRating).toFixed(1)}</span>
           ) : (
             <span>New</span>
