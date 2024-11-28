@@ -12,13 +12,13 @@ function Navigation({ isLoaded }) {
   };
 
   return (
-    <nav className="navigation">
-      <NavLink to="/" className="container-home">
+    <nav id="site-banner">
+      <NavLink to="/" id="logo-banner">
         <Paw />
-        <span className="site-name paw-purple">pawspot</span>
+        <span className="site-name">pawspot</span>
       </NavLink>
 
-      <div className="container-profile">
+      <div id="profile-dropdown-container">
         {isLoaded && (
           <div>
             <ProfileButton user={sessionUser} />

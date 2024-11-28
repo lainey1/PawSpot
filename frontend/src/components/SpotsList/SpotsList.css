@@ -1,33 +1,20 @@
+/* ================================
+   Base Styles
+================================ */
+
+/* Grid Container */
 .spots-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5em;
+  gap: 1.5rem;
+  margin: 0 5%;
 }
 
-@media (min-width: 700px) {
-  .spots-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .spots-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1700px) {
-  .spots-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
+/* Individual Spot Tile */
 .spot-tile {
   position: relative;
   text-align: center;
-
-  background: #fff;
-
+  background: #ffffff;
   overflow: hidden;
   transition: box-shadow 0.3s;
 }
@@ -36,45 +23,39 @@
   opacity: 1;
 }
 
-.spot-link {
+/* Spot Link */
+.spot-link,
+.spot-link a {
   display: block;
   position: relative;
-
   text-align: left;
-
   text-decoration: none;
   color: #333;
 }
 
-.spot-link a {
-  text-decoration: none;
-  color: #333;
-}
-
+/* Spot Image */
 .spot-image {
   width: 100%;
   height: 33vh;
-
   border: 1px solid #ccc;
-  border-radius: 8px;
-
+  border-radius: 0.5rem;
   object-fit: cover;
 }
 
+/* Spot Name Overlay */
 .spot-name {
   position: absolute;
-  top: 10px;
+  top: 0.625rem;
   left: 0;
   right: 0;
-
-  color: #fff;
+  color: #ffffff;
   background: rgba(0, 0, 0, 0.6);
   opacity: 0;
-  padding: 10px;
-
+  padding: 0.625rem;
   transition: opacity 0.3s;
 }
 
+/* Spot Location and Rating */
 .spot-location-rating {
   display: flex;
   justify-content: space-between;
@@ -82,13 +63,36 @@
 }
 
 .spot-location {
-  font-size: 1em;
+  font-size: 1rem;
   color: #333;
   font-weight: bold;
   margin: 0;
 }
 
 .average-rating {
-  margin-left: 10px;
+  margin-left: 0.625rem;
   font-weight: bold;
 }
+
+/*
+/* ================================
+   Responsive Layouts
+================================ */
+
+@media (min-width: 700px) {
+  .spots-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .spots-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .spots-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+} */

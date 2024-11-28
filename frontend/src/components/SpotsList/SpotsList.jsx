@@ -14,43 +14,39 @@ const SpotsList = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <main>
-        <div className="spots-grid">
-          {spots?.map((spot) => (
-            <div key={spot.id} className="spot-tile">
-              <Link to={`/spots/${spot.id}`} className="spot-link">
-                {spot.previewImage && (
-                  <img
-                    src={spot.previewImage}
-                    alt={spot.name}
-                    className="spot-image"
-                  />
+    <div className="spots-grid">
+      {spots?.map((spot) => (
+        <div key={spot.id} className="spot-tile">
+          <Link to={`/spots/${spot.id}`} className="spot-link">
+            {spot.previewImage && (
+              <img
+                src={spot.previewImage}
+                alt={spot.name}
+                className="spot-image"
+              />
+            )}
+            <h3 className="spot-name">{spot.name}</h3>
+            <div className="spot-location-rating">
+              <p className="spot-location">
+                {spot.city}, {spot.state}
+              </p>
+              <span className="average-rating">
+                {spot.avgRating ? (
+                  <>
+                    <GoStarFill /> {spot.avgRating}
+                  </>
+                ) : (
+                  <span className="no-ratings">New</span>
                 )}
-                <h3 className="spot-name">{spot.name}</h3>
-                <div className="spot-location-rating">
-                  <p className="spot-location">
-                    {spot.city}, {spot.state}
-                  </p>
-                  <span className="average-rating">
-                    {spot.avgRating ? (
-                      <>
-                        <GoStarFill /> {spot.avgRating}
-                      </>
-                    ) : (
-                      <span className="no-ratings">New</span>
-                    )}
-                  </span>
-                </div>
-                <p>
-                  <strong>${spot.price}</strong> night
-                </p>
-              </Link>
+              </span>
             </div>
-          ))}
+            <p>
+              <strong>${spot.price}</strong> night
+            </p>
+          </Link>
         </div>
-      </main>
-    </>
+      ))}
+    </div>
   );
 };
 

@@ -46,7 +46,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={toggleMenu} id="profile-dropdown">
+      <button onClick={toggleMenu} id="profile-dropdown-button">
         <span className="container-profile">
           <GiHamburgerMenu className="icon-hamburger" />
           <FaUserCircle className="icon-user" />
@@ -55,7 +55,7 @@ function ProfileButton({ user }) {
 
       <div className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
+          <div className="profile-text">
             <p>Hello, {user.username}.</p>
             <p>{user.email}</p>
 
@@ -66,7 +66,7 @@ function ProfileButton({ user }) {
             <button className="button-logout" onClick={logout}>
               Log Out
             </button>
-          </>
+          </div>
         ) : (
           <div>
             <OpenModalMenuItem
