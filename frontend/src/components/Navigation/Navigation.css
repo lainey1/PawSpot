@@ -36,10 +36,20 @@
 /* ================================
    Profile Dropdown Container
 ================================ */
-#profile-dropdown-container {
+#actions-container {
   display: flex;
   align-items: center;
   margin-left: auto;
+}
+
+.nav-link {
+  color: #b965d7;
+  text-decoration: none;
+  padding-right: 1em;
+
+  &:hover {
+    color: #4a90e2;
+  }
 }
 
 /* ================================

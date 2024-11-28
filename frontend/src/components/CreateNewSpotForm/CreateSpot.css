@@ -1,0 +1,124 @@
+/* ================================
+   Form Container
+================================ */
+.create-spot-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px; /* Minimum width for responsiveness */
+  max-width: 500px;
+  margin: 0 20%; /* Center the form horizontally with space on sides */
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   Form Header
+================================ */
+h2 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* ================================
+   Input & Field Styling
+================================ */
+.input-field,
+.textarea-field {
+  width: 95%; /* Almost full width */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #4f4f4f;
+  margin-top: 5px;
+}
+.textarea-field {
+  width: 100%; /* Almost full width */
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #4f4f4f;
+  margin-top: 5px;
+}
+.input-field:focus,
+.textarea-field:focus {
+  border-color: #b965d7;
+  outline: none; /* Removes default focus outline */
+}
+.textarea-field::placeholder {
+  font-size: 1em;
+  font-style: italic;
+}
+
+/* ================================
+   Image URL Container
+================================ */
+.image-url-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.select-field {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #4f4f4f;
+  margin-top: 5px;
+  background-color: #ffffff;
+}
+
+.select-field:focus {
+  border-color: #b965d7;
+  outline: none;
+}
+
+.select-field option {
+  font-size: 1em;
+  color: #4f4f4f;
+  background-color: #ffffff;
+}
+/* ================================
+   Section Styling
+================================ */
+.section {
+  margin-bottom: 20px;
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+/* ================================
+   Latitude & Longitude Section
+================================ */
+#lat-long {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.5em;
+}
+
+.lat,
+.long {
+  width: calc(50% - 0.5em); /* Each input takes half width minus the gap */
+  margin: 0; /* Ensure no extra margin */
+}
+
+/* ================================
+   Error Message
+================================ */
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}

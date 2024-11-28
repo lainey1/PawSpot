@@ -30,3 +30,12 @@ input {
 
   font-weight: 1rem;
 }
+
+select {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  font-weight: 1rem;
+}

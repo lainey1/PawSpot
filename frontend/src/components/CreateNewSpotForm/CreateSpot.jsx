@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./CreateNewSpotForm.css";
+
 import { useDispatch } from "react-redux";
 import { createNewSpot } from "../../store/spots";
+
+import "./CreateSpot.css";
 
 const CreateSpot = () => {
   const [formData, setFormData] = useState({
@@ -80,69 +82,98 @@ const CreateSpot = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
+    <form onSubmit={handleSubmit} className="create-spot-form">
       <h2>Create a New Spot</h2>
 
-      {/* Location Section */}
-      <h3>Where&apos;s your place located?</h3>
-      <p>
-        Guests will only get your exact address once they booked a reservation.
-      </p>
+      <section id="location">
+        <h3>Where&apos;s your place located?</h3>
+        <p>
+          Guests will only get your exact address once they booked a
+          reservation.
+        </p>
 
-      {/* Location Section */}
-      <h3>Where&apos;s your place located?</h3>
-      <p>
-        Guests will only get your exact address once they booked a reservation.
-      </p>
+        <h3>Where&apos;s your place located?</h3>
+        <p>
+          Guests will only get your exact address once they booked a
+          reservation.
+        </p>
 
-      <input
-        className="input-field"
-        name="country"
-        value={formData.country}
-        onChange={handleChange}
-        placeholder="Country"
-        required
-      />
-      <input
-        className="input-field"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-        placeholder="Street Address"
-        required
-      />
-      <input
-        className="input-field"
-        name="city"
-        value={formData.city}
-        onChange={handleChange}
-        placeholder="City"
-        required
-      />
-      <input
-        className="input-field"
-        name="state"
-        value={formData.state}
-        onChange={handleChange}
-        placeholder="State"
-        required
-      />
-      <input
-        type="number"
-        name="lat"
-        value={formData.lat}
-        onChange={handleChange}
-        placeholder="Latitude"
-        required
-      />
-      <input
-        type="number"
-        name="lng"
-        value={formData.lng}
-        onChange={handleChange}
-        placeholder="Longitude"
-        required
-      />
+        <select
+          className="select-field"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          placeholder="Country"
+          required
+        >
+          <option value="" disabled>
+            Select a Country
+          </option>
+          <option value="United States">United States</option>
+          <option value="Canada">Canada</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Australia">Australia</option>
+          <option value="Japan">Japan</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Italy">Italy</option>
+          <option value="Spain">Spain</option>
+        </select>
+        <input
+          className="input-field"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Street Address"
+          required
+        />
+        <input
+          className="input-field"
+          name="city"
+          value={formData.city}
+          onChange={handleChange}
+          placeholder="City"
+          required
+        />
+        <input
+          className="input-field"
+          name="state"
+          value={formData.state}
+          onChange={handleChange}
+          placeholder="State"
+          required
+        />
+        <div id="lat-long">
+          <input
+            className="lat"
+            type="number"
+            name="lat"
+            value={formData.lat}
+            onChange={handleChange}
+            placeholder="Latitude"
+          />
+          ,
+          <input
+            className="long"
+            type="number"
+            name="lng"
+            value={formData.lng}
+            onChange={handleChange}
+            placeholder="Longitude"
+          />{" "}
+        </div>
+        <div
+          style={{
+            fontSize: "0.8em",
+            fontStyle: "italic",
+            textAlign: "right",
+            marginRight: "1em",
+          }}
+        >
+          *Optional
+        </div>
+      </section>
 
       {/* Description Section */}
       <h3>Describe your place to guests</h3>
@@ -202,8 +233,9 @@ const CreateSpot = () => {
           name="previewImageUrl"
           value={formData.previewImageUrl}
           onChange={handleChange}
-          placeholder="Preview Image URL"
+          placeholder="Required: Preview Image URL"
         />
+
         {errors.previewImageUrl && (
           <p className="error-message">{errors.previewImageUrl}</p>
         )}

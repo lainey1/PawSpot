@@ -1,3 +1,3 @@
-import CreateSpot from "./CreateNewSpotForm";
+import CreateSpot from "./CreateSpot";
 
 export default CreateSpot;

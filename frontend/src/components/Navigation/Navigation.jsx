@@ -18,7 +18,12 @@ function Navigation({ isLoaded }) {
         <span className="site-name">pawspot</span>
       </NavLink>
 
-      <div id="profile-dropdown-container">
+      <div id="actions-container">
+        {sessionUser && (
+          <NavLink to="/create-spot" className="nav-link">
+            Create Spot
+          </NavLink>
+        )}
         {isLoaded && (
           <div>
             <ProfileButton user={sessionUser} />
