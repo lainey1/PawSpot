@@ -1,23 +1,9 @@
-/* ================================
-   Container for All Images
-================================ */
-#images-container {
-  display: flex;
-  justify-content: space-between;
+.images-container {
   height: 400px;
-  width: 100%;
+  display: flex;
   margin-top: 10px;
-}
-
-/* ================================
-   Large Image
-================================ */
-#image-large-container {
-  height: 100%;
-  margin-right: 5px;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+  justify-content: space-between; /* Ensure images are spaced correctly */
+  width: 100%; /* Ensure the container stretches across the available width */
 }
 
 .image-large {
@@ -27,15 +13,27 @@
   width: 100%;
 }
 
-/* ================================
-   Small Images
-================================ */
-#images-small-container {
+.image-large-container {
+  height: 100%;
+  margin-right: 5px;
+  overflow: hidden;
+  position: relative;
+  width: 100%; /* Stretch to fill available width */
+}
+
+.image-small {
+  border-radius: 4px;
+  height: 100%;
+  object-fit: cover;
+  width: 49%;
+}
+
+.images-small-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  width: 100%;
+  width: 45%; /* This takes up the remaining space */
 }
 
 .images-small-row {
@@ -46,9 +44,28 @@
   margin: 5px;
 }
 
-.image-small {
-  border-radius: 4px;
-  height: 100%;
-  object-fit: cover;
-  width: 49%;
+/* If only one image, make it full-width */
+.images-container.one-image {
+  justify-content: center;
+}
+
+.images-container.one-image .image-large-container {
+  width: 100%; /* Stretch the large image to full width */
+}
+
+/* Responsive Design for Mobile Screens */
+@media (max-width: 768px) {
+  .images-container {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .image-large-container {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .images-small-container {
+    display: none; /* Hide the smaller images */
+  }
 }

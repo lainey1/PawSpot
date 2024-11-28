@@ -1,8 +1,8 @@
 import "./ImagesContainer.css";
 
 const ImagesContainer = ({ spot }) => (
-  <div id="images-container">
-    <div id="image-large-container">
+  <div className="images-container">
+    <div className="image-large-container">
       <img
         className="image-large"
         src={spot.SpotImages[0]?.url}
@@ -10,7 +10,7 @@ const ImagesContainer = ({ spot }) => (
       />
     </div>
     {spot.SpotImages.length >= 5 && (
-      <div id="images-small-container">
+      <div className="images-small-container">
         <div className="images-small-row">
           {spot.SpotImages.slice(1, 3).map((image, index) => (
             <img
