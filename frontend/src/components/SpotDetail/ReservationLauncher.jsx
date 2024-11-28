@@ -5,7 +5,7 @@ function ReservationLauncher({ spot, onReserveClick }) {
     <div id="reservation-launcher">
       <div id="reservation-header">
         <div>
-          <span className="price-amount">${spot.price.toFixed(2)}</span>
+          <span className="price-amount">${Number(spot.price).toFixed(2)}</span>
           <span> night</span>
         </div>
 
