@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import * as sessionActions from "../../store/session";
-import "./SignUpForm.css";
+
 import { useModal } from "../../context/Modal";
+import * as sessionActions from "../../store/session";
+
+import "./SignUpForm.css";
 
 function SignUpFormModal() {
   const dispatch = useDispatch();
+
+  // State hooks
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -24,8 +28,7 @@ function SignUpFormModal() {
       lastName &&
       password &&
       confirmPassword &&
-      password === confirmPassword && // Ensure passwords match
-      Object.keys(errors).length === 0 // Make sure no validation errors exist
+      password === confirmPassword // Ensure passwords match
     );
   };
 
