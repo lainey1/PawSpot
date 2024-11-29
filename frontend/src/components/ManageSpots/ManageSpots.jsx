@@ -1,95 +1,95 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
-import { fetchReviews } from "../../store/reviews";
-
-import { formatDate } from "../../utils/reviewUtils";
-
+import { useNavigate, Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
-import "./SpotReviews.css";
 
-function ManageSpots({ spot }) {
+import { fetchSpots } from "../../store/spots";
+
+import "./ManageSpots.css";
+
+function ManageSpots() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { spotId } = useParams();
 
   const [loading, setLoading] = useState(true);
-  const reviews = useSelector((state) => state.reviews.Reviews);
+  const spots = useSelector((state) => state.spots.Spots);
+  console.log(spots);
   const currentUser = useSelector((state) => state.session.user);
 
-  const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
-  const hasCurrentUserReviewed = reviews?.some(
-    (review) => review.User?.id === currentUser?.id
-  );
-  const canPostReview =
-    currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
+  const userSpots = spots?.filter((spot) => spot.ownerId === currentUser.id);
+  console.log(userSpots);
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchReviews(spotId))
+    dispatch(fetchSpots())
       .then(() => setLoading(false))
       .catch(() => setLoading(false));
-  }, [dispatch, spotId]);
+  }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
-  if (!reviews) return <div>Review not found.</div>;
-
-  // Sort reviews by updatedAt in descending order (newest first)
-  const sortedReviews = [...reviews].sort(
-    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
-  );
+  if (!currentUser) return <div>You must be logged in to manage spots.</div>;
 
   return (
-    <>
-      <div id="section-divider"></div>
-
-      <div id="header">
-        <GoStarFill style={{ fontSize: "1.5em", paddingRight: ".25em" }} />
-
-        {spot?.avgStarRating > 0 ? (
-          <span>{Number(spot?.avgStarRating).toFixed(1)}</span>
-        ) : (
-          <span>New</span>
-        )}
-
-        <p>
-          {spot?.numReviews > 0 && (
-            <>
-              <span style={{ padding: "0 0.5em" }}>•</span>
-              <span>
-                {spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}
-              </span>
-            </>
-          )}
-        </p>
+    <div className="manage-spots-page">
+      <div className="header">
+        <h1>Manage Your Spots</h1>
       </div>
 
-      {canPostReview && (
-        <div>
-          <button id="post-review-button">Post Your Review</button>
+      {!userSpots.length ? (
+        <button
+          id="create-spot-button"
+          onClick={() => {
+            navigate("/spots/create-spot");
+          }}
+        >
+          Create a New Spot
+        </button>
+      ) : (
+        <div className="spots-grid">
+          {userSpots?.map((spot) => (
+            <div key={spot.id} className="spot-tile">
+              <Link to={`/spots/${spot.id}`} className="spot-link">
+                <div className="spot-image-container">
+                  {spot.previewImage ? (
+                    <img
+                      src={spot.previewImage}
+                      alt={spot.name}
+                      className="spot-image"
+                    />
+                  ) : (
+                    <div>No Image Available</div>
+                  )}
+                </div>
+              </Link>
+              <div className="spot-details">
+                <h3 className="spot-name">{spot.name}</h3>
+                <div className="spot-location-rating">
+                  <p className="spot-location">
+                    {spot.city}, {spot.state}
+                  </p>
+                  <span className="average-rating">
+                    {spot.avgRating ? (
+                      <>
+                        <GoStarFill /> {spot.avgRating}
+                      </>
+                    ) : (
+                      <span className="no-ratings">New</span>
+                    )}
+                  </span>
+                </div>
+                <p style={{ textAlign: "left" }}>
+                  <strong>${spot.price.toFixed(2)}</strong> night
+                </p>
+              </div>
+              <span id="manage-buttons">
+                <button>Update</button>
+                <button>Delete</button>
+              </span>
+            </div>
+          ))}
         </div>
       )}
-
-      <div id="section">
-        {spot?.numReviews > 0 &&
-        !isCurrentUserOwner &&
-        !hasCurrentUserReviewed ? (
-          <p>Be the first to post a review!</p>
-        ) : (
-          <ul className="list">
-            {sortedReviews?.map((review) => (
-              <li key={review.id} className="item">
-                <p>
-                  <strong>{review.User.firstName}</strong>
-                </p>
-                <p className="date">{formatDate(review.updatedAt)}</p>
-                <p>{review.review}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </>
+    </div>
   );
 }
 

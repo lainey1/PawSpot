@@ -1,7 +1,7 @@
 /* ================================
    Spot Page Styles
 ================================ */
-#spot-page {
+.spot-page {
   display: flex;
   flex-direction: column;
   max-width: 1000px;

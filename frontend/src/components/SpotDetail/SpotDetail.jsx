@@ -32,7 +32,7 @@ function SpotDetail() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div id="spot-page">
+    <div className="spot-page">
       <div>
         <SpotHeader spot={spot} />
         <ImagesContainer spot={spot} />

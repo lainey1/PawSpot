@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchSpots } from "../../store/spots";
 import { GoStarFill } from "react-icons/go";
+import { fetchSpots } from "../../store/spots";
 import "./SpotsList.css";
 
 const SpotsList = () => {
@@ -18,13 +18,19 @@ const SpotsList = () => {
       {spots?.map((spot) => (
         <div key={spot.id} className="spot-tile">
           <Link to={`/spots/${spot.id}`} className="spot-link">
-            {spot.previewImage && (
-              <img
-                src={spot.previewImage}
-                alt={spot.name}
-                className="spot-image"
-              />
-            )}
+            <div className="spot-image-container">
+              {spot.previewImage ? (
+                <img
+                  src={spot.previewImage}
+                  alt={spot.name}
+                  className="spot-image"
+                />
+              ) : (
+                <div>No Image Available</div>
+              )}
+            </div>
+          </Link>
+          <div className="spot-details">
             <h3 className="spot-name">{spot.name}</h3>
             <div className="spot-location-rating">
               <p className="spot-location">
@@ -40,10 +46,14 @@ const SpotsList = () => {
                 )}
               </span>
             </div>
-            <p>
+            <p style={{ textAlign: "left" }}>
               <strong>${spot.price.toFixed(2)}</strong> night
             </p>
-          </Link>
+          </div>
+          <span id="manage-buttons">
+            <button>Update</button>
+            <button>Delete</button>
+          </span>
         </div>
       ))}
     </div>

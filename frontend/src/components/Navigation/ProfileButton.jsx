@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "../OpenModalMenuItem";
@@ -60,6 +60,9 @@ function ProfileButton({ user }) {
           <div className="profile-text">
             <p>Hello, {user.username}</p>
             <p>{user.email}</p>
+            <NavLink to="/manage-spots" className="nav-link">
+              Manage Spots
+            </NavLink>
 
             <button className="button-logout" onClick={logout}>
               Log Out

@@ -1,10 +1,39 @@
+/* ================================
+   Login Container
+================================ */
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   Login Form
+================================ */
 .login-form {
   display: flex;
   flex-direction: column;
-
   min-width: 300px;
-  max-width: 500px;
-  margin: auto;
+  width: 80%;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+/* ================================
+   Errors Container
+================================ */
+
+#errors-container {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
 }
 
@@ -14,11 +43,9 @@
   margin-bottom: 15px;
 }
 
-button:disabled {
-  background-color: #cccccc;
-  color: #999999;
-  cursor: not-allowed;
-  opacity: 0.5; /* Reduce opacity for a muted effect */
+.error-message {
+  color: red;
+  font-size: 0.9em; /* Optional: adjust the font size */
 }
 
 .demo-link {
