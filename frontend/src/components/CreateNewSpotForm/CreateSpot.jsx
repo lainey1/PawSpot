@@ -23,16 +23,28 @@ const CreateSpot = () => {
     imageUrls: ["", "", "", ""],
   });
   const [errors, setErrors] = useState({});
+  // const [formIsValid, setFormIsValid] = useState(false);
 
   // Validation helper functions
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.previewImageUrl)
+
+    if (!formData.previewImageUrl) {
       newErrors.previewImageUrl = "Preview Image URL is required";
-    if (formData.description.length < 30)
+    }
+
+    if (!formData.description || formData.description.length < 30) {
       newErrors.description = "Description needs 30 or more characters";
-    if (!formData.name) newErrors.name = "Name of your spot is required";
-    if (!formData.price) newErrors.price = "Price per night is required";
+    }
+    if (!formData.name) {
+      newErrors.name = "Name of your spot is required";
+    }
+    if (!formData.price) {
+      newErrors.price = "Price per night is required";
+    } else if (isNaN(parseFloat(formData.price))) {
+      newErrors.price = "Price must be a number";
+    }
+
     return newErrors;
   };
 
@@ -79,6 +91,22 @@ const CreateSpot = () => {
     }
   };
 
+  // // Check if all required fields have valid input
+  // useEffect(() => {
+  //   const isValid =
+  //     !!formData.previewImageUrl &&
+  //     formData.description.length >= 30 &&
+  //     !!formData.name &&
+  //     !!formData.price &&
+  //     !isNaN(parseFloat(formData.price)) &&
+  //     !!formData.country &&
+  //     !!formData.address &&
+  //     !!formData.city &&
+  //     !!formData.state;
+
+  //   setFormIsValid(isValid);
+  // }, [formData]);
+
   return (
     <div id="create-spot-container">
       <form onSubmit={handleSubmit} className="create-spot-form">
@@ -113,6 +141,7 @@ const CreateSpot = () => {
             <option value="Italy">Italy</option>
             <option value="Spain">Spain</option>
           </select>
+          {errors.country && <p className="error-message">{errors.country}</p>}
           <input
             className="input-field"
             name="address"
@@ -121,6 +150,7 @@ const CreateSpot = () => {
             placeholder="Street Address"
             required
           />
+          {errors.address && <p className="error-message">{errors.address}</p>}
           <input
             className="input-field"
             name="city"
@@ -129,6 +159,7 @@ const CreateSpot = () => {
             placeholder="City"
             required
           />
+          {errors.city && <p className="error-message">{errors.city}</p>}
           <input
             className="input-field"
             name="state"
@@ -137,6 +168,7 @@ const CreateSpot = () => {
             placeholder="State"
             required
           />
+          {errors.state && <p className="error-message">{errors.state}</p>}
           <div id="lat-long">
             <input
               className="lat"
@@ -175,9 +207,7 @@ const CreateSpot = () => {
             Mention the best features of your space, any special amenities like
             fast wifi or parking, and what you love about the neighborhood.
           </p>
-          {errors.description && (
-            <p className="error-message">{errors.description}</p>
-          )}
+
           <textarea
             className="textarea-field"
             name="description"
@@ -186,6 +216,9 @@ const CreateSpot = () => {
             placeholder="Please write at least 30 characters"
             required
           />
+          {errors.description && (
+            <p className="error-message">{errors.description}</p>
+          )}
         </section>
 
         <section>
