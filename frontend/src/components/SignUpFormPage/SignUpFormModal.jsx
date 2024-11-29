@@ -22,6 +22,7 @@ function SignUpFormModal() {
   // Validation helper functions
   const validateField = (fieldName, value) => {
     let error = "";
+
     switch (fieldName) {
       case "email":
         if (!value.includes("@")) error = "Email must include '@'.";
@@ -35,6 +36,7 @@ function SignUpFormModal() {
       case "confirmPassword":
         if (value !== password) error = "Passwords must match.";
         break;
+
       default:
         break;
     }
@@ -51,7 +53,7 @@ function SignUpFormModal() {
     }));
   };
 
-  // Function to check if all required fields are filled and valid
+  // Func to check if all required fields are filled and valid
   const isFormValid = () => {
     return (
       email &&

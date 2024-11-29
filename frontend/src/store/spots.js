@@ -70,7 +70,8 @@ export const createNewSpot = (spotData) => async (dispatch) => {
     return data;
   } else {
     const errorData = await response.json();
-    return Promise.reject(errorData);
+    return console.log(errorData);
+    // return Promise.reject(errorData);
   }
 };
 
