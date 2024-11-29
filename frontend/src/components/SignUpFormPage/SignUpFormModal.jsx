@@ -19,20 +19,7 @@ function SignUpFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  // Function to check if all required fields are filled and valid
-  const isFormValid = () => {
-    return (
-      email &&
-      username &&
-      firstName &&
-      lastName &&
-      password &&
-      confirmPassword &&
-      password === confirmPassword // Ensure passwords match
-    );
-  };
-
-  // General function to validate fields and set errors
+  // Validation helper functions
   const validateField = (fieldName, value) => {
     let error = "";
     switch (fieldName) {
@@ -64,24 +51,23 @@ function SignUpFormModal() {
     }));
   };
 
+  // Function to check if all required fields are filled and valid
+  const isFormValid = () => {
+    return (
+      email &&
+      username &&
+      firstName &&
+      lastName &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Final validation before API call
-    const finalErrors = {};
-    [
-      "email",
-      "username",
-      "firstName",
-      "lastName",
-      "password",
-      "confirmPassword",
-    ].forEach((field) => {
-      const error = validateField(field, eval(field));
-      if (error) finalErrors[field] = error;
-    });
-
-    // If there are any errors, don't submit the form
+    const finalErrors = validateAllFields();
     if (Object.keys(finalErrors).length > 0) {
       setErrors(finalErrors);
       return;
@@ -106,6 +92,23 @@ function SignUpFormModal() {
           setErrors(data.errors);
         }
       });
+  };
+
+  // Validate all form fields before API call
+  const validateAllFields = () => {
+    const finalErrors = {};
+    [
+      "email",
+      "username",
+      "firstName",
+      "lastName",
+      "password",
+      "confirmPassword",
+    ].forEach((field) => {
+      const error = validateField(field, eval(field));
+      if (error) finalErrors[field] = error;
+    });
+    return finalErrors;
   };
 
   // Collect all error messages into an array for display

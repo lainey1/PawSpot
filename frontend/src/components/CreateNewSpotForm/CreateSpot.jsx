@@ -7,6 +7,10 @@ import { createNewSpot } from "../../store/spots";
 import "./CreateSpot.css";
 
 const CreateSpot = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // State hooks
   const [formData, setFormData] = useState({
     country: "",
     address: "",
@@ -20,9 +24,8 @@ const CreateSpot = () => {
     previewImageUrl: "",
     imageUrls: ["", "", "", ""],
   });
+
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
