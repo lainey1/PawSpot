@@ -2,6 +2,9 @@
    Site Banner
 ================================ */
 #site-banner {
+  position: sticky;
+  top: 0; /* Fixed at top of the viewport */
+  z-index: 1000;
   display: flex;
   align-items: center;
   background-color: #ffffff;
@@ -151,4 +154,35 @@
 .button-logout {
   margin: 1em 0 0 1em;
   width: 80%;
+}
+
+/* ================================
+   Media Queries
+================================ */
+
+/* Small Screens (up to 667px) */
+
+@media (max-width: 667px) {
+  #site-banner {
+    padding: 1em 1em;
+  }
+
+  #logo-banner {
+    font-size: 2em;
+  }
+
+  .site-name {
+    font-size: 0.75em;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.75em;
+    padding-right: 0.25em;
+  }
+
+  #profile-dropdown-button {
+    font-size: 0.8em;
+  }
 }
