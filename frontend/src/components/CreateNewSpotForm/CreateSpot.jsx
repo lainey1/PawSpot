@@ -68,31 +68,24 @@ const CreateSpot = () => {
       lng: parseFloat(formData.lng),
       imageUrls: [formData.previewImageUrl, ...formData.imageUrls].filter(
         (url) => url
-      ), // Combine
+      ),
     };
 
     try {
       const newSpot = await dispatch(createNewSpot(newSpotData));
-      console.log("New spot created:", newSpot); // Log to check what data you have
-      navigate(`/spots/${newSpot.id}`); // Navigate to the new spot's detail page
+      console.log("New spot created:", newSpot);
+      navigate(`/spots/${newSpot.id}`);
     } catch (error) {
-      console.log("goodbye");
       setErrors({ submit: error.message || "An unknown error occurred." });
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="create-spot-form">
-      <h2>Create a New Spot</h2>
+      <h1>Create a New Spot</h1>
 
-      <section id="location">
-        <h3>Where&apos;s your place located?</h3>
-        <p>
-          Guests will only get your exact address once they booked a
-          reservation.
-        </p>
-
-        <h3>Where&apos;s your place located?</h3>
+      <section>
+        <h2>Where&apos;s your place located?</h2>
         <p>
           Guests will only get your exact address once they booked a
           reservation.
@@ -169,86 +162,94 @@ const CreateSpot = () => {
             fontStyle: "italic",
             textAlign: "right",
             marginRight: "1em",
+            paddingBottom: "1em",
           }}
         >
           *Optional
         </div>
       </section>
 
-      {/* Description Section */}
-      <h3>Describe your place to guests</h3>
-      <p>
-        Mention the best features of your space, any special amenities like fast
-        wifi or parking, and what you love about the neighborhood.
-      </p>
-      <textarea
-        className="textarea-field"
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        placeholder="Please write at least 30 characters"
-      />
-      {errors.description && (
-        <p className="error-message">{errors.description}</p>
-      )}
+      <section>
+        <h2>Describe your place to guests</h2>
+        <p>
+          Mention the best features of your space, any special amenities like
+          fast wifi or parking, and what you love about the neighborhood.
+        </p>
+        <textarea
+          className="textarea-field"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Please write at least 30 characters"
+          required
+        />
+        {errors.description && (
+          <p className="error-message">{errors.description}</p>
+        )}
+      </section>
 
-      {/* Title Section */}
-      <h3>Create a title for your spot</h3>
-      <p>
-        Catch guests&apos; attention with a spot title that highlights what
-        makes your place special.
-      </p>
-      <input
-        className="input-field"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        placeholder="Name of your spot"
-      />
-      {errors.name && <p className="error-message">{errors.name}</p>}
-
-      {/* Price Section */}
-      <h3>Set a base price for your spot</h3>
-      <p>
-        Competitive pricing can help your listing stand out and rank higher in
-        search results.
-      </p>
-      <input
-        className="input-field"
-        type="number"
-        name="price"
-        value={formData.price}
-        onChange={handleChange}
-        placeholder="Price per night (USD)"
-      />
-      {errors.price && <p className="error-message">{errors.price}</p>}
-
-      {/* Image Section */}
-      <h3>Liven up your spot with photos</h3>
-      <p>Submit a link to at least one photo to publish your spot.</p>
-
-      <div className="image-url-container">
+      <section>
+        <h2>Create a title for your spot</h2>
+        <p>
+          Catch guests&apos; attention with a spot title that highlights what
+          makes your place special.
+        </p>
         <input
           className="input-field"
-          name="previewImageUrl"
-          value={formData.previewImageUrl}
+          name="name"
+          value={formData.name}
           onChange={handleChange}
-          placeholder="Required: Preview Image URL"
+          placeholder="Name of your spot"
+          required
         />
+        {errors.name && <p className="error-message">{errors.name}</p>}
+      </section>
 
-        {errors.previewImageUrl && (
-          <p className="error-message">{errors.previewImageUrl}</p>
-        )}
-        {formData.imageUrls.map((url, index) => (
+      <section>
+        <h2>Set a base price for your spot</h2>
+        <p>
+          Competitive pricing can help your listing stand out and rank higher in
+          search results.
+        </p>
+        <input
+          className="input-field"
+          type="number"
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+          placeholder="Price per night (USD)"
+          required
+        />
+        {errors.price && <p className="error-message">{errors.price}</p>}
+      </section>
+
+      <section>
+        <h2>Liven up your spot with photos</h2>
+        <p>Submit a link to at least one photo to publish your spot.</p>
+
+        <div className="image-url-container">
           <input
-            key={index}
             className="input-field"
-            value={url}
-            onChange={(e) => handleImageChange(index, e.target.value)}
-            placeholder="Image URL"
+            name="previewImageUrl"
+            value={formData.previewImageUrl}
+            onChange={handleChange}
+            placeholder="Required: Preview Image URL"
           />
-        ))}
-      </div>
+
+          {errors.previewImageUrl && (
+            <p className="error-message">{errors.previewImageUrl}</p>
+          )}
+          {formData.imageUrls.map((url, index) => (
+            <input
+              key={index}
+              className="input-field"
+              value={url}
+              onChange={(e) => handleImageChange(index, e.target.value)}
+              placeholder="Image URL"
+            />
+          ))}
+        </div>
+      </section>
 
       <button type="submit">Create Spot</button>
     </form>

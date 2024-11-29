@@ -4,9 +4,9 @@
 .create-spot-form {
   display: flex;
   flex-direction: column;
-  min-width: 300px; /* Minimum width for responsiveness */
+  min-width: 300px;
   max-width: 500px;
-  margin: 0 20%; /* Center the form horizontally with space on sides */
+  margin: 0 auto;
   padding: 20px;
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -15,54 +15,8 @@
 }
 
 /* ================================
-   Form Header
+   Select Field Styling
 ================================ */
-h2 {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* ================================
-   Input & Field Styling
-================================ */
-.input-field,
-.textarea-field {
-  width: 95%; /* Almost full width */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  color: #4f4f4f;
-  margin-top: 5px;
-}
-.textarea-field {
-  width: 100%; /* Almost full width */
-  height: 50px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  color: #4f4f4f;
-  margin-top: 5px;
-}
-.input-field:focus,
-.textarea-field:focus {
-  border-color: #b965d7;
-  outline: none; /* Removes default focus outline */
-}
-.textarea-field::placeholder {
-  font-size: 1em;
-  font-style: italic;
-}
-
-/* ================================
-   Image URL Container
-================================ */
-.image-url-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
 .select-field {
   width: 100%;
   border: 1px solid #ccc;
@@ -83,18 +37,43 @@ h2 {
   color: #4f4f4f;
   background-color: #ffffff;
 }
+
 /* ================================
-   Section Styling
+   Input & Text Area Field Styling
 ================================ */
-.section {
-  margin-bottom: 20px;
+.input-field {
+  width: 95%; /* Almost full width */
+  font-size: 1em;
+  color: #4f4f4f;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
 }
 
-.section-divider {
-  border: 0;
-  height: 1px;
-  background-color: #ccc;
-  margin: 20px 0;
+.textarea-field {
+  width: calc(100% - 20px); /* Matches the container padding */
+  min-width: 300px;
+  min-height: 2em;
+  max-width: 480px;
+  height: 10em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #4f4f4f;
+  margin-top: 5px;
+  padding: 8px;
+}
+
+.textarea-field::placeholder {
+  font-size: 1em;
+  font-style: italic;
+  color: #b965d7;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+  border-color: #b965d7;
+  outline: none;
 }
 
 /* ================================
@@ -110,7 +89,24 @@ h2 {
 .lat,
 .long {
   width: calc(50% - 0.5em); /* Each input takes half width minus the gap */
-  margin: 0; /* Ensure no extra margin */
+  margin: 0;
+  font-size: 1rem;
+}
+
+.lat:focus,
+.long:focus {
+  border-color: #b965d7;
+  outline: none;
+}
+
+/* ================================
+   Image URL Container
+================================ */
+.image-url-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 /* ================================
