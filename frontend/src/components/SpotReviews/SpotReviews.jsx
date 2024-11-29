@@ -1,0 +1,96 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { fetchReviews } from "../../store/reviews";
+
+import { formatDate } from "../../utils/reviewUtils";
+
+import { GoStarFill } from "react-icons/go";
+import "./SpotReviews.css";
+
+function Reviews({ spot }) {
+  const dispatch = useDispatch();
+  const { spotId } = useParams();
+
+  const [loading, setLoading] = useState(true);
+  const reviews = useSelector((state) => state.reviews.Reviews);
+  const currentUser = useSelector((state) => state.session.user);
+
+  const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
+  const hasCurrentUserReviewed = reviews?.some(
+    (review) => review.User?.id === currentUser?.id
+  );
+  const canPostReview =
+    currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(fetchReviews(spotId))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, [dispatch, spotId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!reviews) return <div>Review not found.</div>;
+
+  // Sort reviews by updatedAt in descending order (newest first)
+  const sortedReviews = [...reviews].sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  );
+
+  return (
+    <>
+      <div id="section-divider"></div>
+
+      <div id="header">
+        <GoStarFill style={{ fontSize: "1.5em", paddingRight: ".25em" }} />
+
+        {spot?.avgStarRating > 0 ? (
+          <span>{Number(spot?.avgStarRating).toFixed(1)}</span>
+        ) : (
+          <span>New</span>
+        )}
+
+        <p>
+          {spot?.numReviews > 0 && (
+            <>
+              <span style={{ padding: "0 0.5em" }}>•</span>
+              <span>
+                {spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}
+              </span>
+            </>
+          )}
+        </p>
+      </div>
+
+      {canPostReview && (
+        <div>
+          <button id="post-review-button">Post Your Review</button>
+        </div>
+      )}
+
+      <div id="section">
+        {spot?.numReviews > 0 &&
+        !isCurrentUserOwner &&
+        !hasCurrentUserReviewed ? (
+          <p>Be the first to post a review!</p>
+        ) : (
+          <ul className="list">
+            {sortedReviews?.map((review) => (
+              <li key={review.id} className="item">
+                <p>
+                  <strong>{review.User.firstName}</strong>
+                </p>
+                <p className="date">{formatDate(review.updatedAt)}</p>
+                <p>{review.review}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
+  );
+}
+
+export default Reviews;

@@ -1,0 +1,36 @@
+{
+  "name": "pawspot",
+  "version": "1.0.0",
+  "description": "This project highlights my skills in full-stack development and my ability to create user-friendly apps. An online marketplace for short- and long-term pet homestays and experiences, built with a PostgreSQL database, Express for the backend, and React with Redux for the frontend.",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lainey1/pawSpot.git"
+  },
+  "keywords": [
+    "postgres",
+    "express",
+    "react",
+    "redux",
+    "authentication",
+    "modals",
+    "async",
+    "promise",
+    "providers",
+    "context"
+  ],
+  "author": "Lainey Paddock <lainey.code@gmail.com> (https://lainey1.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lainey1/pawSpot/issues"
+  },
+  "homepage": "https://github.com/lainey1/pawSpot#readme"
+}

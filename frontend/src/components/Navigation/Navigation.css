@@ -1,0 +1,188 @@
+/* ================================
+   Site Banner
+================================ */
+#site-banner {
+  position: sticky;
+  top: 0; /* Fixed at top of the viewport */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(100, 100, 111, 0.2);
+  margin: 0 0 1rem 0;
+}
+
+/* ================================
+   Home Page Container
+================================ */
+#logo-banner {
+  display: flex;
+  align-items: center;
+  font-size: 3em;
+  text-decoration: none;
+  color: #b965d7;
+
+  &:hover {
+    color: #6a6a6a;
+    transition: color 0.3s ease;
+  }
+}
+
+.site-name {
+  font-size: 0.75em;
+  font-weight: normal;
+  margin-left: 0.25em;
+  text-decoration: none;
+}
+
+/* ================================
+   Profile Dropdown Container
+================================ */
+#actions-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-link {
+  color: #b965d7;
+  text-decoration: none;
+  padding-right: 1em;
+
+  &:hover {
+    color: #4a90e2;
+  }
+}
+
+/* ================================
+   Profile Dropdown Button
+================================ */
+#profile-dropdown-button {
+  color: #6a6a6a;
+  background: #ffffff;
+
+  padding: 0.5em 1em;
+  border: 1px solid rgba(100, 100, 111, 0.2);
+  box-shadow: 0px 7px 29px rgba(100, 100, 111, 0.2);
+  border-radius: 2.125em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#profile-dropdown-button > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-user {
+  padding-left: 0.25em;
+  font-size: 2.125em;
+}
+
+/* ================================
+   Dropdown Menu
+================================ */
+.profile-dropdown {
+  position: absolute;
+  right: 2rem;
+  z-index: 1;
+  min-width: 12.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 1rem;
+  background: #ffffff;
+  border-radius: 0.625rem;
+  box-shadow: rgba(100, 100, 111, 0.25) 0px 7px 15px 0px;
+  text-align: left;
+}
+
+.profile-dropdown > * {
+  padding-left: 0em;
+  cursor: pointer;
+}
+
+.profile-dropdown.hidden {
+  display: none;
+}
+
+.profile-dropdown ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.profile-dropdown li {
+  display: flex;
+  padding: 1em 1.1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.profile-dropdown li:hover {
+  background-color: #faf7f7;
+}
+
+.profile-text {
+  margin: 1rem;
+}
+
+/* ================================
+   Dropdown Menu Links
+================================ */
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation li {
+  display: inline;
+  padding: 0 1em;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================================
+   Logout Button
+================================ */
+.button-logout {
+  margin: 1em 0 0 1em;
+  width: 80%;
+}
+
+/* ================================
+   Media Queries
+================================ */
+
+/* Small Screens (up to 667px) */
+
+@media (max-width: 667px) {
+  #site-banner {
+    padding: 1em 1em;
+  }
+
+  #logo-banner {
+    font-size: 2em;
+  }
+
+  .site-name {
+    font-size: 0.75em;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: flex-end;
+    font-size: 1em;
+    padding-right: 0.25em;
+  }
+
+  #profile-dropdown-button {
+    font-size: 0.8em;
+  }
+}

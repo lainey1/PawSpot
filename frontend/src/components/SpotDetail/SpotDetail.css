@@ -1,0 +1,138 @@
+/* ================================
+   Spot Page Styles
+================================ */
+.spot-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto; /* Centers the container */
+  padding: 0 15px;
+}
+
+/* ================================
+   Spot Header Styles
+================================ */
+.title {
+  font-size: 2em;
+}
+
+.location {
+  font-weight: bold;
+}
+
+/* ================================
+   Description & Reservation Launcher
+================================ */
+
+#description-reservation-launcher {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.details {
+  max-width: 600px;
+  padding-right: 50px;
+}
+
+.host-info {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* ================================
+   Reservation Launcher
+================================ */
+
+#reservation-launcher {
+  min-width: 300px;
+  max-height: 100px;
+  margin-top: 25px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.5);
+}
+
+#reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 1em;
+}
+
+.price-amount {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+/* ================================
+   Reserve Button
+================================ */
+.reserve-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px #ccc;
+  background-image: linear-gradient(to right, #b965d7, #4a90e2);
+  cursor: pointer;
+}
+
+.reserve-button:hover {
+  background-image: linear-gradient(to right, #4a90e2, #b965d7);
+}
+
+/* ================================
+   Alert message
+================================ */
+.alert-message {
+  margin-left: 10px;
+  font-weight: bold;
+  color: red; /* Alert color */
+}
+
+/* ================================
+   Media Queries
+================================ */
+
+/* Medium Screens (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container-details {
+    margin-left: 15px;
+    flex: 1;
+  }
+
+  #description-reservation-launcher {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .bookit-sidebar {
+    width: 40%;
+    margin-right: 30px;
+  }
+}
+
+/* Small Screens (up to 667px) */
+@media (max-width: 667px) {
+  /* #spot-page {
+    max-width: 90%;
+    padding: 0 25px;
+  } */
+
+  #description-reservation-launcher {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95%;
+  }
+
+  .bookit-sidebar {
+    width: 90%;
+    margin-right: 50px;
+  }
+}
