@@ -1,12 +1,14 @@
-// frontend/src/components/CreateNewSpotForm/CreateNewSpotForm.jsx
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./CreateSpot.css";
 import { useDispatch } from "react-redux";
 import { createNewSpot } from "../../store/spots";
+import "./CreateSpot.css";
 
 const CreateSpot = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // State Hooks
   const [formData, setFormData] = useState({
     country: "",
     address: "",
@@ -21,8 +23,18 @@ const CreateSpot = () => {
     imageUrls: ["", "", "", ""],
   });
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  // Validation helper functions
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.previewImageUrl)
+      newErrors.previewImageUrl = "Preview Image URL is required";
+    if (formData.description.length < 30)
+      newErrors.description = "Description needs 30 or more characters";
+    if (!formData.name) newErrors.name = "Name of your spot is required";
+    if (!formData.price) newErrors.price = "Price per night is required";
+    return newErrors;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,17 +53,6 @@ const CreateSpot = () => {
     }));
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.previewImageUrl)
-      newErrors.previewImageUrl = "Preview Image URL is required";
-    if (formData.description.length < 30)
-      newErrors.description = "Description needs 30 or more characters";
-    if (!formData.name) newErrors.name = "Name of your spot is required";
-    if (!formData.price) newErrors.price = "Price per night is required";
-    return newErrors;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,23 +62,20 @@ const CreateSpot = () => {
       return;
     }
 
-    // ? IS THIS THE BUG ?
     const newSpotData = {
       ...formData,
       lat: parseFloat(formData.lat),
       lng: parseFloat(formData.lng),
       imageUrls: [formData.previewImageUrl, ...formData.imageUrls].filter(
         (url) => url
-      ), // Combine
+      ),
     };
 
     try {
-      const newSpot = await dispatch(createNewSpot(newSpotData));
-      console.log("New spot created:", newSpot); // Log to check what data you have
-      navigate(`/spots/${newSpot.id}`); // Navigate to the new spot's detail page
+      const spotId = await dispatch(createNewSpot(newSpotData)); // ! BUG ID: Await the dispatch to get the spotId
+      navigate(`/spots/${spotId}`);
     } catch (error) {
-      console.log("goodbye");
-      setErrors({ submit: error.message || "An unknown error occurred." });
+      console.error("Failed to create spot:", error);
     }
   };
 

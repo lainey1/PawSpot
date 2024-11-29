@@ -16,6 +16,11 @@ export const loadSpot = (spot) => ({
   spot,
 });
 
+const createSpot = (spot) => ({
+  type: CREATE_SPOT,
+  spot,
+});
+
 // * Thunk Action Creators ****************
 export const fetchSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
@@ -45,7 +50,7 @@ export const fetchSpot = (spotId) => async (dispatch) => {
   }
 };
 
-export const createNewSpot = (spotData) => async (dispatch, getState) => {
+export const createNewSpot = (spotData) => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     body: JSON.stringify(spotData),
@@ -53,16 +58,13 @@ export const createNewSpot = (spotData) => async (dispatch, getState) => {
       "Content-Type": "application/json",
     },
   });
-  console.log("========>Response from server:", response); //?? DEBUGGER
 
   if (response.ok) {
-    const data = await response.json();
-    const existingSpots = getState().spots.list; // Access the existing spots from the state
-    dispatch(loadSpots([...existingSpots, data.spot])); // Update your existing spots here
-    return data;
+    const newSpot = await response.json();
+    dispatch(createSpot(newSpot));
+    return newSpot.id;
   } else {
     const errorData = await response.json();
-    console.error("============>ERROR creating spot:", errorData);
     return Promise.reject(errorData);
   }
 };
@@ -79,10 +81,7 @@ const spotsReducer = (state = initialState, action) => {
       return { ...state.entries, currentSpot: action.spot };
 
     case CREATE_SPOT:
-      return {
-        ...state,
-        list: [...state, action.spot],
-      };
+      return { ...state.entries, currentSpot: action.spot };
 
     case "spots/LOAD_START":
       return {
