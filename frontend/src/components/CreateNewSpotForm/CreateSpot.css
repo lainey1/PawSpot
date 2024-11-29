@@ -109,6 +109,11 @@
   margin: 0;
 }
 
+.lat::placeholder,
+.long::placeholder {
+  color: #ffffff;
+}
+
 .lat:focus,
 .long:focus {
   border-color: #b965d7;
