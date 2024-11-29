@@ -16,11 +16,6 @@ export const loadSpot = (spot) => ({
   spot,
 });
 
-const createSpot = (spot) => ({
-  type: CREATE_SPOT,
-  spot,
-});
-
 // * Thunk Action Creators ****************
 export const fetchSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
@@ -50,7 +45,7 @@ export const fetchSpot = (spotId) => async (dispatch) => {
   }
 };
 
-export const createNewSpot = (spotData) => async (dispatch) => {
+export const createNewSpot = (spotData) => async (dispatch, getState) => {
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     body: JSON.stringify(spotData),
@@ -58,20 +53,17 @@ export const createNewSpot = (spotData) => async (dispatch) => {
       "Content-Type": "application/json",
     },
   });
-
-  console.log("========>Response from server:", response);
+  console.log("========>Response from server:", response); //?? DEBUGGER
 
   if (response.ok) {
     const data = await response.json();
-    // const existingSpots = getState().spots.list;
-    dispatch(createSpot(data));
-    // dispatch(loadSpots([...existingSpots, data.spot]));
-
+    const existingSpots = getState().spots.list; // Access the existing spots from the state
+    dispatch(loadSpots([...existingSpots, data.spot])); // Update your existing spots here
     return data;
   } else {
     const errorData = await response.json();
-    return console.log(errorData);
-    // return Promise.reject(errorData);
+    console.error("============>ERROR creating spot:", errorData);
+    return Promise.reject(errorData);
   }
 };
 
