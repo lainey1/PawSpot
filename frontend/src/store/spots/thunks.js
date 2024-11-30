@@ -59,6 +59,7 @@ export const editSpot = (spotId, updatedData) => async (dispatch) => {
   if (response.ok) {
     const updatedSpot = await response.json();
     dispatch(updateSpot(updatedSpot));
+    return updatedSpot.id;
   }
 };
 

@@ -20,15 +20,18 @@ const spotsReducer = (state = initialState, action) => {
       return { ...state, currentSpot: action.spot };
 
     case CREATE_SPOT:
-      return { ...state, entries: [...state.entries, action.spot] };
+      return { ...state, ...action.spots };
 
-    case UPDATE_SPOT:
+    case UPDATE_SPOT: {
       return {
         ...state,
-        entries: state.entries.map((spot) =>
-          spot.id === action.spot.id ? action.spot : spot
-        ),
+        spots: state.spots
+          ? state.spots.map((spot) =>
+              spot.id === action.spot.id ? action.spot : spot
+            )
+          : [],
       };
+    }
 
     case DELETE_SPOT:
       return {
