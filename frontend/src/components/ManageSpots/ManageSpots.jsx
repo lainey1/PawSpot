@@ -33,13 +33,17 @@ function ManageSpots() {
     <div className="manage-spots-page">
       <div className="header">
         <h1>Manage Your Spots</h1>
+        <p>
+          Click a spot&apos;s image to view its public listing, or use the
+          buttons below to update or delete the spot.
+        </p>
       </div>
 
       {!userSpots.length ? (
         <button
           id="create-spot-button"
           onClick={() => {
-            navigate("/spots/create-spot");
+            navigate("/spots/new");
           }}
         >
           Create a New Spot
@@ -82,7 +86,14 @@ function ManageSpots() {
                 </p>
               </div>
               <span id="manage-buttons">
-                <button>Update</button>
+                <button
+                  id="create-spot-button"
+                  onClick={() => {
+                    navigate(`/spots/${spot.id}/edit`);
+                  }}
+                >
+                  Update
+                </button>
                 <button>Delete</button>
               </span>
             </div>

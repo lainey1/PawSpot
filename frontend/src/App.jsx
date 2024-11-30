@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import Navigation from "./components/Navigation";
 import SpotsList from "./components/SpotsList";
 import SpotDetail from "./components/SpotDetail";
-import CreateSpot from "./components/CreateNewSpotForm";
+import ManageSpots from "./components/ManageSpots";
+import CreateSpot from "./components/FormPages/CreateSpot";
+import UpdateSpot from "./components/FormPages/UpdateSpot";
 
 import * as sessionActions from "./store/session";
-import ManageSpots from "./components/ManageSpots";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -41,11 +42,15 @@ const router = createBrowserRouter([
         element: <SpotDetail />,
       },
       {
-        path: "/spots/create-spot",
+        path: "/spots/new",
         element: <CreateSpot />,
       },
       {
-        path: "/manage-spots",
+        path: "/spots/:spotId/edit",
+        element: <UpdateSpot />,
+      },
+      {
+        path: "/spots/manage",
         element: <ManageSpots />,
       },
     ],

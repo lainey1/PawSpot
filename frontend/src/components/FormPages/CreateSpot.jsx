@@ -1,14 +1,17 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { fetchSpot } from "../../store/spots";
 import { createNewSpot } from "../../store/spots";
-import "./CreateSpot.css";
+import "./FormPages.css";
 
-const CreateSpot = () => {
+const UpdateSpot = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { spotId } = useParams();
 
   // State Hooks
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     country: "",
     address: "",
@@ -23,27 +26,34 @@ const CreateSpot = () => {
     imageUrls: ["", "", "", ""],
   });
   const [errors, setErrors] = useState({});
-  // const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(fetchSpot(spotId))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, [dispatch, spotId]);
 
   // Validation helper functions
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.previewImageUrl) {
-      newErrors.previewImageUrl = "Preview Image URL is required";
-    }
-
-    if (!formData.description || formData.description.length < 30) {
+    if (!formData.country) newErrors.country = "Country is required";
+    if (!formData.address) newErrors.address = "Address is required";
+    if (!formData.city) newErrors.city = "City is required";
+    if (!formData.state) newErrors.state = "State is required";
+    if (!formData.name) newErrors.name = "Name of your spot is required";
+    if (!formData.description || formData.description.length < 30)
       newErrors.description = "Description needs 30 or more characters";
-    }
-    if (!formData.name) {
-      newErrors.name = "Name of your spot is required";
-    }
+
     if (!formData.price) {
       newErrors.price = "Price per night is required";
-    } else if (isNaN(parseFloat(formData.price))) {
-      newErrors.price = "Price must be a number";
+    } else if (isNaN(Number(formData.price))) {
+      newErrors.price = "Price must be a valid number";
     }
+
+    if (!formData.previewImageUrl.trim())
+      newErrors.previewImageUrl = "Preview Image URL is required";
 
     return newErrors;
   };
@@ -52,7 +62,7 @@ const CreateSpot = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value.trimStart(),
     }));
   };
 
@@ -78,6 +88,7 @@ const CreateSpot = () => {
       ...formData,
       lat: parseFloat(formData.lat),
       lng: parseFloat(formData.lng),
+      price: parseFloat(formData.price),
       imageUrls: [formData.previewImageUrl, ...formData.imageUrls].filter(
         (url) => url
       ),
@@ -91,21 +102,7 @@ const CreateSpot = () => {
     }
   };
 
-  // // Check if all required fields have valid input
-  // useEffect(() => {
-  //   const isValid =
-  //     !!formData.previewImageUrl &&
-  //     formData.description.length >= 30 &&
-  //     !!formData.name &&
-  //     !!formData.price &&
-  //     !isNaN(parseFloat(formData.price)) &&
-  //     !!formData.country &&
-  //     !!formData.address &&
-  //     !!formData.city &&
-  //     !!formData.state;
-
-  //   setFormIsValid(isValid);
-  // }, [formData]);
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div id="create-spot-container">
@@ -248,11 +245,18 @@ const CreateSpot = () => {
             className="input-field"
             type="number"
             name="price"
+            step="0.01"
             value={formData.price}
-            onChange={handleInputChange}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                price: parseFloat(e.target.value) || "",
+              }))
+            }
             placeholder="Price per night (USD)"
             required
           />
+
           {errors.price && <p className="error-message">{errors.price}</p>}
         </section>
 
@@ -272,6 +276,7 @@ const CreateSpot = () => {
             {errors.previewImageUrl && (
               <p className="error-message">{errors.previewImageUrl}</p>
             )}
+
             {formData.imageUrls.map((url, index) => (
               <input
                 key={index}
@@ -290,4 +295,4 @@ const CreateSpot = () => {
   );
 };
 
-export default CreateSpot;
+export default UpdateSpot;

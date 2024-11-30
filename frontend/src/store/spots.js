@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = "/spots/LOAD_SPOTS";
 const LOAD_SPOT = "/spots/LOAD_SPOT";
 const CREATE_SPOT = "/spots/CREATE";
+const UPDATE_SPOT = "/spots/UPDATE";
 
 // * Action Creators **********************
 export const loadSpots = (spots) => ({
@@ -18,6 +19,11 @@ export const loadSpot = (spot) => ({
 
 const createSpot = (spot) => ({
   type: CREATE_SPOT,
+  spot,
+});
+
+const updateSpot = (spot) => ({
+  type: UPDATE_SPOT,
   spot,
 });
 
@@ -69,6 +75,30 @@ export const createNewSpot = (spotData) => async (dispatch) => {
   }
 };
 
+export const editSpot = (spotId, updatedData) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (response.ok) {
+      const updatedSpot = await response.json();
+      dispatch(updateSpot(updatedSpot));
+      return updatedSpot;
+    } else {
+      const errors = await response.json();
+      return Promise.reject(errors);
+    }
+  } catch (error) {
+    console.error("Error updating spot:", error);
+    return Promise.reject(error);
+  }
+};
+
 // * Reducers ***************************
 const initialState = { entries: [], currentSpot: {} };
 
@@ -82,6 +112,20 @@ const spotsReducer = (state = initialState, action) => {
 
     case CREATE_SPOT:
       return { ...state.entries, currentSpot: action.spot };
+
+    case UPDATE_SPOT:
+      return {
+        ...state,
+        entries: Array.isArray(state.entries)
+          ? state.entries.map((spot) =>
+              spot.id === action.spot.id ? action.spot : spot
+            )
+          : [],
+        currentSpot:
+          action.spot.id === state.currentSpot.id
+            ? action.spot
+            : state.currentSpot,
+      };
 
     case "spots/LOAD_START":
       return {

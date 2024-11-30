@@ -6,19 +6,6 @@
   margin: 0 5%;
 }
 
-/* Individual Spot Tile */
-.spot-tile {
-  display: flex; /* Use flexbox for vertical alignment */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: space-between; /* Push details to the bottom */
-  position: relative;
-  height: 100%; /* Ensure all tiles are the same height */
-  text-align: center;
-  background: #ffffff;
-  overflow: hidden;
-  transition: box-shadow 0.3s;
-}
-
 .spot-tile:hover .spot-name {
   opacity: 1;
 }

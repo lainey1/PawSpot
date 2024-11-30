@@ -15,7 +15,7 @@ module.exports = {
       [
         {
           spotId: 1,
-          userId: 1, // Demo-lition
+          userId: 7, // purrfect_escape
           review:
             "Paw-sitively delightful! I could chase my tail all day here! The trailers are cozy, and the ambiance is just purr-fect for a relaxing getaway with my human. Every moment was filled with joy and wagging tails!",
           stars: 5,
@@ -64,7 +64,7 @@ module.exports = {
         },
         {
           spotId: 2,
-          userId: 1,
+          userId: 8,
           review:
             "Not worth the kibble I paid. I’ll stick to my favorite spot! While the environment was pleasant, I expected a bit more excitement for my adventures. My human said we’ll keep looking for better places!",
           stars: 2,
@@ -113,7 +113,7 @@ module.exports = {
         },
         {
           spotId: 2,
-          userId: 1,
+          userId: 7,
           review:
             "What a tranquil spot! My pup and I enjoyed long walks through the beautiful nature trails. The peaceful atmosphere was perfect for unwinding after a day of exploring. Can't wait to return for more outdoor adventures!",
           stars: 5,

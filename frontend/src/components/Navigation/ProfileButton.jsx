@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
           <div className="profile-text">
             <p>Hello, {user.username}</p>
             <p>{user.email}</p>
-            <NavLink to="/manage-spots" className="nav-link">
+            <NavLink to="/spots/manage" className="nav-link">
               Manage Spots
             </NavLink>
 

@@ -71,10 +71,8 @@ function Reviews({ spot }) {
       )}
 
       <div id="section">
-        {spot?.numReviews > 0 &&
-        !isCurrentUserOwner &&
-        !hasCurrentUserReviewed ? (
-          <p>Be the first to post a review!</p>
+        {spot?.numReviews === 0 ? (
+          !isCurrentUserOwner && <p>Be the first to post a review!</p>
         ) : (
           <ul className="list">
             {sortedReviews?.map((review) => (
