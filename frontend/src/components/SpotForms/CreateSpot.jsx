@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchSpot } from "../../store/spots";
 import { createNewSpot } from "../../store/spots";
-import "./FormPages.css";
+import "./spotForms.css";
 
 const UpdateSpot = () => {
   const dispatch = useDispatch();

@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
 import { fetchReviews } from "../../store/reviews";
-
 import { formatDate } from "../../utils/reviewUtils";
-
 import { GoStarFill } from "react-icons/go";
 import "./SpotReviews.css";
 

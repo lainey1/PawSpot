@@ -1,6 +1,6 @@
 import { GoStarFill } from "react-icons/go";
 
-function ReservationLauncher({ spot, onReserveClick }) {
+function BookingLauncher({ spot, onReserveClick }) {
   return (
     <div id="reservation-launcher">
       <div id="reservation-header">
@@ -34,4 +34,4 @@ function ReservationLauncher({ spot, onReserveClick }) {
   );
 }
 
-export default ReservationLauncher;
+export default BookingLauncher;

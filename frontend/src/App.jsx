@@ -2,14 +2,12 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
-import Navigation from "./components/Navigation";
+import * as sessionActions from "./store/session";
+
+import { Navigation, CreateSpot, UpdateSpot } from "./components";
 import SpotsList from "./components/SpotsList";
 import SpotDetail from "./components/SpotDetail";
 import ManageSpots from "./components/ManageSpots";
-import CreateSpot from "./components/FormPages/CreateSpot";
-import UpdateSpot from "./components/FormPages/UpdateSpot";
-
-import * as sessionActions from "./store/session";
 
 function Layout() {
   const dispatch = useDispatch();

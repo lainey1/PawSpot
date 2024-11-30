@@ -1,3 +1,2 @@
-import Navigation from "./Navigation";
-
-export default Navigation;
+export { default as Navigation } from "./Navigation";
+export { default as ProfileButton } from "./ProfileButton";

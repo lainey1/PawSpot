@@ -4,8 +4,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "../OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignUpFormModal from "../SignUpFormPage/SignUpFormModal";
+import { LoginFormModal, SignUpFormModal } from "../SessionModals";
 
 import "./Navigation.css";
 import { FaUserCircle } from "react-icons/fa";

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpot } from "../../store/spots";
-import { createNewSpot } from "../../store/spots";
-import "./FormPages.css";
+import { fetchSpot, editSpot } from "../../store/spots";
+import "./spotForms.css";
 
 const UpdateSpot = () => {
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ const UpdateSpot = () => {
         name: spot.name || "",
         description: spot.description || "",
         price: spot.price || "",
-        previewImageUrl: spot.previewImageUrl || "",
+        // previewImageUrl: spot.previewImageUrl || "",
         imageUrls: spot.imageUrls || ["", "", "", ""],
       });
     }
@@ -67,12 +66,13 @@ const UpdateSpot = () => {
     if (!formData.description || formData.description.length < 30)
       newErrors.description = "Description needs 30 or more characters";
 
-    !formData.price
-      ? (newErrors.price = "Price per night is required")
-      : isNaN(parseFloat(formData.price));
-    newErrors.price = "Price must be a number";
+    if (!formData.price) {
+      newErrors.price = "Price per night is required";
+    } else if (isNaN(Number(formData.price))) {
+      newErrors.price = "Price must be a valid number";
+    }
 
-    if (!formData.previewImageUrl)
+    if (!formData.previewImageUrl.trim())
       newErrors.previewImageUrl = "Preview Image URL is required";
 
     return newErrors;
@@ -82,7 +82,7 @@ const UpdateSpot = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value.trimStart(),
     }));
   };
 
@@ -104,20 +104,21 @@ const UpdateSpot = () => {
       return;
     }
 
-    const newSpotData = {
+    const updatedSpotData = {
       ...formData,
       lat: parseFloat(formData.lat),
       lng: parseFloat(formData.lng),
+      price: parseFloat(formData.price),
       imageUrls: [formData.previewImageUrl, ...formData.imageUrls].filter(
         (url) => url
       ),
     };
 
     try {
-      const spotId = await dispatch(createNewSpot(newSpotData)); // ! BUG ID: Await the dispatch to get the spotId
-      navigate(`/spots/${spotId}`);
+      const updatedSpot = await dispatch(editSpot(spotId, updatedSpotData));
+      navigate(`/spots/${updatedSpot.id}`);
     } catch (error) {
-      console.error("Failed to create spot:", error);
+      console.error("Failed to update spot:", error);
     }
   };
 
@@ -264,11 +265,18 @@ const UpdateSpot = () => {
             className="input-field"
             type="number"
             name="price"
+            step="0.01"
             value={formData.price}
-            onChange={handleInputChange}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                price: parseFloat(e.target.value) || "",
+              }))
+            }
             placeholder="Price per night (USD)"
             required
           />
+
           {errors.price && <p className="error-message">{errors.price}</p>}
         </section>
 
@@ -281,7 +289,7 @@ const UpdateSpot = () => {
               className="input-field"
               name="previewImageUrl"
               value={formData.previewImageUrl}
-              onChange={handleImageChange}
+              onChange={handleInputChange}
               placeholder="Required: Preview Image URL"
             />
 

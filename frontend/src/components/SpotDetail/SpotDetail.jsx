@@ -5,11 +5,9 @@ import { useParams } from "react-router-dom";
 import { fetchSpot } from "../../store/spots";
 
 import SpotHeader from "./SpotHeader";
-import ImagesContainer from "../ImagesContainer";
-import Reviews from "../SpotReviews";
-
-import "./SpotDetail.css";
-import ReservationLauncher from "./ReservationLauncher";
+import ImagesContainer from "../ImagesContainer/ImagesContainer";
+import BookingLauncher from "../BookingLauncher/BookingLauncher";
+import Reviews from "../SpotReviews/SpotReviews";
 
 function SpotDetail() {
   const dispatch = useDispatch();
@@ -43,10 +41,7 @@ function SpotDetail() {
             </p>
             <p>{spot?.description}</p>
           </div>
-          <ReservationLauncher
-            spot={spot}
-            onReserveClick={handleReserveClick}
-          />
+          <BookingLauncher spot={spot} onReserveClick={handleReserveClick} />
         </span>
       </div>
       <Reviews spot={spot} />
