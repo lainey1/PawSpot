@@ -9,6 +9,8 @@ import ImagesContainer from "../ImagesContainer/ImagesContainer";
 import BookingLauncher from "../BookingLauncher/BookingLauncher";
 import Reviews from "../SpotReviews/SpotReviews";
 
+import "./spotDetail.css";
+
 function SpotDetail() {
   const dispatch = useDispatch();
   const { spotId } = useParams();

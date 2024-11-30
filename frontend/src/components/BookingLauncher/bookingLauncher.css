@@ -1,0 +1,54 @@
+/* ================================
+   Reservation Launcher
+================================ */
+
+#booking-launcher {
+  min-width: 300px;
+  max-height: 100px;
+  margin-top: 25px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0.1, 0.1, 0.5);
+}
+
+#booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 1em;
+}
+
+.boooking-amount {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+/* ================================
+     Reserve Button
+  ================================ */
+.booking-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px #ccc;
+  background-image: linear-gradient(to right, #b965d7, #4a90e2);
+  cursor: pointer;
+}
+
+.booking-button:hover {
+  background-image: linear-gradient(to right, #4a90e2, #b965d7);
+}
+
+/* ================================
+     Alert message
+  ================================ */
+.alert-message {
+  margin-left: 10px;
+  font-weight: bold;
+  color: red; /* Alert color */
+}

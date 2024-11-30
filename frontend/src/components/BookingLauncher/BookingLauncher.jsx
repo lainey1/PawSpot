@@ -1,9 +1,11 @@
+import "./bookingLauncher.css";
+
 import { GoStarFill } from "react-icons/go";
 
 function BookingLauncher({ spot, onReserveClick }) {
   return (
-    <div id="reservation-launcher">
-      <div id="reservation-header">
+    <div id="booking-launcher">
+      <div id="booking-header">
         <div>
           <span className="price-amount">${Number(spot.price).toFixed(2)}</span>
           <span> night</span>
