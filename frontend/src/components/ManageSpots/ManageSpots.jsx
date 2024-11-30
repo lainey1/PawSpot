@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 
-import { fetchSpots } from "../../store/spots";
+import { fetchSpots } from "../../store/spots/thunks";
 
 import "./ManageSpots.css";
 

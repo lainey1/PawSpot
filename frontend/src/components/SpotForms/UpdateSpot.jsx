@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpot, editSpot } from "../../store/spots";
+import { fetchSpot, editSpot } from "../../store/spots/thunks";
 import "./spotForms.css";
 
 const UpdateSpot = () => {

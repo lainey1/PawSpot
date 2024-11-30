@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { fetchSpot } from "../../store/spots";
+import { fetchSpot } from "../../store/spots/thunks";
 
 import SpotHeader from "./SpotHeader";
 import ImagesContainer from "../ImagesContainer/ImagesContainer";

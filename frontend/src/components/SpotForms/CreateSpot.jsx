@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchSpot } from "../../store/spots";
-import { createNewSpot } from "../../store/spots";
+import { fetchSpot, createNewSpot } from "../../store/spots/thunks";
+
 import "./spotForms.css";
 
 const UpdateSpot = () => {
@@ -95,8 +95,9 @@ const UpdateSpot = () => {
     };
 
     try {
-      const spotId = await dispatch(createNewSpot(newSpotData)); // ! BUG ID: Await the dispatch to get the spotId
-      navigate(`/spots/${spotId}`);
+      // Await the dispatch to get the spotId returned from createNewSpot
+      const spotId = await dispatch(createNewSpot(newSpotData)); // Ensure this returns the ID
+      navigate(`/spots/${spotId}`); // Use the returned spotId for navigation
     } catch (error) {
       console.error("Failed to create spot:", error);
     }
