@@ -1,5 +1,3 @@
-import "./spotForms.css";
-
 const DeleteSpot = () => {
   return (
     <div>

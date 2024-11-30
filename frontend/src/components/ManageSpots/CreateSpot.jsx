@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchSpot, createNewSpot } from "../../store/spots/thunks";
 
-import "./spotForms.css";
+import "./Form.css";
 
 const UpdateSpot = () => {
   const dispatch = useDispatch();
@@ -106,8 +106,8 @@ const UpdateSpot = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div id="create-spot-container">
-      <form onSubmit={handleSubmit} className="create-spot-form">
+    <div>
+      <form onSubmit={handleSubmit} className="form">
         <h1>Create a New Spot</h1>
 
         <section>

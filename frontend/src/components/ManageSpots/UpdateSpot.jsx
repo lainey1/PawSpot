@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSpot, editSpot } from "../../store/spots/thunks";
-import "./spotForms.css";
+import "./Form.css";
 
 const UpdateSpot = () => {
   const dispatch = useDispatch();
@@ -125,8 +125,8 @@ const UpdateSpot = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div id="create-spot-container">
-      <form onSubmit={handleSubmit} className="create-spot-form">
+    <div>
+      <form onSubmit={handleSubmit} className="form">
         <h1>Update Your Spot</h1>
 
         <section>

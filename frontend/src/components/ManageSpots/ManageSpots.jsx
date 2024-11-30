@@ -87,14 +87,19 @@ function ManageSpots() {
               </div>
               <span id="manage-buttons">
                 <button
-                  id="create-spot-button"
                   onClick={() => {
                     navigate(`/spots/${spot.id}/edit`);
                   }}
                 >
                   Update
                 </button>
-                <button>Delete</button>
+                <button
+                  onClick={() => {
+                    navigate(`/spots/${spot.id}/delete`);
+                  }}
+                >
+                  Delete
+                </button>
               </span>
             </div>
           ))}
