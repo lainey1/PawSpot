@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 
-import { fetchSpots } from "../../store/spots/thunks";
+import { fetchSpotsList } from "../../store/spots/thunks";
 
 import "./ManageSpots.css";
 
@@ -21,7 +21,7 @@ function ManageSpots() {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchSpots())
+    dispatch(fetchSpotsList())
       .then(() => setLoading(false))
       .catch(() => setLoading(false));
   }, [dispatch]);

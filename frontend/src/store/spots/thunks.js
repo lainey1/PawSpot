@@ -10,7 +10,7 @@ import {
   deleteSpot,
 } from "./actions";
 
-export const fetchSpots = () => async (dispatch) => {
+export const fetchSpotsList = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   if (response.ok) {
     const spots = await response.json();

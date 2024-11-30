@@ -9,12 +9,12 @@ import {
   DELETE_SPOT,
 } from "./types";
 
-const initialState = { entries: [], currentSpot: {} };
+const initialState = { currentSpot: {} };
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SPOTS:
-      return { ...state, entries: action.spots };
+      return { ...state, ...action.spots };
 
     case LOAD_SPOT:
       return { ...state, currentSpot: action.spot };

@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
-import { fetchSpots } from "../../store/spots/thunks";
+import { fetchSpotsList } from "../../store/spots/thunks";
 import "./SpotsList.css";
 
 const SpotsList = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.Spots);
+  console.log("Fetched spots:", spots); // Log to see if the spots are being fetched correctly
 
   useEffect(() => {
-    dispatch(fetchSpots());
+    dispatch(fetchSpotsList());
   }, [dispatch]);
 
   return (
