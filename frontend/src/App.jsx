@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 
 import * as sessionActions from "./store/session";
 
-import { Navigation, CreateSpot, UpdateSpot } from "./components";
+import { Navigation } from "./components/Navigation";
 import SpotsList from "./components/SpotsList";
 import SpotDetail from "./components/SpotDetail";
-import ManageSpots from "./components/ManageSpots";
+import {
+  ManageSpots,
+  CreateSpot,
+  UpdateSpot,
+  DeleteSpot,
+} from "./components/ManageSpots";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -44,12 +49,20 @@ const router = createBrowserRouter([
         element: <CreateSpot />,
       },
       {
+        path: "/spots/manage",
+        element: <ManageSpots />,
+      },
+      {
         path: "/spots/:spotId/edit",
         element: <UpdateSpot />,
       },
       {
-        path: "/spots/manage",
-        element: <ManageSpots />,
+        path: "/spots/:spotId/delete",
+        element: <DeleteSpot />,
+      },
+      {
+        path: "*",
+        element: <h2>Page does not exist</h2>,
       },
     ],
   },
