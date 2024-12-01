@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import DeleteSpot from "./DeleteSpot";
 import { fetchSpotsList } from "../../store/spots/thunks";
 
 import "./ManageSpots.css";
@@ -11,13 +13,12 @@ function ManageSpots() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(true);
   const spots = useSelector((state) => state.spots.Spots);
   console.log(spots);
   const currentUser = useSelector((state) => state.session.user);
+  const [loading, setLoading] = useState(true);
 
   const userSpots = spots?.filter((spot) => spot.ownerId === currentUser.id);
-  console.log(userSpots);
 
   useEffect(() => {
     setLoading(true);
@@ -85,21 +86,20 @@ function ManageSpots() {
                   <strong>${spot.price.toFixed(2)}</strong> night
                 </p>
               </div>
-              <span id="manage-buttons">
+              <span className="button-wrapper">
                 <button
+                  className="update-button"
                   onClick={() => {
                     navigate(`/spots/${spot.id}/edit`);
                   }}
                 >
                   Update
                 </button>
-                <button
-                  onClick={() => {
-                    navigate(`/spots/${spot.id}/delete`);
-                  }}
-                >
-                  Delete
-                </button>
+                <OpenModalButton
+                  buttonText={"Delete"}
+                  modalComponent={<DeleteSpot spotId={spot.id} />}
+                  className="delete-button"
+                />
               </span>
             </div>
           ))}

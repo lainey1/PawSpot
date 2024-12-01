@@ -25,7 +25,13 @@
   margin-bottom: 1em;
 }
 
-#manage-buttons > * {
+.button-wrapper {
   display: flex;
-  width: 100%;
+  justify-content: space-between;
+  gap: 0.3em;
+  width: 100%; /* Ensures the buttons share the same width */
+}
+
+.button-wrapper > * {
+  flex: 1;
 }
