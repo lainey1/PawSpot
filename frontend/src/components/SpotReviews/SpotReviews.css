@@ -10,7 +10,7 @@
   border-bottom: 1px solid #ccc;
 }
 
-.post-review-button {
+.review-button {
   max-width: 200px; /* Adjust the width limit as needed */
   width: 100%; /* Makes the button responsive within the max-width */
   padding: 10px;

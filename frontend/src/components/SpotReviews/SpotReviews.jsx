@@ -59,7 +59,7 @@ function Reviews({ spot }) {
             modalComponent={
               <CreateReview spotId={spotId} reviewId={reviews.id} />
             }
-            className="post-review-button"
+            className="review-button"
           />
         </div>
       )}
@@ -85,7 +85,7 @@ function Reviews({ spot }) {
                     modalComponent={
                       <DeleteReview reviewId={review.id} spotId={spot.id} />
                     }
-                    className="delete-button"
+                    className="review-button"
                   />
                 )}
               </li>
