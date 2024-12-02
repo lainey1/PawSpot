@@ -8,8 +8,8 @@
   transform: translateX(-50%); /* Adjusts centering based on its own width */
   display: flex;
   flex-direction: column;
-  min-width: 300px;
-  width: 80%;
+
+  width: 400px;
   margin: 0; /* No margin, as it's fixed */
   z-index: 1001; /* Ensure it's above the banner */
   background-color: white;
