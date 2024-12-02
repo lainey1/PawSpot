@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
-import CreateReview from "../SpotReviews/CreateReview";
+import { CreateReview, DeleteReview } from "../SpotReviews";
 import { fetchReviews } from "../../store/reviews/thunks";
 import { useReviewPermissions } from "../../hooks/useReviewPermissions";
 
@@ -15,7 +15,7 @@ import {
 } from "../../utils/reviewUtils";
 
 import { GoStarFill } from "react-icons/go";
-import "./SpotReviews.css";
+import "./spotReviews.css";
 
 function Reviews({ spot }) {
   const dispatch = useDispatch();
@@ -56,7 +56,9 @@ function Reviews({ spot }) {
         <div>
           <OpenModalButton
             buttonText={"Post Your Review"}
-            modalComponent={<CreateReview spotId={spotId} />}
+            modalComponent={
+              <CreateReview spotId={spotId} reviewId={reviews.id} />
+            }
             className="post-review-button"
           />
         </div>
@@ -71,7 +73,22 @@ function Reviews({ spot }) {
           )
         ) : (
           <ul className="list">
-            {renderReviewList(sortedReviews, formatDate)}
+            {sortedReviews.map((review) => (
+              <li key={review.id} className="review-item">
+                <div className="review-content">
+                  {renderReviewList([review], formatDate)}
+                </div>
+                {review.userId === currentUser.id && (
+                  <OpenModalButton
+                    buttonText={"Delete"}
+                    modalComponent={
+                      <DeleteReview reviewId={review.id} spotId={spot.id} />
+                    }
+                    className="delete-button"
+                  />
+                )}
+              </li>
+            ))}
           </ul>
         )}
       </div>

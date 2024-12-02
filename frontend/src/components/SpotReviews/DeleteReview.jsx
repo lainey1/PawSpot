@@ -1,36 +1,40 @@
 import { useDispatch } from "react-redux";
-import { deleteSpotThunk, fetchSpotsList } from "../../store/spots/thunks";
+import { deleteReview, fetchReviews } from "../../store/reviews/thunks";
+import { fetchSpot } from "../../store/spots/thunks";
 import { useModal } from "../../context/Modal";
-import "./deleteSpot.css";
+import "./deleteReview.css";
 
-const DeleteSpot = ({ spotId }) => {
+const DeleteReview = ({ reviewId, spotId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const confirmDelete = (e) => {
     e.preventDefault();
-    dispatch(deleteSpotThunk(spotId))
-      .then(() => dispatch(fetchSpotsList()))
+    dispatch(deleteReview(reviewId))
+      .then(() => {
+        dispatch(fetchReviews(spotId)); // Re-fetch reviews after deletion
+        dispatch(fetchSpot(spotId)); // Re-fetch the spot details
+      })
       .then(() => closeModal());
   };
 
   const cancelDelete = (e) => {
     e.preventDefault();
-    closeModal(); // Close modal if user cancels
+    closeModal();
   };
 
   return (
-    <div id="delete-spot-form">
+    <div id="delete-review-form">
       <h1>Confirm Delete</h1>
-      <p>Are you sure you want to remove this spot?</p>
+      <p>Are you sure you want to delete this review?</p>
       <button onClick={confirmDelete} className="confirm-delete">
-        Yes (Delete Spot)
+        Yes (Delete Review)
       </button>
       <button onClick={cancelDelete} className="cancel-delete">
-        No (Keep Spot)
+        No (Keep Review)
       </button>
     </div>
   );
 };
 
-export default DeleteSpot;
+export default DeleteReview;
