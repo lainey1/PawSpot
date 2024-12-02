@@ -18,7 +18,6 @@ export const fetchReviews = (spotId) => async (dispatch) => {
       throw new Error("Failed to fetch reviews");
     }
     const reviews = await response.json();
-    console.log(reviews);
     dispatch(loadReviews(reviews));
   } catch (error) {
     console.error("Error fetching reviews:", error.message);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewReview } from "../../store/reviews/thunks";
+import { createNewReview, fetchReviews } from "../../store/reviews/thunks";
 import { useNavigate, useParams } from "react-router-dom";
 import "./createReview.css";
 
@@ -14,6 +14,25 @@ const CreateReview = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [errors, setErrors] = useState("");
   const userId = useSelector((state) => state.session.user.id);
+  const reviews = useSelector((state) => state.reviews.Reviews);
+
+  // Check if the user already has a review for this spot
+  useEffect(() => {
+    // Fetch the reviews for the specific spot when the component mounts
+    dispatch(fetchReviews(spotId));
+  }, [dispatch, spotId]);
+
+  useEffect(() => {
+    // Check if the user already has a review for this spot
+    const existingReview = reviews?.find(
+      (rev) => rev.userId === userId && rev.spotId === Number(spotId)
+    );
+    if (existingReview) {
+      setErrors("Review already exists for this spot.");
+    } else {
+      setErrors("");
+    }
+  }, [reviews, userId, spotId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +46,6 @@ const CreateReview = () => {
         })
         .catch((error) => {
           console.error("Error creating review:", error);
-          // Optional: Show an error message to the user
         });
     }
   };
