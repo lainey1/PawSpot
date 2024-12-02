@@ -59,7 +59,7 @@ function Reviews({ spot }) {
             modalComponent={
               <CreateReview spotId={spotId} reviewId={reviews.id} />
             }
-            className="post-review-button"
+            className="review-button"
           />
         </div>
       )}
@@ -78,13 +78,14 @@ function Reviews({ spot }) {
                 <div className="review-content">
                   {renderReviewList([review], formatDate)}
                 </div>
-                {review.userId === currentUser.id && (
+
+                {review?.userId === currentUser?.id && (
                   <OpenModalButton
                     buttonText={"Delete"}
                     modalComponent={
                       <DeleteReview reviewId={review.id} spotId={spot.id} />
                     }
-                    className="delete-button"
+                    className="review-button"
                   />
                 )}
               </li>

@@ -2,18 +2,27 @@
    Session Form
 ================================ */
 .session-form {
+  position: fixed;
+  top: 25%;
+  left: 50%; /* Centers the modal horizontally */
+  transform: translateX(-50%); /* Adjusts centering based on its own width */
   display: flex;
   flex-direction: column;
-  min-width: 300px;
-  width: 80%;
-  margin-left: 1em;
-  margin-right: 1em;
+
+  width: 400px;
+  margin: 0; /* No margin, as it's fixed */
+  z-index: 1001; /* Ensure it's above the banner */
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(100, 100, 111, 0.2);
+  border-radius: 4px;
+  padding: 1rem;
 }
 
 /* Media query for smaller screens (phones) */
 @media screen and (max-width: 600px) {
   .session-form {
-    width: 90%; /* Increase width for better use of space */
+    width: 80%; /* Increase width for better use of space */
     margin-left: 0.5em; /* Reduced margin for smaller screens */
     margin-right: 0.5em; /* Reduced margin for smaller screens */
   }
