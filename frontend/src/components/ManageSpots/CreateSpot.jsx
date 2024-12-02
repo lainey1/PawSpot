@@ -125,21 +125,6 @@ const CreateSpot = () => {
     return finalErrors;
   };
 
-  //   if (!country) newErrors.country = "Country is required.";
-  //   if (!address) newErrors.address = "Address is required.";
-  //   if (!city) newErrors.city = "City is required.";
-  //   if (!state) newErrors.state = "State is required.";
-  //   if (!name) newErrors.name = "Name of your spot is required.";
-  //   if (!description || description.length < 30)
-  //     newErrors.description = "Description needs 30 or more characters.";
-  //   if (!price) newErrors.price = "Price per night is required.";
-  //   if (isNaN(Number(price))) newErrors.price = "Price must be a valid number.";
-  //   if (!previewImageUrl.trim())
-  //     newErrors.previewImageUrl = "Preview Image URL is required.";
-
-  //   return newErrors;
-  // };
-
   const errorMessages = Object.values(errors);
 
   useEffect(() => {
