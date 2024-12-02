@@ -6,6 +6,7 @@
   margin-top: 0.5em;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #ccc;
 }
 
 #post-review-button {
