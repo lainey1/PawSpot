@@ -11,9 +11,6 @@ const UpdateSpot = () => {
 
   // Selector
   const spot = useSelector((state) => state.spots.currentSpot);
-  const imagesArr = spot?.SpotImages;
-  const previewImg = imagesArr?.find((image) => image.preview === true);
-  const otherImgs = imagesArr?.filter((image) => image.preview !== true);
 
   // State Hooks
   const [loading, setLoading] = useState(true);
@@ -27,7 +24,13 @@ const UpdateSpot = () => {
     name: "",
     description: "",
     price: "",
-    SpotImages: ["", "", "", "", ""],
+    SpotImages: [
+      { url: "", preview: true },
+      { url: "", preview: false },
+      { url: "", preview: false },
+      { url: "", preview: false },
+      { url: "", preview: false },
+    ],
   });
   const [errors, setErrors] = useState({});
 
@@ -50,7 +53,7 @@ const UpdateSpot = () => {
         name: spot.name || "",
         description: spot.description || "",
         price: spot.price || "",
-        SpotImages: spot?.SpotImages || ["", "", "", "", ""],
+        SpotImages: ensureSpotImagesLength(spot?.SpotImages || []),
       });
     }
   }, [spot]);
@@ -98,15 +101,13 @@ const UpdateSpot = () => {
     if (!formData.name) newErrors.name = "Name of your spot is required";
     if (!formData.description || formData.description.length < 30)
       newErrors.description = "Description needs 30 or more characters";
-
-    if (!formData.price) {
-      newErrors.price = "Price per night is required";
-    } else if (isNaN(Number(formData.price))) {
+    if (!formData.price) newErrors.price = "Price per night is required";
+    else if (isNaN(Number(formData.price)))
       newErrors.price = "Price must be a valid number";
-    }
 
-    // if (!formData.previewImageUrl.trim())
-    //   newErrors.previewImageUrl = "Preview Image URL is required";
+    if (!formData.SpotImages[0]?.url.trim())
+      newErrors.previewImageUrl =
+        "At least one image URL (preview) is required";
 
     return newErrors;
   };
@@ -124,48 +125,29 @@ const UpdateSpot = () => {
     }));
   };
 
-  // const addImagesToSpot = async (spotId, imageUrls) => {
-  //   const imageRequests = imageUrls.map((url, index) =>
-  //     fetch(`/api/spots/${spotId}/images`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         url,
-  //         preview: index === 0, // Mark the first image as preview
-  //       }),
-  //     })
-  //   );
+  // Utility to ensure SpotImages always has exactly 5 slots
+  const ensureSpotImagesLength = (images) => {
+    const filledImages = [...images];
+    while (filledImages.length < 5) {
+      filledImages.push({ url: "", preview: false });
+    }
+    return filledImages.slice(0, 5);
+  };
 
-  //   return Promise.all(imageRequests);
-  // };
-
-  // const addImagesToSpot = async (spotId, imageUrls) => {
-  //   const imageRequests = imageUrls.map((url, index) =>
-  //     fetch(`/api/spots/${spotId}/images`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         url,
-  //         preview: index === 0, // Mark the first image as preview
-  //       }),
-  //     })
-  //   );
-
-  //   return Promise.all(imageRequests);
-  // };
-
-  // const handleImageChange = (index, value) => {
-  //   const newImageUrls = [...formData.imageUrls];
-  //   newImageUrls[index] = value;
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     SpotImages: newImageUrls,
-  //   }));
-  // };
+  // Image input change handler
+  const handleImageChange = (index, value) => {
+    setFormData((prev) => {
+      const updatedImages = [...prev.SpotImages];
+      updatedImages[index] = {
+        url: value,
+        preview: index === 0, // First image is preview
+      };
+      return {
+        ...prev,
+        SpotImages: ensureSpotImagesLength(updatedImages),
+      };
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -181,13 +163,11 @@ const UpdateSpot = () => {
       lat: parseFloat(formData.lat),
       lng: parseFloat(formData.lng),
       price: parseFloat(formData.price),
-      SpotImages: [formData.previewImageUrl, formData.imageUrls], // Ensure non-empty URLs
+      SpotImages: formData.SpotImages.filter((img) => img.url.trim()),
     };
 
     try {
       await dispatch(editSpot(spotId, updatedSpotData));
-      // await addImagesToSpot(spotId, updatedSpotData.imageUrls);
-      await dispatch(fetchSpot(spotId));
       navigate(`/spots/${spotId}`);
     } catch (error) {
       console.error("Failed to update spot:", error);
@@ -200,7 +180,6 @@ const UpdateSpot = () => {
     <div>
       <form onSubmit={handleSubmit} className="form">
         <h1>Update Your Spot</h1>
-
         <section>
           <h2>Where&apos;s your place located?</h2>
           <p>
@@ -289,7 +268,6 @@ const UpdateSpot = () => {
             *Optional
           </div>
         </section>
-
         <section>
           <h2>Describe your place to guests</h2>
           <p>
@@ -309,7 +287,6 @@ const UpdateSpot = () => {
             <p className="error-message">{errors.description}</p>
           )}
         </section>
-
         <section>
           <h2>Create a title for your spot</h2>
           <p>
@@ -326,7 +303,6 @@ const UpdateSpot = () => {
           />
           {errors.name && <p className="error-message">{errors.name}</p>}
         </section>
-
         <section>
           <h2>Set a base price for your spot</h2>
           <p>
@@ -351,59 +327,26 @@ const UpdateSpot = () => {
 
           {errors.price && <p className="error-message">{errors.price}</p>}
         </section>
-
+        {/* Section for photo inputs */}
         <section>
           <h2>Liven up your spot with photos</h2>
           <p>Submit a link to at least one photo to publish your spot.</p>
 
           <div className="image-url-container">
-            {/* Preview Image */}
-            <input
-              className="input-field"
-              name="previewImageUrl"
-              value={previewImg?.url || ""} // Ensure empty field if no previewImg
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  SpotImages: [
-                    {
-                      ...prev.SpotImages[0],
-                      url: e.target.value,
-                      preview: true,
-                    },
-                    ...prev.SpotImages.slice(1),
-                  ],
-                }))
-              }
-              placeholder="Required: Preview Image URL"
-            />
-            {errors.previewImageUrl && (
-              <p className="error-message">{errors.previewImageUrl}</p>
-            )}
-
-            {/* Other Images */}
-            {(otherImgs || []).map((image, index) => (
+            {formData.SpotImages.map((image, index) => (
               <input
                 key={index}
                 className="input-field"
-                value={image.url || ""} // Empty input if no URL
-                onChange={(e) =>
-                  setFormData((prev) => {
-                    const updatedImages = [...prev.SpotImages];
-                    updatedImages[index + 1] = {
-                      ...updatedImages[index + 1],
-                      url: e.target.value,
-                      preview: false,
-                    };
-                    return { ...prev, SpotImages: updatedImages };
-                  })
-                }
-                placeholder="Image URL"
+                value={image?.url || ""}
+                onChange={(e) => handleImageChange(index, e.target.value)}
+                placeholder={`Image URL ${index === 0 ? "Preview" : index}`}
               />
             ))}
           </div>
+          {errors.previewImageUrl && (
+            <p className="error-message">{errors.previewImageUrl}</p>
+          )}
         </section>
-
         <button type="submit">Update Your Spot</button>
       </form>
     </div>
