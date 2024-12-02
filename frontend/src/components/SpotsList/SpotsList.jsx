@@ -8,7 +8,6 @@ import "./SpotsList.css";
 const SpotsList = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.Spots);
-  console.log("Fetched spots:", spots); // Log to see if the spots are being fetched correctly
 
   useEffect(() => {
     dispatch(fetchSpotsList());

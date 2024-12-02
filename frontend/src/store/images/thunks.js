@@ -34,30 +34,51 @@ export const fetchImage = (imageId) => async (dispatch) => {
   }
 };
 
-export const createNewImage =
-  (userId, spotId, imageUrl, preview) => async (dispatch) => {
-    console.log(userId, spotId, imageUrl, preview);
-    try {
-      const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: "POST",
-        body: JSON.stringify({ userId, spotId, imageUrl, preview }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+export const addImagesToSpot = (spotId, imageUrls) => async (dispatch) => {
+  for (const url of imageUrls) {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url }),
+    });
 
-      if (response.ok) {
-        const newImage = await response.json();
-        dispatch(createImage(newImage)); // Only pass the new image here
-      } else {
-        const errorData = await response.json();
-        return Promise.reject(errorData);
-      }
-    } catch (error) {
-      console.error("Error creating image:", error);
-      return Promise.reject(error);
+    console.log("RESPONSE ==> ", response);
+
+    if (!response.ok) throw response;
+    if (response.ok) {
+      const newImage = await response.json();
+      console.log("newIMAGE ==> ", newImage);
+      dispatch(createImage(newImage));
     }
-  };
+  }
+};
+
+// export const createNewImage =
+//   (userId, spotId, imageUrl, preview) => async (dispatch) => {
+//     console.log(userId, spotId, imageUrl, preview);
+//     try {
+//       const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+//         method: "POST",
+//         body: JSON.stringify({ userId, spotId, imageUrl, preview }),
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       });
+
+//       if (response.ok) {
+//         const newImage = await response.json();
+//         dispatch(createImage(newImage)); // Only pass the new image here
+//       } else {
+//         const errorData = await response.json();
+//         return Promise.reject(errorData);
+//       }
+//     } catch (error) {
+//       console.error("Error creating image:", error);
+//       return Promise.reject(error);
+//     }
+//   };
 
 export const editImage = (imageId, updatedData) => async (dispatch) => {
   const response = await csrfFetch(`/api/images/${imageId}`, {
