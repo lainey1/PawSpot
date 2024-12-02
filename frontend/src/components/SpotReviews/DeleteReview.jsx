@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { deleteReview, fetchReviews } from "../../store/reviews/thunks";
+import { fetchSpot } from "../../store/spots/thunks";
 import { useModal } from "../../context/Modal";
 import "./deleteReview.css";
 
@@ -10,13 +11,16 @@ const DeleteReview = ({ reviewId, spotId }) => {
   const confirmDelete = (e) => {
     e.preventDefault();
     dispatch(deleteReview(reviewId))
-      .then(() => dispatch(fetchReviews(spotId)))
+      .then(() => {
+        dispatch(fetchReviews(spotId)); // Re-fetch reviews after deletion
+        dispatch(fetchSpot(spotId)); // Re-fetch the spot details
+      })
       .then(() => closeModal());
   };
 
   const cancelDelete = (e) => {
     e.preventDefault();
-    closeModal(); // Close modal if user cancels
+    closeModal();
   };
 
   return (
