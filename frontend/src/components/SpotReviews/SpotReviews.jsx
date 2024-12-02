@@ -66,7 +66,11 @@ function Reviews({ spot }) {
 
       <div id="section">
         {spot?.numReviews === 0 ? (
-          getEmptyReviewMessage(spot?.numReviews, isCurrentUserOwner)
+          getEmptyReviewMessage(
+            spot?.numReviews,
+            isCurrentUserOwner,
+            canPostReview
+          )
         ) : (
           <ul className="list">
             {renderReviewList(sortedReviews, formatDate)}

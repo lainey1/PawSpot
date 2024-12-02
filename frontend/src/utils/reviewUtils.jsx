@@ -37,12 +37,16 @@ export function sortReviewsByDate(reviews) {
 }
 
 export const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: "numeric", month: "long" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-export function getEmptyReviewMessage(numReviews, isCurrentUserOwner) {
-  if (numReviews === 0 && !isCurrentUserOwner) {
+export function getEmptyReviewMessage(
+  numReviews,
+  isCurrentUserOwner,
+  canPostReview
+) {
+  if (numReviews === 0 && !isCurrentUserOwner && canPostReview) {
     return <p>Be the first to post a review!</p>;
   }
   return null;
