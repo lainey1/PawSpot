@@ -1,0 +1,23 @@
+.star-rating {
+  margin: 1em 0;
+}
+
+.star {
+  cursor: pointer;
+  color: lightgray; /* Color for empty stars */
+  transition: color 0.2s;
+}
+
+.star.filled {
+  color: gold; /* Color for filled stars */
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+.server-error {
+  font-weight: bold;
+  margin-top: 10px;
+}

@@ -33,29 +33,31 @@ export const fetchReview = (reviewId) => async (dispatch) => {
   }
 };
 
-export const createNewReview = (reviewData) => async (dispatch) => {
-  try {
-    const response = await csrfFetch("/api/reviews", {
-      method: "POST",
-      body: JSON.stringify(reviewData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+export const createNewReview =
+  ({ userId, spotId, review, stars }) =>
+  async (dispatch) => {
+    try {
+      const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: "POST",
+        body: JSON.stringify({ userId, spotId, review, stars }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (response.ok) {
-      const newReview = await response.json();
-      dispatch(createReview(newReview));
-      return newReview.id;
-    } else {
-      const errorData = await response.json();
-      return Promise.reject(errorData);
+      if (response.ok) {
+        const newReview = await response.json();
+        dispatch(createReview(newReview));
+        return newReview.id;
+      } else {
+        const errorData = await response.json();
+        return Promise.reject(errorData);
+      }
+    } catch (error) {
+      console.error("Error creating review:", error);
+      return Promise.reject(error);
     }
-  } catch (error) {
-    console.error("Error creating review:", error);
-    return Promise.reject(error);
-  }
-};
+  };
 
 export const editReview = (reviewId, updatedData) => async (dispatch) => {
   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
