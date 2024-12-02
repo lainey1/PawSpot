@@ -4,13 +4,17 @@ import { Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 import { fetchSpotsList } from "../../store/spots/thunks";
 import "./SpotsList.css";
+import { fetchImages } from "../../store/images/thunks";
 
 const SpotsList = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.Spots);
+  const images = useSelector((state) => state.images);
+  console.log(images);
 
   useEffect(() => {
     dispatch(fetchSpotsList());
+    dispatch(fetchImages());
   }, [dispatch]);
 
   return (
@@ -19,7 +23,7 @@ const SpotsList = () => {
         <div key={spot.id} className="spot-tile">
           <Link to={`/spots/${spot.id}`} className="spot-link">
             <div className="spot-image-container">
-              {spot.previewImage ? (
+              {spot?.previewImage ? (
                 <img
                   src={spot.previewImage}
                   alt={spot.name}

@@ -20,7 +20,7 @@ const imagesReducer = (state = initialState, action) => {
       return { ...state, currentSpot: action.image };
 
     case CREATE_IMAGE:
-      return { ...state, ...action.images };
+      return { ...state, ...action.image };
 
     case UPDATE_IMAGE: {
       return {

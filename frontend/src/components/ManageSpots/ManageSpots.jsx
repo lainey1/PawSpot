@@ -14,7 +14,6 @@ function ManageSpots() {
   const dispatch = useDispatch();
 
   const spots = useSelector((state) => state.spots.Spots);
-  console.log(spots);
   const currentUser = useSelector((state) => state.session.user);
   const [loading, setLoading] = useState(true);
 
