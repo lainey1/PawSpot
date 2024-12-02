@@ -1,8 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchReviews } from "../../store/reviews";
-import { formatDate } from "../../utils/reviewUtils";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import CreateReview from "../SpotReviews/CreateReview";
+import { fetchReviews } from "../../store/reviews/thunks";
+import { useReviewPermissions } from "../../hooks/useReviewPermissions";
+
+import {
+  formatDate,
+  sortReviewsByDate,
+  getReviewHeader,
+  renderReviewList,
+  getEmptyReviewMessage,
+} from "../../utils/reviewUtils";
+
 import { GoStarFill } from "react-icons/go";
 import "./SpotReviews.css";
 
@@ -14,12 +25,11 @@ function Reviews({ spot }) {
   const reviews = useSelector((state) => state.reviews.Reviews);
   const currentUser = useSelector((state) => state.session.user);
 
-  const isCurrentUserOwner = currentUser?.id === spot?.Owner?.id;
-  const hasCurrentUserReviewed = reviews?.some(
-    (review) => review.User?.id === currentUser?.id
+  const { isCurrentUserOwner, canPostReview } = useReviewPermissions(
+    reviews,
+    currentUser,
+    spot
   );
-  const canPostReview =
-    currentUser && !isCurrentUserOwner && !hasCurrentUserReviewed;
 
   useEffect(() => {
     setLoading(true);
@@ -31,10 +41,7 @@ function Reviews({ spot }) {
   if (loading) return <div>Loading...</div>;
   if (!reviews) return <div>Review not found.</div>;
 
-  // Sort reviews by updatedAt in descending order (newest first)
-  const sortedReviews = [...reviews].sort(
-    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
-  );
+  const sortedReviews = sortReviewsByDate(reviews);
 
   return (
     <>
@@ -42,45 +49,29 @@ function Reviews({ spot }) {
 
       <div id="header">
         <GoStarFill style={{ fontSize: "1.5em", paddingRight: ".25em" }} />
-
-        {spot?.avgStarRating > 0 ? (
-          <span>{Number(spot?.avgStarRating).toFixed(1)}</span>
-        ) : (
-          <span>New</span>
-        )}
-
-        <p>
-          {spot?.numReviews > 0 && (
-            <>
-              <span style={{ padding: "0 0.5em" }}>•</span>
-              <span>
-                {spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}
-              </span>
-            </>
-          )}
-        </p>
+        {getReviewHeader(spot?.avgStarRating, spot?.numReviews)}
       </div>
 
       {canPostReview && (
         <div>
-          <button id="post-review-button">Post Your Review</button>
+          <OpenModalButton
+            buttonText={"Post Your Review"}
+            modalComponent={<CreateReview spotId={spotId} />}
+            className="post-review-button"
+          />
         </div>
       )}
 
       <div id="section">
         {spot?.numReviews === 0 ? (
-          !isCurrentUserOwner && <p>Be the first to post a review!</p>
+          getEmptyReviewMessage(
+            spot?.numReviews,
+            isCurrentUserOwner,
+            canPostReview
+          )
         ) : (
           <ul className="list">
-            {sortedReviews?.map((review) => (
-              <li key={review.id} className="item">
-                <p>
-                  <strong>{review.User.firstName}</strong>
-                </p>
-                <p className="date">{formatDate(review.updatedAt)}</p>
-                <p>{review.review}</p>
-              </li>
-            ))}
+            {renderReviewList(sortedReviews, formatDate)}
           </ul>
         )}
       </div>

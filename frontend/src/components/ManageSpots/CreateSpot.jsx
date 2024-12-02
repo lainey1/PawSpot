@@ -5,7 +5,7 @@ import { fetchSpot, createNewSpot } from "../../store/spots/thunks";
 
 import "./Form.css";
 
-const UpdateSpot = () => {
+const CreateSpot = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { spotId } = useParams();
@@ -296,4 +296,4 @@ const UpdateSpot = () => {
   );
 };
 
-export default UpdateSpot;
+export default CreateSpot;

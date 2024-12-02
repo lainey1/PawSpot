@@ -51,6 +51,10 @@ const router = createBrowserRouter([
         path: "/spots/:spotId/edit",
         element: <UpdateSpot />,
       },
+      // {
+      //   path: "/spots/:spotId/reviews",
+      //   element: <CreateReview />,
+      // },
       {
         path: "*",
         element: <h2>Page does not exist</h2>,

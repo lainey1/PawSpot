@@ -1,0 +1,60 @@
+/* ================================
+   Form Container
+================================ */
+#create-review-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+
+  margin: 0 auto;
+  padding: 20px;
+
+  color: #4f4f4f;
+  background-color: #ffffff;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.star-rating {
+  margin: 1em 0;
+}
+
+.star {
+  cursor: pointer;
+  color: lightgray; /* Color for empty stars */
+  transition: color 0.2s;
+}
+
+.star.filled {
+  color: gold; /* Color for filled stars */
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+.server-error {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ================================
+   Media Query for Small Screens (Phones)
+================================ */
+@media (max-width: 600px) {
+  #create-review-form {
+    width: 90%; /* Adjust the form width to be 90% of the screen */
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .star-rating {
+    margin: 0.5em 0; /* Adjust spacing for smaller screens */
+  }
+
+  .error-message {
+    font-size: 12px; /* Make error messages slightly smaller on mobile */
+  }
+}

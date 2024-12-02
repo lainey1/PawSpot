@@ -115,8 +115,9 @@ const UpdateSpot = () => {
     };
 
     try {
-      const updatedSpot = await dispatch(editSpot(spotId, updatedSpotData));
-      navigate(`/spots/${updatedSpot.id}`);
+      await dispatch(editSpot(spotId, updatedSpotData));
+      await dispatch(fetchSpot(spotId));
+      navigate(`/spots/${spotId}`);
     } catch (error) {
       console.error("Failed to update spot:", error);
     }

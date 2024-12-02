@@ -1,4 +1,3 @@
-import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { deleteSpotThunk, fetchSpotsList } from "../../store/spots/thunks";
 import { useModal } from "../../context/Modal";
@@ -7,8 +6,6 @@ import "./deleteSpot.css";
 const DeleteSpot = ({ spotId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-
-  const formRef = useRef(null); // Reference to the form
 
   const confirmDelete = (e) => {
     e.preventDefault();
@@ -21,34 +18,6 @@ const DeleteSpot = ({ spotId }) => {
     e.preventDefault();
     closeModal(); // Close modal if user cancels
   };
-
-  // Close the modal when clicking outside the form
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (formRef.current && !formRef.current.contains(e.target)) {
-        closeModal();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [closeModal]);
-
-  // Close the modal when clicking outside the form
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (formRef.current && !formRef.current.contains(e.target)) {
-        closeModal();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [closeModal]);
 
   return (
     <div id="delete-spot-form">

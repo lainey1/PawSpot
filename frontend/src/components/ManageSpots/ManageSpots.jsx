@@ -65,27 +65,28 @@ function ManageSpots() {
                     <div>No Image Available</div>
                   )}
                 </div>
-              </Link>
-              <div className="spot-details">
-                <h3 className="spot-name">{spot.name}</h3>
-                <div className="spot-location-rating">
-                  <p className="spot-location">
-                    {spot.city}, {spot.state}
+                <div className="spot-details">
+                  <h3 className="spot-name">{spot.name}</h3>
+                  <div className="spot-location-rating">
+                    <p className="spot-location">
+                      {spot.city}, {spot.state}
+                    </p>
+                    <span className="average-rating">
+                      {spot.avgRating ? (
+                        <>
+                          <GoStarFill /> {spot.avgRating}
+                        </>
+                      ) : (
+                        <span className="no-ratings">New</span>
+                      )}
+                    </span>
+                  </div>
+                  <p style={{ textAlign: "left" }}>
+                    <strong>${spot.price.toFixed(2)}</strong> night
                   </p>
-                  <span className="average-rating">
-                    {spot.avgRating ? (
-                      <>
-                        <GoStarFill /> {spot.avgRating}
-                      </>
-                    ) : (
-                      <span className="no-ratings">New</span>
-                    )}
-                  </span>
                 </div>
-                <p style={{ textAlign: "left" }}>
-                  <strong>${spot.price.toFixed(2)}</strong> night
-                </p>
-              </div>
+              </Link>
+
               <span className="button-wrapper">
                 <button
                   className="update-button"

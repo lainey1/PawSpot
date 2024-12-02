@@ -6,9 +6,17 @@
   margin-top: 0.5em;
   display: flex;
   align-items: center;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
 }
 
-#post-review-button {
+.post-review-button {
+  max-width: 200px; /* Adjust the width limit as needed */
+  width: 100%; /* Makes the button responsive within the max-width */
+  padding: 10px;
+  font-size: 14px; /* Adjust the font size if needed */
+  text-align: center;
+  display: inline-block;
   margin-top: 1em;
   margin-bottom: 1em;
 }

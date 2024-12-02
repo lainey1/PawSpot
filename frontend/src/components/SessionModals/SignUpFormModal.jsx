@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 
-import "./SignUpForm.css";
+import "./sessionForms.css";
 
 function SignUpFormModal() {
   const dispatch = useDispatch();
@@ -117,8 +117,8 @@ function SignUpFormModal() {
   const errorMessages = Object.values(errors);
 
   return (
-    <div id="session-form">
-      <form className="signup-form" onSubmit={handleSubmit}>
+    <div>
+      <form className="session-form" onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
         <input
           placeholder="First Name"
