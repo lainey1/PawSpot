@@ -137,6 +137,14 @@ const UpdateSpot = () => {
             reservation.
           </p>
 
+          <section>
+            <h2>Where&apos;s your place located?</h2>
+            <p>
+              Guests will only get your exact address once they booked a
+              reservation.
+            </p>
+          </section>
+
           <select
             className="select-field"
             name="country"
