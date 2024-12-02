@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewReview } from "../../store/reviews/thunks";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./createReview.css";
 
 const CreateReview = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { spotId } = useParams();
 
   const [review, setReview] = useState("");
@@ -13,6 +14,23 @@ const CreateReview = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [errors, setErrors] = useState("");
   const userId = useSelector((state) => state.session.user.id);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Proceed with submission only if there are no errors
+    if (!errors) {
+      console.log("Submitting review:", { userId, spotId, review, stars });
+      dispatch(createNewReview({ userId, spotId, review, stars }))
+        .then(() => {
+          navigate(`/spots/${spotId}`);
+        })
+        .catch((error) => {
+          console.error("Error creating review:", error);
+          // Optional: Show an error message to the user
+        });
+    }
+  };
 
   // Real-time form validation on review or star change
   useEffect(() => {
@@ -29,24 +47,6 @@ const CreateReview = () => {
 
     setErrors(errorMessage);
   }, [review, stars]); // Trigger validation whenever review or stars change
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Proceed with submission only if there are no errors
-    if (!errors) {
-      console.log("Submitting review:", { userId, spotId, review, stars });
-      dispatch(createNewReview({ userId, spotId, review, stars }))
-        .then((newReviewId) => {
-          console.log("Review created with ID:", newReviewId);
-          // Optional: navigate to a different page or show success message
-        })
-        .catch((error) => {
-          console.error("Error creating review:", error);
-          // Optional: Show an error message to the user
-        });
-    }
-  };
 
   return (
     <form id="create-review-form" onSubmit={handleSubmit}>
