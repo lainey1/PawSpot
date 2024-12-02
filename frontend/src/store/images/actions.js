@@ -1,34 +1,34 @@
 //* Action Creators **********
 // Encapsulate the creation of action objects (POJOs) to describe events or changes in app state. Improves consistency and supports scalability as Redux app grows.
 import {
-  LOAD_SPOTS,
-  LOAD_SPOT,
-  CREATE_SPOT,
-  UPDATE_SPOT,
-  DELETE_SPOT,
+  LOAD_IMAGES,
+  LOAD_IMAGE,
+  CREATE_IMAGE,
+  UPDATE_IMAGE,
+  DELETE_IMAGE,
 } from "./types";
 
-export const loadSpots = (spots) => ({
-  type: LOAD_SPOTS,
-  spots,
+export const loadImages = (images) => ({
+  type: LOAD_IMAGES,
+  images,
 });
 
-export const loadSpot = (spot) => ({
-  type: LOAD_SPOT,
-  spot,
+export const loadImage = (image) => ({
+  type: LOAD_IMAGE,
+  image,
 });
 
-export const createSpot = (spot) => ({
-  type: CREATE_SPOT,
-  spot,
+export const createImage = (image) => ({
+  type: CREATE_IMAGE,
+  image,
 });
 
-export const updateSpot = (spot) => ({
-  type: UPDATE_SPOT,
-  spot,
+export const updateImage = (image) => ({
+  type: UPDATE_IMAGE,
+  image,
 });
 
-export const deleteSpot = (spotId) => ({
-  type: DELETE_SPOT,
-  spotId,
+export const removeImage = (imageId) => ({
+  type: DELETE_IMAGE,
+  imageId,
 });

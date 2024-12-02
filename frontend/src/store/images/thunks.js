@@ -2,73 +2,82 @@
 // Handles asynchronous logic using redux-thunk middleware to dispatch actions and access the current state (getState). Simplifies workflow, centralizes control, and improves scalability by separating concerns.
 
 import { csrfFetch } from "../csrf";
+
 import {
-  loadSpots,
-  loadSpot,
-  createSpot,
-  updateSpot,
-  deleteSpot,
+  loadImages,
+  loadImage,
+  createImage,
+  updateImage,
+  removeImage,
 } from "./actions";
 
-export const fetchSpotsList = () => async (dispatch) => {
-  const response = await fetch("/api/spots");
-  if (response.ok) {
-    const spots = await response.json();
-    dispatch(loadSpots(spots));
-  }
-};
-
-export const fetchSpot = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spots/${spotId}`);
-  if (response.ok) {
-    const spot = await response.json();
-    dispatch(loadSpot(spot));
-  }
-};
-
-export const createNewSpot = (spotData) => async (dispatch) => {
+export const fetchImages = (spotId) => async (dispatch) => {
   try {
-    const response = await csrfFetch("/api/spots", {
-      method: "POST",
-      body: JSON.stringify(spotData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      const newSpot = await response.json();
-      dispatch(createSpot(newSpot));
-      return newSpot.id; // Return the ID of the newly created spot
+    const response = await fetch(`/api/spots/${spotId}/images`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch images");
     } else {
-      const errorData = await response.json();
-      return Promise.reject(errorData); // Handle errors appropriately
+      const images = await response.json();
+      dispatch(loadImages(images));
+      return images;
     }
   } catch (error) {
-    console.error("Error creating spot:", error);
-    return Promise.reject(error);
+    console.error("Error fetching images:", error.message);
   }
 };
 
-export const editSpot = (spotId, updatedData) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spotId}`, {
+export const fetchImage = (imageId) => async (dispatch) => {
+  const response = await fetch(`/api/images/${imageId}`);
+  if (response.ok) {
+    const image = await response.json();
+    dispatch(loadImage(image));
+  }
+};
+
+export const createNewImage =
+  (userId, spotId, imageUrl, preview) => async (dispatch) => {
+    console.log(userId, spotId, imageUrl, preview);
+    try {
+      const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        body: JSON.stringify({ userId, spotId, imageUrl, preview }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const newImage = await response.json();
+        dispatch(createImage(newImage)); // Only pass the new image here
+      } else {
+        const errorData = await response.json();
+        return Promise.reject(errorData);
+      }
+    } catch (error) {
+      console.error("Error creating image:", error);
+      return Promise.reject(error);
+    }
+  };
+
+export const editImage = (imageId, updatedData) => async (dispatch) => {
+  const response = await csrfFetch(`/api/images/${imageId}`, {
     method: "PUT",
     body: JSON.stringify(updatedData),
     headers: { "Content-Type": "application/json" },
   });
   if (response.ok) {
-    const updatedSpot = await response.json();
-    dispatch(updateSpot(updatedSpot));
-    return updatedSpot.id;
+    const updatedImage = await response.json();
+    dispatch(updateImage(updatedImage));
+    return updatedImage.id;
   }
 };
 
-export const deleteSpotThunk = (spotId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spotId}`, {
+export const deleteReview = (imageId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/images/${imageId}`, {
     method: "DELETE",
   });
   console.log("RESPONSE ===> ", response);
   if (response.ok) {
-    dispatch(deleteSpot(spotId));
+    dispatch(removeImage(imageId));
   }
 };
