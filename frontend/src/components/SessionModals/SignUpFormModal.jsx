@@ -124,29 +124,16 @@ function SignUpFormModal() {
           placeholder="First Name"
           type="text"
           value={firstName}
-          onBlur={() =>
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              firstName: validateField("firstName", firstName),
-            }))
-          }
           onChange={(e) =>
             handleInputChange(setFirstName, "firstName", e.target.value)
           }
           required
         />
-        {errors.firstName && <p className="error">{errors.firstName}</p>}
 
         <input
           placeholder="Last Name"
           type="text"
           value={lastName}
-          onBlur={() =>
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              lastName: validateField("lastName", lastName),
-            }))
-          }
           onChange={(e) =>
             handleInputChange(setLastName, "lastName", e.target.value)
           }
@@ -158,61 +145,57 @@ function SignUpFormModal() {
           placeholder="Email"
           type="text"
           value={email}
-          onBlur={() =>
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              email: validateField("email", email),
-            }))
-          }
+          className={errors.email ? "error" : ""}
+          aria-describedby="email-error"
           onChange={(e) => handleInputChange(setEmail, "email", e.target.value)}
           required
         />
+        {errors.email && (
+          <p id="email-error" className="error">
+            {errors.email}
+          </p>
+        )}
 
         <input
           placeholder="Username"
           type="text"
           value={username}
-          onBlur={() =>
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              username: validateField("username", username),
-            }))
-          }
+          className={errors.username ? "error" : ""}
+          aria-describedby="username-error"
           onChange={(e) =>
             handleInputChange(setUsername, "username", e.target.value)
           }
           required
         />
+        {errors.username && (
+          <p id="username-error" className="error">
+            {errors.username}
+          </p>
+        )}
 
         <input
           placeholder="Password"
           type="password"
           value={password}
-          onBlur={() =>
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              password: validateField("password", password),
-            }))
-          }
+          className={errors.password ? "error" : ""}
+          aria-describedby="password-error"
           onChange={(e) =>
             handleInputChange(setPassword, "password", e.target.value)
           }
           required
         />
+        {errors.password && (
+          <p id="password-error" className="error">
+            {errors.password}
+          </p>
+        )}
 
         <input
           placeholder="Confirm Password"
           type="password"
           value={confirmPassword}
-          onBlur={() =>
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              confirmPassword: validateField(
-                "confirmPassword",
-                confirmPassword
-              ),
-            }))
-          }
+          className={errors.confirmPassword ? "error" : ""}
+          aria-describedby="confirmPassword-error"
           onChange={(e) =>
             handleInputChange(
               setConfirmPassword,
@@ -222,13 +205,18 @@ function SignUpFormModal() {
           }
           required
         />
+        {errors.confirmPassword && (
+          <p id="confirmPassword-error" className="error">
+            {errors.confirmPassword}
+          </p>
+        )}
 
         <button type="submit" disabled={!isFormValid()}>
           Sign Up
         </button>
       </form>
 
-      <div id="errors-container">
+      <div id="signup-errors-container">
         {!isFormValid() && (
           <p className="required-message">All fields are required.</p>
         )}

@@ -10,88 +10,92 @@ const CreateSpot = () => {
   const navigate = useNavigate();
   const { spotId } = useParams();
 
-  // State Hooks
+  // State Hooks for each field
   const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    country: "",
-    address: "",
-    city: "",
-    state: "",
-    lat: "",
-    lng: "",
-    name: "",
-    description: "",
-    price: "",
-    previewImageUrl: "",
-    imageUrls: ["", "", "", ""],
-  });
+
+  const [address, setAddress] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
+  const [imageUrls, setImageUrls] = useState(["", "", "", ""]);
+
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    setLoading(true);
-    dispatch(fetchSpot(spotId))
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false));
-  }, [dispatch, spotId]);
-
   // Validation helper functions
-  const validateForm = () => {
-    const newErrors = {};
 
-    if (!formData.country) newErrors.country = "Country is required";
-    if (!formData.address) newErrors.address = "Address is required";
-    if (!formData.city) newErrors.city = "City is required";
-    if (!formData.state) newErrors.state = "State is required";
-    if (!formData.name) newErrors.name = "Name of your spot is required";
-    if (!formData.description || formData.description.length < 30)
-      newErrors.description = "Description needs 30 or more characters";
+  const validateField = (name, value) => {
+    let error = "";
 
-    if (!formData.price) {
-      newErrors.price = "Price per night is required";
-    } else if (isNaN(Number(formData.price))) {
-      newErrors.price = "Price must be a valid number";
+    switch (name) {
+      case "country":
+      case "address":
+      case "city":
+      case "state":
+      case "name":
+        if (!value)
+          error = `${
+            name.charAt(0).toUpperCase() + name.slice(1)
+          } is required.`;
+        break;
+      case "description":
+        if (!value || value.length < 30)
+          error = "Description needs 30 or more characters.";
+        break;
+      case "price":
+        if (!value) error = "Price per night is required.";
+        else if (isNaN(Number(value))) error = "Price must be a valid number.";
+        break;
+      case "previewImageUrl":
+        if (!value.trim()) error = "Preview Image URL is required.";
+        break;
+      default:
+        break;
     }
-
-    if (!formData.previewImageUrl.trim())
-      newErrors.previewImageUrl = "Preview Image URL is required";
-
-    return newErrors;
+    return error;
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value.trimStart(),
+  // Handle input changes and validate immediately after input
+  const handleInputChange = (setter, fieldName, value) => {
+    setter(value);
+    const error = validateField(fieldName, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: error,
     }));
   };
 
   const handleImageChange = (index, value) => {
-    const newImageUrls = [...formData.imageUrls];
+    const newImageUrls = [...imageUrls];
     newImageUrls[index] = value;
-    setFormData((prev) => ({
-      ...prev,
-      imageUrls: newImageUrls,
-    }));
+    setImageUrls(newImageUrls);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    const finalErrors = validateAllFields();
+    if (Object.keys(finalErrors).length > 0) {
+      setErrors(finalErrors);
       return;
     }
 
     const newSpotData = {
-      ...formData,
-      lat: parseFloat(formData.lat),
-      lng: parseFloat(formData.lng),
-      price: parseFloat(formData.price),
-      imageUrls: [formData.previewImageUrl, ...formData.imageUrls].filter(
-        (url) => url
-      ),
+      country,
+      address,
+      city,
+      state,
+      lat: parseFloat(lat) || null,
+      lng: parseFloat(lng) || null,
+      name,
+      description,
+      price: parseFloat(price),
+      imageUrls: [previewImageUrl, ...imageUrls].filter(Boolean),
     };
 
     try {
@@ -102,6 +106,33 @@ const CreateSpot = () => {
       console.error("Failed to create spot:", error);
     }
   };
+
+  const validateAllFields = () => {
+    const finalErrors = {};
+    [
+      "country",
+      "address",
+      "city",
+      "state",
+      "name",
+      "description",
+      "price",
+      "previewImageUrl",
+    ].forEach((field) => {
+      const error = validateField(field, eval(field));
+      if (error) finalErrors[field] = error;
+    });
+    return finalErrors;
+  };
+
+  const errorMessages = Object.values(errors);
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(fetchSpot(spotId))
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, [dispatch, spotId]);
 
   if (loading) return <div>Loading...</div>;
 
@@ -120,8 +151,11 @@ const CreateSpot = () => {
           <select
             className="select-field"
             name="country"
-            value={formData.country}
-            onChange={handleInputChange}
+            value={country}
+            aria-describedby="country-error"
+            onChange={(e) =>
+              handleInputChange(setCountry, "country", e.target.value)
+            }
             placeholder="Country"
             required
           >
@@ -140,40 +174,57 @@ const CreateSpot = () => {
             <option value="Spain">Spain</option>
           </select>
           {errors.country && <p className="error-message">{errors.country}</p>}
+
           <input
-            className="input-field"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
+            className={errors.address ? "error" : ""}
+            aria-describedby="address-error"
+            onChange={(e) =>
+              handleInputChange(setAddress, "address", e.target.value)
+            }
+            value={address}
             placeholder="Street Address"
-            required
           />
-          {errors.address && <p className="error-message">{errors.address}</p>}
+          {errors.address && (
+            <p id="address-error" className="error">
+              {errors.address}
+            </p>
+          )}
+
           <input
-            className="input-field"
-            name="city"
-            value={formData.city}
-            onChange={handleInputChange}
+            className={errors.city ? "error" : ""}
+            aria-describedby="city-error"
+            onChange={(e) => handleInputChange(setCity, "city", e.target.value)}
+            value={city}
             placeholder="City"
-            required
           />
-          {errors.city && <p className="error-message">{errors.city}</p>}
+          {errors.city && (
+            <p id="city-error" className="error">
+              {errors.city}
+            </p>
+          )}
+
           <input
-            className="input-field"
-            name="state"
-            value={formData.state}
-            onChange={handleInputChange}
+            value={state}
+            className={errors.state ? "error" : ""}
+            aria-describedby="state-error"
+            onChange={(e) =>
+              handleInputChange(setState, "state", e.target.value)
+            }
             placeholder="State"
-            required
           />
-          {errors.state && <p className="error-message">{errors.state}</p>}
+          {errors.state && (
+            <p id="state-error" className="error">
+              {errors.state}
+            </p>
+          )}
+
           <div id="lat-long">
             <input
               className="lat"
               type="number"
               name="lat"
-              value={formData.lat}
-              onChange={handleInputChange}
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
               placeholder="Latitude"
             />
             ,
@@ -181,8 +232,8 @@ const CreateSpot = () => {
               className="long"
               type="number"
               name="lng"
-              value={formData.lng}
-              onChange={handleInputChange}
+              value={lng}
+              onChange={(e) => setLng(e.target.value)}
               placeholder="Longitude"
             />{" "}
           </div>
@@ -207,15 +258,18 @@ const CreateSpot = () => {
           </p>
 
           <textarea
-            className="textarea-field"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
+            value={description}
+            className={errors.description ? "error" : ""}
+            aria-describedby="description-error"
+            onChange={(e) =>
+              handleInputChange(setDescription, "description", e.target.value)
+            }
             placeholder="Please write at least 30 characters"
-            required
           />
           {errors.description && (
-            <p className="error-message">{errors.description}</p>
+            <p id="description-error" className="error">
+              {errors.description}
+            </p>
           )}
         </section>
 
@@ -225,15 +279,19 @@ const CreateSpot = () => {
             Catch guests&apos; attention with a spot title that highlights what
             makes your place special.
           </p>
+
           <input
-            className="input-field"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
+            value={name}
+            className={errors.name ? "error" : ""}
+            aria-describedby="name-error"
+            onChange={(e) => handleInputChange(setName, "name", e.target.value)}
             placeholder="Name of your spot"
-            required
           />
-          {errors.name && <p className="error-message">{errors.name}</p>}
+          {errors.name && (
+            <p id="name-error" className="error">
+              {errors.name}
+            </p>
+          )}
         </section>
 
         <section>
@@ -243,22 +301,23 @@ const CreateSpot = () => {
             in search results.
           </p>
           <input
-            className="input-field"
             type="number"
             name="price"
             step="0.01"
-            value={formData.price}
+            value={price}
+            className={errors.price ? "error" : ""}
+            aria-describedby="price-error"
             onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                price: parseFloat(e.target.value) || "",
-              }))
+              handleInputChange(setPrice, "price", e.target.value)
             }
             placeholder="Price per night (USD)"
             required
           />
-
-          {errors.price && <p className="error-message">{errors.price}</p>}
+          {errors.price && (
+            <p id="price-error" className="error">
+              {errors.price}
+            </p>
+          )}
         </section>
 
         <section>
@@ -267,24 +326,33 @@ const CreateSpot = () => {
 
           <div className="image-url-container">
             <input
-              className="input-field"
+              className={errors.password ? "error" : ""}
+              aria-describedby="password-error"
               name="previewImageUrl"
-              value={formData.previewImageUrl}
-              onChange={handleInputChange}
+              value={previewImageUrl}
+              onChange={(e) =>
+                handleInputChange(
+                  setPreviewImageUrl,
+                  "previewImageUrl",
+                  e.target.value
+                )
+              }
               placeholder="Required: Preview Image URL"
             />
 
             {errors.previewImageUrl && (
-              <p className="error-message">{errors.previewImageUrl}</p>
+              <p id="previewImageUrl-error" className="error">
+                {errors.previewImageUrl}
+              </p>
             )}
 
-            {formData.imageUrls.map((url, index) => (
+            {imageUrls.map((url, index) => (
               <input
                 key={index}
-                className="input-field"
+                className={errors.url ? "error" : ""}
                 value={url}
                 onChange={(e) => handleImageChange(index, e.target.value)}
-                placeholder="Image URL"
+                placeholder={`Image URL ${index + 1}`}
               />
             ))}
           </div>
@@ -292,6 +360,16 @@ const CreateSpot = () => {
 
         <button type="submit">Create Spot</button>
       </form>
+
+      {errorMessages.length > 0 && (
+        <div className="error-messages">
+          {errorMessages.map((error, index) => (
+            <p key={index} className="error">
+              {error}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

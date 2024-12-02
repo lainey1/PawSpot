@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
 
-  width: 400px;
+  width: 375px;
   margin: 0; /* No margin, as it's fixed */
   z-index: 1001; /* Ensure it's above the banner */
   background-color: white;
@@ -40,10 +40,16 @@
 /* ================================
    Errors Container
 ================================ */
-#errors-container {
+#login-errors-container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  min-height: 2rem;
+}
+
+#signup-errors-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 5rem;
 }
 
 .error {

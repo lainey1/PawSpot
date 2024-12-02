@@ -55,6 +55,38 @@ const UpdateSpot = () => {
   }, [spot]);
 
   // Validation helper functions
+
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "country":
+      case "address":
+      case "city":
+      case "state":
+      case "name":
+        if (!value)
+          error = `${
+            name.charAt(0).toUpperCase() + name.slice(1)
+          } is required.`;
+        break;
+      case "description":
+        if (!value || value.length < 30)
+          error = "Description needs 30 or more characters.";
+        break;
+      case "price":
+        if (!value) error = "Price per night is required.";
+        else if (isNaN(Number(value))) error = "Price must be a valid number.";
+        break;
+      case "previewImageUrl":
+        if (!value.trim()) error = "Preview Image URL is required.";
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -83,6 +115,11 @@ const UpdateSpot = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value.trimStart(),
+    }));
+    const error = validateField(name, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
     }));
   };
 

@@ -48,6 +48,14 @@
 /* ================================
    Input & Text Area Field Styling
 ================================ */
+
+input {
+  width: 95%; /* Almost full width */
+  font-size: 1em;
+  color: #4f4f4f;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 .input-field {
   width: 95%; /* Almost full width */
   font-size: 1em;
@@ -133,6 +141,13 @@
 /* ================================
    Error Message
 ================================ */
+
+.error {
+  color: red;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
 .error-message {
   color: red;
   font-size: 0.9em;
