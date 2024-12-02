@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewReview, fetchReviews } from "../../store/reviews/thunks";
 import { fetchSpot } from "../../store/spots/thunks";
@@ -8,6 +8,8 @@ import "./createReview.css";
 const CreateReview = ({ spotId }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+
+  const formRef = useRef(null); // Reference to the form
 
   const [review, setReview] = useState("");
   const [stars, setStars] = useState(0);
@@ -59,6 +61,20 @@ const CreateReview = ({ spotId }) => {
     }
     setErrors(errorMessage);
   }, [review, stars]);
+
+  // Close the modal when clicking outside the form
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (formRef.current && !formRef.current.contains(e.target)) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [closeModal]);
 
   return (
     <form id="create-review-form" onSubmit={handleSubmit}>

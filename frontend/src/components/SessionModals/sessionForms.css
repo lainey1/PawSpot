@@ -1,141 +1,64 @@
 /* ================================
-   Form Container
+   Session Form
 ================================ */
-.create-spot-form {
+.session-form {
   display: flex;
   flex-direction: column;
   min-width: 300px;
-  max-width: 500px;
+  width: 80%;
+  margin-left: 1em;
+  margin-right: 1em;
+}
 
-  margin: 0 auto;
+/* Media query for smaller screens (phones) */
+@media screen and (max-width: 600px) {
+  .session-form {
+    width: 90%; /* Increase width for better use of space */
+    margin-left: 0.5em; /* Reduced margin for smaller screens */
+    margin-right: 0.5em; /* Reduced margin for smaller screens */
+  }
+
+  .error-message {
+    font-size: 0.8em; /* Make error messages smaller on mobile */
+  }
+
+  .demo-link {
+    font-size: 0.9em; /* Adjust demo link font size on mobile */
+    padding-bottom: 1.5em; /* Reduce padding for mobile screens */
+  }
+}
+
+/* ================================
+   Errors Container
+================================ */
+#errors-container {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
-
-  color: #4f4f4f;
-  background-color: #ffffff;
-
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ================================
-   Select Field Styling
-================================ */
-.select-field {
-  width: 100%;
-
-  font-size: 1em;
-  font-weight: 600;
-  color: #ffffff;
-
-  background-image: linear-gradient(to right, #b965d7, #4a90e2);
-  border-radius: 4px;
-
-  margin-top: 5px;
+.error {
+  color: red;
+  margin-top: -15px;
+  margin-bottom: 15px;
 }
 
-.select-field:focus {
-  border-color: #b965d7;
-  outline: none;
-}
-
-.select-field option {
-  font-size: 1em;
-  color: #4f4f4f;
-  background-color: #ffffff;
-}
-
-/* ================================
-   Input & Text Area Field Styling
-================================ */
-.input-field {
-  width: 95%; /* Almost full width */
-  font-size: 1em;
-  color: #4f4f4f;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 5px;
-}
-
-.textarea-field {
-  width: calc(100% - 20px); /* Matches the container padding */
-  min-width: 300px;
-  min-height: 2em;
-  max-width: 480px;
-  height: 10em;
-
-  font-size: 1rem;
-  color: #4f4f4f;
-
-  padding: 8px;
-  margin-top: 5px;
-
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.input-field::placeholder,
-.textarea-field::placeholder {
-  font-size: 1em;
-  color: #4f4f4f;
-}
-
-.input-field:focus,
-.textarea-field:focus {
-  border-color: #b965d7;
-  outline: none;
-}
-
-/* ================================
-   Latitude & Longitude Section
-================================ */
-#lat-long {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 0.5em;
-}
-
-.lat,
-.long {
-  width: calc(50% - 0.5em); /* Each input takes half width minus the gap */
-
-  color: #ffffff;
-  font-size: 1em;
-  font-weight: 600;
-
-  background-image: linear-gradient(to right, #b965d7, #4a90e2);
-
-  margin: 0;
-}
-
-.lat::placeholder,
-.long::placeholder {
-  color: #ffffff;
-}
-
-.lat:focus,
-.long:focus {
-  border-color: #b965d7;
-  outline: none;
-}
-
-/* ================================
-   Image URL Container
-================================ */
-.image-url-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-/* ================================
-   Error Message
-================================ */
 .error-message {
   color: red;
-  font-size: 0.9em;
-  margin-top: 4px;
-  margin-bottom: 10px;
+  font-size: 0.9em; /* Optional: adjust the font size */
+}
+
+/* ================================
+   Demo Link
+================================ */
+
+.demo-link {
+  display: flex;
+  color: #b965d7;
+  justify-content: center;
+  padding-bottom: 2em;
+
+  &:hover {
+    color: #4a90e2;
+  }
 }
