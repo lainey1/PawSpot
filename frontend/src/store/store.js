@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import spotsReducer from "./spots/reducer";
-import reviewsReducer from "./reviews";
+import reviewsReducer from "./reviews/reducer";
 
 // * 1 Create Root Reducer *********
 // Makes Redux applications scalable as the state grows in complexity.
