@@ -36,7 +36,7 @@ const CreateReview = ({ spotId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting review:", { userId, spotId, review, stars });
+    // console.log("Submitting review:", { userId, spotId, review, stars });
 
     if (!errors) {
       try {

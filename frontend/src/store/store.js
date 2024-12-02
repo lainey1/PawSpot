@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import spotsReducer from "./spots/reducer";
 import reviewsReducer from "./reviews/reducer";
+import imagesReducer from "./images/reducer";
 
 // * 1 Create Root Reducer *********
 // Makes Redux applications scalable as the state grows in complexity.
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   spots: spotsReducer,
   reviews: reviewsReducer,
+  images: imagesReducer,
 });
 
 // * 2 Enhancer ********************

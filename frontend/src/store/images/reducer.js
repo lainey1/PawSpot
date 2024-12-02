@@ -2,42 +2,42 @@
 // Handle state updates based on dispatch actions. Pure functions taking current state and action as inputs to return a new state
 
 import {
-  LOAD_SPOTS,
-  LOAD_SPOT,
-  CREATE_SPOT,
-  UPDATE_SPOT,
-  DELETE_SPOT,
+  LOAD_IMAGES,
+  LOAD_IMAGE,
+  CREATE_IMAGE,
+  UPDATE_IMAGE,
+  DELETE_IMAGE,
 } from "./types";
 
-const initialState = { currentSpot: {} };
+const initialState = { currentImages: {} };
 
-const spotsReducer = (state = initialState, action) => {
+const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_SPOTS:
-      return { ...state, ...action.spots };
+    case LOAD_IMAGES:
+      return { ...state, ...action.images };
 
-    case LOAD_SPOT:
-      return { ...state, currentSpot: action.spot };
+    case LOAD_IMAGE:
+      return { ...state, currentSpot: action.image };
 
-    case CREATE_SPOT:
-      return { ...state, ...action.spots };
+    case CREATE_IMAGE:
+      return { ...state, ...action.image };
 
-    case UPDATE_SPOT: {
+    case UPDATE_IMAGE: {
       return {
         ...state,
-        spots: state.spots
-          ? state.spots.map((spot) =>
-              spot.id === action.spot.id ? action.spot : spot
+        images: state.images
+          ? state.images.map((image) =>
+              image.id === action.image.id ? action.image : image
             )
           : [],
       };
     }
 
-    case DELETE_SPOT:
+    case DELETE_IMAGE:
       return {
         ...state,
-        spots: state.spots
-          ? state.spots.filter((spot) => spot.id !== action.spotId)
+        images: state.images
+          ? state.images.filter((image) => image.id !== action.imageId)
           : [],
       };
 
@@ -46,4 +46,4 @@ const spotsReducer = (state = initialState, action) => {
   }
 };
 
-export default spotsReducer;
+export default imagesReducer;
