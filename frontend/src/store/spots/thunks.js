@@ -39,6 +39,7 @@ export const createNewSpot = (spotData) => async (dispatch) => {
     if (response.ok) {
       const newSpot = await response.json();
       dispatch(createSpot(newSpot));
+      console.log(newSpot.id);
       return newSpot.id; // Return the ID of the newly created spot
     } else {
       const errorData = await response.json();

@@ -11,7 +11,7 @@ const UpdateSpot = () => {
 
   // Selector
   const spot = useSelector((state) => state.spots.currentSpot);
-  const imagesArr = spot.SpotImages;
+  const imagesArr = spot?.SpotImages;
   const previewImg = imagesArr?.find((image) => image.preview === true);
   const otherImgs = imagesArr?.filter((image) => image.preview !== true);
 
@@ -105,8 +105,8 @@ const UpdateSpot = () => {
       newErrors.price = "Price must be a valid number";
     }
 
-    if (!formData.previewImageUrl.trim())
-      newErrors.previewImageUrl = "Preview Image URL is required";
+    // if (!formData.previewImageUrl.trim())
+    //   newErrors.previewImageUrl = "Preview Image URL is required";
 
     return newErrors;
   };
@@ -124,31 +124,48 @@ const UpdateSpot = () => {
     }));
   };
 
-  const addImagesToSpot = async (spotId, imageUrls) => {
-    const imageRequests = imageUrls.map((url, index) =>
-      fetch(`/api/spots/${spotId}/images`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          url,
-          preview: index === 0, // Mark the first image as preview
-        }),
-      })
-    );
+  // const addImagesToSpot = async (spotId, imageUrls) => {
+  //   const imageRequests = imageUrls.map((url, index) =>
+  //     fetch(`/api/spots/${spotId}/images`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         url,
+  //         preview: index === 0, // Mark the first image as preview
+  //       }),
+  //     })
+  //   );
 
-    return Promise.all(imageRequests);
-  };
+  //   return Promise.all(imageRequests);
+  // };
 
-  const handleImageChange = (index, value) => {
-    const newImageUrls = [...formData.imageUrls];
-    newImageUrls[index] = value;
-    setFormData((prev) => ({
-      ...prev,
-      SpotImages: newImageUrls,
-    }));
-  };
+  // const addImagesToSpot = async (spotId, imageUrls) => {
+  //   const imageRequests = imageUrls.map((url, index) =>
+  //     fetch(`/api/spots/${spotId}/images`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         url,
+  //         preview: index === 0, // Mark the first image as preview
+  //       }),
+  //     })
+  //   );
+
+  //   return Promise.all(imageRequests);
+  // };
+
+  // const handleImageChange = (index, value) => {
+  //   const newImageUrls = [...formData.imageUrls];
+  //   newImageUrls[index] = value;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     SpotImages: newImageUrls,
+  //   }));
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -164,14 +181,12 @@ const UpdateSpot = () => {
       lat: parseFloat(formData.lat),
       lng: parseFloat(formData.lng),
       price: parseFloat(formData.price),
-      SpotImages: [formData.previewImageUrl, ...formData.imageUrls].filter(
-        (url) => url.trim() // Ensure non-empty URLs
-      ),
+      SpotImages: [formData.previewImageUrl, formData.imageUrls], // Ensure non-empty URLs
     };
 
     try {
       await dispatch(editSpot(spotId, updatedSpotData));
-      await addImagesToSpot(spotId, updatedSpotData.imageUrls);
+      // await addImagesToSpot(spotId, updatedSpotData.imageUrls);
       await dispatch(fetchSpot(spotId));
       navigate(`/spots/${spotId}`);
     } catch (error) {
@@ -342,24 +357,47 @@ const UpdateSpot = () => {
           <p>Submit a link to at least one photo to publish your spot.</p>
 
           <div className="image-url-container">
+            {/* Preview Image */}
             <input
               className="input-field"
               name="previewImageUrl"
-              value={previewImg.url}
-              onChange={handleInputChange}
+              value={previewImg?.url || ""} // Ensure empty field if no previewImg
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  SpotImages: [
+                    {
+                      ...prev.SpotImages[0],
+                      url: e.target.value,
+                      preview: true,
+                    },
+                    ...prev.SpotImages.slice(1),
+                  ],
+                }))
+              }
               placeholder="Required: Preview Image URL"
             />
-
             {errors.previewImageUrl && (
               <p className="error-message">{errors.previewImageUrl}</p>
             )}
 
-            {otherImgs.map((image, index) => (
+            {/* Other Images */}
+            {(otherImgs || []).map((image, index) => (
               <input
                 key={index}
                 className="input-field"
-                value={image.url}
-                onChange={(e) => handleImageChange(index, e.target.value)}
+                value={image.url || ""} // Empty input if no URL
+                onChange={(e) =>
+                  setFormData((prev) => {
+                    const updatedImages = [...prev.SpotImages];
+                    updatedImages[index + 1] = {
+                      ...updatedImages[index + 1],
+                      url: e.target.value,
+                      preview: false,
+                    };
+                    return { ...prev, SpotImages: updatedImages };
+                  })
+                }
                 placeholder="Image URL"
               />
             ))}

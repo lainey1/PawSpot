@@ -76,24 +76,24 @@ const CreateSpot = () => {
     setImageUrls(newImageUrls);
   };
 
-  const addImagesToSpot = async (spotId, imageUrls) => {
-    try {
-      for (const url of imageUrls) {
-        const response = await fetch(`/api/spots/${spotId}/images`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url }),
-        });
+  // const addImagesToSpot = async (spotId, imageUrls) => {
+  //   try {
+  //     for (const url of imageUrls) {
+  //       const response = await fetch(`/api/spots/${spotId}/images`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({ url }),
+  //       });
 
-        if (!response.ok) throw response;
-      }
-    } catch (error) {
-      console.error("Error adding images:", error);
-      throw error;
-    }
-  };
+  //       if (!response.ok) throw response;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding images:", error);
+  //     throw error;
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,7 +122,7 @@ const CreateSpot = () => {
     try {
       // Await the dispatch to get the spotId returned from createNewSpot
       const spotId = await dispatch(createNewSpot(newSpotData)); // Ensure this returns the ID
-      await addImagesToSpot(spotId, newSpotData.imageUrls);
+      // await addImagesToSpot(spotId, newSpotData.imageUrls);
       navigate(`/spots/${spotId}`); // Use the returned spotId for navigation
     } catch (error) {
       console.error("Failed to create spot:", error);
