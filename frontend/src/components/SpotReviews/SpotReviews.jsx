@@ -78,7 +78,8 @@ function Reviews({ spot }) {
                 <div className="review-content">
                   {renderReviewList([review], formatDate)}
                 </div>
-                {review.userId === currentUser.id && (
+
+                {review?.userId === currentUser?.id && (
                   <OpenModalButton
                     buttonText={"Delete"}
                     modalComponent={
