@@ -18,10 +18,9 @@ export const loadReview = (review) => ({
   review,
 });
 
-export const createReview = (review, reviews) => ({
+export const createReview = (review) => ({
   type: CREATE_REVIEW,
   review,
-  reviews,
 });
 
 export const updateReview = (review) => ({

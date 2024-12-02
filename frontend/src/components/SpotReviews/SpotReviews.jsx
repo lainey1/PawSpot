@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import CreateReview from "../SpotReviews/CreateReview";
 import { fetchReviews } from "../../store/reviews/thunks";
 import { useReviewPermissions } from "../../hooks/useReviewPermissions";
 
@@ -17,7 +19,6 @@ import "./SpotReviews.css";
 
 function Reviews({ spot }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { spotId } = useParams();
 
   const [loading, setLoading] = useState(true);
@@ -53,14 +54,11 @@ function Reviews({ spot }) {
 
       {canPostReview && (
         <div>
-          <button
-            id="post-review-button"
-            onClick={() => {
-              navigate(`/spots/${spot.id}/reviews`);
-            }}
-          >
-            Post Your Review
-          </button>
+          <OpenModalButton
+            buttonText={"Post Your Review"}
+            modalComponent={<CreateReview spotId={spotId} />}
+            className="post-review-button"
+          />
         </div>
       )}
 

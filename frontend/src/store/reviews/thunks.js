@@ -16,9 +16,11 @@ export const fetchReviews = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`);
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
+    } else {
+      const reviews = await response.json();
+      dispatch(loadReviews(reviews));
+      return reviews;
     }
-    const reviews = await response.json();
-    dispatch(loadReviews(reviews));
   } catch (error) {
     console.error("Error fetching reviews:", error.message);
   }
@@ -33,8 +35,8 @@ export const fetchReview = (reviewId) => async (dispatch) => {
 };
 
 export const createNewReview =
-  ({ userId, spotId, review, stars }) =>
-  async (dispatch) => {
+  (userId, spotId, review, stars) => async (dispatch) => {
+    console.log(userId, spotId, review, stars);
     try {
       const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
@@ -46,8 +48,7 @@ export const createNewReview =
 
       if (response.ok) {
         const newReview = await response.json();
-        dispatch(createReview(newReview));
-        return newReview.id;
+        dispatch(createReview(newReview)); // Only pass the new review here
       } else {
         const errorData = await response.json();
         return Promise.reject(errorData);
