@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchSpot, createNewSpot } from "../../store/spots/thunks";
-import { addImagesToSpot } from "../../store/images/thunks";
-
 import "./Form.css";
 
 const CreateSpot = () => {
@@ -104,7 +102,7 @@ const CreateSpot = () => {
     try {
       // Await the dispatch to get the spotId returned from createNewSpot
       const spotId = await dispatch(createNewSpot(newSpotData)); // Ensure this returns the ID
-      await dispatch(addImagesToSpot(spotId, newSpotData.imageUrls));
+      // await dispatch(addImagesToSpot(spotId, newSpotData.imageUrls));
       navigate(`/spots/${spotId}`); // Use the returned spotId for navigation
     } catch (error) {
       console.error("Failed to create spot:", error);

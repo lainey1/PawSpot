@@ -142,10 +142,12 @@ const UpdateSpot = () => {
         url: value,
         preview: index === 0, // First image is preview
       };
-      return {
+      const updatedFormData = {
         ...prev,
         SpotImages: ensureSpotImagesLength(updatedImages),
       };
+      console.log("Updated SpotImages:", updatedFormData.SpotImages); // Debug
+      return updatedFormData;
     });
   };
 

@@ -51,16 +51,29 @@ export const createNewSpot = (spotData) => async (dispatch) => {
   }
 };
 
-export const editSpot = (spotId, updatedData) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spotId}`, {
-    method: "PUT",
-    body: JSON.stringify(updatedData),
-    headers: { "Content-Type": "application/json" },
-  });
-  if (response.ok) {
+export const editSpot = (spotId, spotData) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(spotData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+
     const updatedSpot = await response.json();
+
+    console.log("Response from server:", updatedSpot); // Debug
+
     dispatch(updateSpot(updatedSpot));
-    return updatedSpot.id;
+  } catch (error) {
+    console.error("Error in editSpot thunk:", error);
+    throw error;
   }
 };
 
