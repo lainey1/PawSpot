@@ -67,5 +67,5 @@ This project is licensed under the **TBD** - see the LICENSE file for details.
 
 ## 🌟 Stay Connected!
 
-Website: [PawPlace](https://pawspot.onrender.com)
+Website: [PawSpot](https://pawspot.onrender.com)
 Join us in making the world a better place for pets and their humans! 🐕🐈
