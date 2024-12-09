@@ -1,12 +1,12 @@
 # 🐾 PawSpot: Where Your Pets Find Their Home Away From Home!
 
-Welcome to **PawSpot**, the ultimate online marketplace designed for pet lovers! Just like Airbnb, but for our furry friends, PawSpot connects pet owners with trusted hosts for both short and long-term homestays and experiences.
+Welcome to **PawSpot**, the ultimate online marketplace designed for pet lovers! PawSpot connects pet owners with trusted hosts for both short and long-term homestays and experiences.
 
 ## 🎉 Features
 
 - **🐶 Dog-Friendly Stays**: From cozy apartments to spacious backyards, find the perfect spot for your pup!
 - **🐱 Cat Cuddles**: Discover warm homes where your feline friends can relax and roam.
-- **💼 Host Opportunities**: Be a paw pal and open your home to furry guests while earning extra income.
+- **💼 Host Opportunities**: Be a paw pal and open your home to furry guests while earning extra income. Upload images to showcase your spot.
 - **🔍 Easy Search & Filter**: Find the perfect stay with our user-friendly search options.
 
 ## 💻 Technoligies used
@@ -21,13 +21,13 @@ Welcome to **PawSpot**, the ultimate online marketplace designed for pet lovers!
 1. **Clone the repository**:
 
 ```
-git clone https://github.com/yourusername/PawPlace.git
+git clone https://github.com/yourusername/pawSpot.git
 ```
 
 2. **Navigate into the project directory**:
 
 ```
-cd PawPlace
+cd paSspot
 ```
 
 3. **Install dependencies**:
@@ -39,8 +39,14 @@ npm install
 
 4. **Run the application**:
 
+In backend folder:
 ```
 npm start
+```
+
+In frontend folder:
+```
+npm run dev
 ```
 
 5. **Enjoy**: Browse and book the best stays for your furry friends!
