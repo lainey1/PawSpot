@@ -4,11 +4,16 @@ Welcome to **PawSpot**, the ultimate online marketplace designed for pet lovers!
 
 
 ## 🎉 Features
-
 - **🐶 Dog-Friendly Stays**: From cozy apartments to spacious backyards, find the perfect spot for your pup!
 - **🐱 Cat Cuddles**: Discover warm homes where your feline friends can relax and roam.
-- **💼 Host Opportunities**: Be a paw pal and open your home to furry guests while earning extra income. Upload images to showcase your spot.
+- **💼 Host Opportunities**: Be a paw pal and open your home to furry guests while earning extra income.
+- **📸 Share Spot Images**: Help the PawSpot community by adding images to your spot listings.
+
+Upcoming Features
 - **🔍 Easy Search & Filter**: Find the perfect stay with our user-friendly search options.
+- **📸 Share Images**: Help the PawSpot community by adding images to your reviews.
+- **🗺️ Google Maps API**
+- **AWS**
 
   
 ## 💻 Technoligies used
@@ -38,18 +43,16 @@ View available spots along with the most up-to-date pricing and average rating.
 ![Landing Page](https://github.com/lainey1/pawSpot/blob/main/images/Screenshot%202024-12-09%20at%2012.59.28%E2%80%AFAM.png)
 
 View spot details such as the spot description, number of reviews and average rating of the spot.
-
-![Reviews Section](https://github.com/lainey1/pawSpot/blob/main/images/Screenshot%202024-12-09%20at%201.00.27%E2%80%AFAM.png)
-
 Sign Up and Log In to access additional functionality
 ![Sign Up Form](https://github.com/lainey1/pawSpot/blob/main/images/Screenshot%202024-12-09%20at%2012.59.03%E2%80%AFAM.png)
 
 
 All members can - 
-1. book a reservation,
-2. add and edit reviews to a spot - if they're not the owner
+1. Book a reservation,
+2. Click Spot Images to scroll through gallery, and
+3. Add and edit reviews to a spot - if they're not the owner
 ![Spot Detail Page](https://github.com/lainey1/pawSpot/blob/main/images/Screenshot%202024-12-09%20at%2012.59.45%E2%80%AFAM.png) 
-
+![Reviews Section](https://github.com/lainey1/pawSpot/blob/main/images/Screenshot%202024-12-09%20at%201.00.27%E2%80%AFAM.png)
    
 As a Host, you can - 
 1. Create a spot to host including adding up to 5 images,
