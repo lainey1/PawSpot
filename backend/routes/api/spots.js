@@ -146,8 +146,8 @@ router.post("/", validateSpot, async (req, res) => {
   }
 });
 
-//* Edit a Spot (CHECKED)
-router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
+//* Edit a Spot
+router.put("/:spotId", requireAuth, async (req, res) => {
   const userId = req.user.id; // GET authenticated userId
   const { spotId } = req.params; // GET from URL
   const {
@@ -160,10 +160,12 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
     name,
     description,
     price,
-    imageUrls,
+    SpotImages,
   } = req.body;
 
-  const spot = await Spot.findByPk(spotId); // Find spot by ID;
+  const spot = await Spot.findByPk(spotId, {
+    include: [{ model: SpotImage, attributes: ["id", "url", "preview"] }],
+  });
 
   // Check if the spot exists
   if (!spot) {
@@ -206,14 +208,14 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
   spot.price = price;
 
   // Update existing images
-  if (imageUrls && imageUrls.length) {
+  if (SpotImages && SpotImages.length) {
     // Delete old images
     console.log("Image URLs received:", imageUrls);
     await SpotImage.destroy({ where: { spotId } });
 
     // Add new images
-    const newSpotImages = imageUrls.map((url, index) => ({
-      spotId: spot.id,
+    const newSpotImages = SpotImages.map((url, index) => ({
+      spotId: spotId,
       url,
       preview: index === 0,
     }));
@@ -223,8 +225,12 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
 
   await spot.save(); // save the updated spot
 
+  const updatedSpot = await Spot.findByPk(spotId, {
+    include: [{ model: SpotImage, attributes: ["url", "preview"] }],
+  });
+
   // response with updated spot
-  return res.status(200).json(spot);
+  return res.status(200).json(updatedSpot);
 });
 
 //* GET all Spots owned by the Current User (v2) (CHECKED)

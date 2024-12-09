@@ -4,9 +4,7 @@ import "./bookingLauncher.css";
 import { GoStarFill } from "react-icons/go";
 
 function BookingLauncher({ spot, onReserveClick }) {
-  useEffect(() => {
-    console.log("Spot data updated:", spot);
-  }, [spot]);
+  useEffect(() => {}, [spot]);
 
   return (
     <div id="booking-launcher">

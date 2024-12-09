@@ -52,6 +52,7 @@ export const createNewSpot = (spotData) => async (dispatch) => {
 };
 
 export const editSpot = (spotId, spotData) => async (dispatch) => {
+  console.log(spotData);
   try {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: "PUT",
@@ -60,6 +61,7 @@ export const editSpot = (spotId, spotData) => async (dispatch) => {
       },
       body: JSON.stringify(spotData),
     });
+    console.log("RESPONSE --->", response);
 
     if (!response.ok) {
       const error = await response.json();

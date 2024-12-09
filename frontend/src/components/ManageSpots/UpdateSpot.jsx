@@ -146,7 +146,6 @@ const UpdateSpot = () => {
         ...prev,
         SpotImages: ensureSpotImagesLength(updatedImages),
       };
-      console.log("Updated SpotImages:", updatedFormData.SpotImages); // Debug
       return updatedFormData;
     });
   };
