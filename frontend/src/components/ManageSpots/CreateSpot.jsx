@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchSpot, createNewSpot } from "../../store/spots/thunks";
+import { createNewSpot } from "../../store/spots/thunks";
 import "./Form.css";
 
 const CreateSpot = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { spotId } = useParams();
+  // const { spotId } = useParams();
 
   // State Hooks for each field
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
@@ -129,14 +129,14 @@ const CreateSpot = () => {
 
   const errorMessages = Object.values(errors);
 
-  useEffect(() => {
-    setLoading(true);
-    dispatch(fetchSpot(spotId))
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false));
-  }, [dispatch, spotId]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   dispatch(fetchSpot(spotId))
+  //     .then(() => setLoading(false))
+  //     .catch(() => setLoading(false));
+  // }, [dispatch, spotId]);
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
 
   return (
     <div>

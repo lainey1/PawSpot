@@ -1,13 +1,9 @@
 // backend/utils/auth.js
 const jwt = require("jsonwebtoken");
-const { jwtConfig } = require("../config");
+const { secret, expiresIn } = require("../config").jwtConfig;
 const { User } = require("../db/models");
 
-const { secret, expiresIn } = jwtConfig;
-
-//* Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
-  // Create the token.
   const safeUser = {
     id: user.id,
     email: user.email,
@@ -21,21 +17,17 @@ const setTokenCookie = (res, user) => {
 
   const isProduction = process.env.NODE_ENV === "production";
 
-  // Set the token cookie
   res.cookie("token", token, {
     maxAge: expiresIn * 1000, // maxAge in milliseconds
     httpOnly: true,
-    secure: isProduction,
+    secure: isProduction, // Only send cookie over HTTPS in production
     sameSite: isProduction && "Lax",
   });
 
   return token;
 };
 
-//* restoreUser
-
 const restoreUser = (req, res, next) => {
-  // token parsed from cookies
   const { token } = req.cookies;
   req.user = null;
 
@@ -62,8 +54,6 @@ const restoreUser = (req, res, next) => {
   });
 };
 
-//* requireAuth
-// If there is no current user, return an error
 const requireAuth = function (req, _res, next) {
   if (req.user) return next();
 
@@ -74,5 +64,4 @@ const requireAuth = function (req, _res, next) {
   return next(err);
 };
 
-// ***** EXPORTS *****/
 module.exports = { setTokenCookie, restoreUser, requireAuth };
