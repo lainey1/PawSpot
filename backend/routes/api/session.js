@@ -1,18 +1,21 @@
 // backend/routes/api/session.js
+
 const express = require("express");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
+const { check } = require("express-validator");
 
-const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User } = require("../../db/models");
+
+const {
+  setTokenCookie,
+  restoreUser,
+  handleValidationErrors,
+} = require("../../utils");
 
 const router = express.Router();
 
-//* import the check function from express-validator and the handleValidationError functions
-const { check } = require("express-validator");
-const { handleValidationErrors } = require("../../utils/validation");
-
-//* Make a middleware called validateLogin that will check these keys and validate them:
+// Middleware: Validate login credentials
 const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
@@ -24,7 +27,7 @@ const validateLogin = [
   handleValidationErrors,
 ];
 
-//* Log in
+// Route: Log in
 router.post("/", validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 
@@ -69,13 +72,13 @@ router.post("/", validateLogin, async (req, res, next) => {
   }
 });
 
-//* Log out
+// Route: Log out
 router.delete("/", (_req, res) => {
   res.clearCookie("token");
   return res.json({ message: "success" });
 });
 
-//* Restore session user
+// Route: Restore session user
 router.get("/", (req, res) => {
   const { user } = req;
   if (user) {
@@ -92,5 +95,5 @@ router.get("/", (req, res) => {
   } else return res.json({ user: null });
 });
 
-// ***** EXPORTS *****/
+// Export the router
 module.exports = router;

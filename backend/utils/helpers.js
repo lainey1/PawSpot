@@ -1,3 +1,5 @@
+// backend/utils/helpers.js
+
 // Helper to build pagination params
 const getPaginationParams = (query) => {
   let { page, size } = query;

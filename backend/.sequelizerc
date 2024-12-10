@@ -1,9 +1,13 @@
 // backend/.sequelizerc
+
+// Import the "path" module to resolve file paths
 const path = require("path");
 
-// ************ EXPORTS *********************************/
+// Export Sequelize configuration paths
 module.exports = {
+  // Path to the database config file
   config: path.resolve("config", "database.js"),
+  // Paths to the directories: models, seeders, migrations
   "models-path": path.resolve("db", "models"),
   "seeders-path": path.resolve("db", "seeders"),
   "migrations-path": path.resolve("db", "migrations"),

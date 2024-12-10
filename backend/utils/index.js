@@ -1,7 +1,10 @@
 // Export all the utilities from individual files
-const { handleValidationErrors } = require("./validation");
+const {
+  handleValidationErrors,
+  validateAllSpots,
+  validateSpot,
+} = require("./validation");
 const { setTokenCookie, restoreUser, requireAuth } = require("./auth");
-const { validateAllSpots, validateSpot } = require("./validate-endpoints");
 const {
   getPaginationParams,
   buildFilterConditions,
@@ -11,11 +14,13 @@ const {
 
 module.exports = {
   handleValidationErrors,
+  validateAllSpots,
+  validateSpot,
+
   setTokenCookie,
   restoreUser,
   requireAuth,
-  validateAllSpots,
-  validateSpot,
+
   getPaginationParams,
   buildFilterConditions,
   formatSpot,

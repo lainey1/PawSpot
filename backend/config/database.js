@@ -1,4 +1,4 @@
-// backend/config/database.js
+// COMMAND `npx sequelize init` and then adjusted
 
 const config = require("./index");
 

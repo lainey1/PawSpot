@@ -1,13 +1,13 @@
 // backend/routes/index.js
+
 const express = require("express");
 const router = express.Router();
 
-// Import this file into the routes/index.js file and connect it to the router there.
+// Import the API router and connect it
 const apiRouter = require("./api");
 router.use("/api", apiRouter);
 
-//* STATIC ROUTES
-//Serve React build files in production
+// Static Routes: Serve React build files in production
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
 
@@ -19,10 +19,10 @@ if (process.env.NODE_ENV === "production") {
     );
   });
 
-  //Serve the static assets in the frontend's build folder
+  // Serve static assets from the frontend's build folder
   router.use(express.static(path.resolve("../frontend/dist")));
 
-  // Serve the frontend's index.html at all other routes NOT starting with /api
+  // Serve the frontend's index.html for all routes not starting with /api
   router.get(/^(?!\/?api).*/, (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken());
     return res.sendFile(
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Add a XSRF-TOKEN cookie in development
+// Development-only: Add XSRF-TOKEN cookie for CSRF protection
 if (process.env.NODE_ENV !== "production") {
   router.get("/api/csrf/restore", (req, res) => {
     res.cookie("XSRF-TOKEN", req.csrfToken());
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-// Add a XSRF-TOKEN cookie
+// Add XSRF-TOKEN cookie endpoint
 router.get("/api/csrf/restore", (req, res) => {
   const csrfToken = req.csrfToken();
   res.cookie("XSRF-TOKEN", csrfToken);
@@ -48,4 +48,5 @@ router.get("/api/csrf/restore", (req, res) => {
   });
 });
 
+// Export the router
 module.exports = router;

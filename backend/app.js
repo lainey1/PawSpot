@@ -8,40 +8,38 @@ const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const reviewImagesRouter = require("./routes/api/review-images");
+const { ValidationError } = require("sequelize");
 
 const { environment } = require("./config");
 const isProduction = environment === "production";
 
-//* Initialize the Express application:
+// Initialize the Express application
 const app = express();
 
-//* Import Routes
+// Import Routes
 const routes = require("./routes");
 
-//* Import Sequelizer validation errors
-const { ValidationError } = require("sequelize");
-
-//* Connect the `morgan` middleware for logging information about requests and responses:
+// * Middleware setup **********
+// Logging middleware (requests and responses)
 app.use(morgan("dev"));
 
-//* Add the `cookie-parser` middleware for parsing cookies and the `express.json` middleware for parsing JSON bodies of requests with `Content-Type` of `"application/json"`.
+// Parse cookies and JSON bodies
 app.use(cookieParser());
 app.use(express.json());
 
-//* Security Middleware
+// Security Middleware
 if (!isProduction) {
-  // enable cors only in development
-  app.use(cors());
+  app.use(cors()); // enable CORS (cross-origin sharing) only in development
 }
 
-// helmet helps set a variety of headers to better secure your app
+// Set security headers with Helmet
 app.use(
   helmet.crossOriginResourcePolicy({
     policy: "cross-origin",
   })
 );
 
-// Set the _csrf token and create req.csrfToken method
+// Set CSRF token and method
 app.use(
   csurf({
     cookie: {
@@ -52,12 +50,11 @@ app.use(
   })
 );
 
-//* Add routes to the Express application by importing with the other imports
-
-app.use(routes); // Connect all the routes
+// * Routes **********
+app.use(routes);
 app.use("/api/review-images", reviewImagesRouter);
 
-//* Catch unhandled requests and forward to error handler.
+// Handle unhandled requests
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.title = "Resource Not Found";
@@ -66,7 +63,9 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
-//* Process sequelize errors
+// * Errors **********
+
+// Handle Sequelize validation errors
 app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
@@ -80,12 +79,11 @@ app.use((err, _req, _res, next) => {
   next(err);
 });
 
-//* Error formatter
+// Error formatter
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
 
   if (!isProduction) {
-    // enable cors only in development
     res.json({
       title: err.title || "Server Error",
       message: err.message,
@@ -101,5 +99,5 @@ app.use((err, _req, res, _next) => {
   }
 });
 
-// ***** EXPORTS *****/
+// * Export the Express app
 module.exports = app;
