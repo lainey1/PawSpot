@@ -4,17 +4,16 @@ import { Link } from "react-router-dom";
 import { GoStarFill } from "react-icons/go";
 import { fetchSpotsList } from "../../store/spots/thunks";
 import "./SpotsList.css";
-import { fetchImages } from "../../store/images/thunks";
+// import { fetchImages } from "../../store/images/thunks";
 
 const SpotsList = () => {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots.Spots);
-  const images = useSelector((state) => state.images);
-  console.log(images);
+  // const images = useSelector((state) => state.images);
 
   useEffect(() => {
     dispatch(fetchSpotsList());
-    dispatch(fetchImages());
+    // dispatch(fetchImages());
   }, [dispatch]);
 
   return (

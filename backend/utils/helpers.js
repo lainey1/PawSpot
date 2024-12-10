@@ -1,22 +1,19 @@
 // backend/utils/helpers.js
 
 // Helper to build pagination params
-const getPaginationParams = (query) => {
-  let { page, size } = query;
-  page = parseInt(page) || 1;
-  size = parseInt(size) || 20;
-  page = page < 1 ? 1 : page;
-  size = size < 1 || size > 20 ? 20 : size;
-  return { page, size };
+const parsePagination = (page, size) => {
+  const parsedPage = Math.max(parseInt(page) || 1, 1);
+  const parsedSize = Math.min(Math.max(parseInt(size) || 20, 1), 20);
+  return { page: parsedPage, size: parsedSize };
 };
 
 // Helper to build the 'where' conditions for filtering
-const buildFilterConditions = (query) => {
+const buildFilters = (query) => {
   const where = {};
-  // Add filtering logic here, for example:
-  if (query.city) where.city = query.city;
-  if (query.state) where.state = query.state;
-  if (query.country) where.country = query.country;
+  // Add filtering logic dynamically based on query parameters
+  ["city", "state", "country"].forEach((field) => {
+    if (query[field]) where[field] = query[field];
+  });
   return where;
 };
 
@@ -59,8 +56,8 @@ const getSpotInclude = () => [
 ];
 
 module.exports = {
-  getPaginationParams,
-  buildFilterConditions,
+  parsePagination,
+  buildFilters,
   formatSpot,
   getSpotInclude,
 };

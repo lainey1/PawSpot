@@ -20,13 +20,13 @@ export function getReviewHeader(avgStarRating, numReviews) {
 
 export function renderReviewList(reviews, formatDate) {
   return reviews.map((review) => (
-    <li key={review.id} className="item">
+    <div key={review.id} className="item">
       <p>
         <strong>{review.User.firstName}</strong>
       </p>
       <p className="date">{formatDate(review.updatedAt)}</p>
       <p>{review.review}</p>
-    </li>
+    </div>
   ));
 }
 

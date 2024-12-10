@@ -39,7 +39,6 @@ export const createNewSpot = (spotData) => async (dispatch) => {
     if (response.ok) {
       const newSpot = await response.json();
       dispatch(createSpot(newSpot));
-      console.log(newSpot.id);
       return newSpot.id; // Return the ID of the newly created spot
     } else {
       const errorData = await response.json();
@@ -52,7 +51,6 @@ export const createNewSpot = (spotData) => async (dispatch) => {
 };
 
 export const editSpot = (spotId, spotData) => async (dispatch) => {
-  console.log(spotData);
   try {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: "PUT",
@@ -61,7 +59,6 @@ export const editSpot = (spotId, spotData) => async (dispatch) => {
       },
       body: JSON.stringify(spotData),
     });
-    console.log("RESPONSE --->", response);
 
     if (!response.ok) {
       const error = await response.json();
@@ -69,8 +66,6 @@ export const editSpot = (spotId, spotData) => async (dispatch) => {
     }
 
     const updatedSpot = await response.json();
-
-    console.log("Response from server:", updatedSpot); // Debug
 
     dispatch(updateSpot(updatedSpot));
   } catch (error) {
@@ -83,7 +78,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
   });
-  console.log("RESPONSE ===> ", response);
+
   if (response.ok) {
     dispatch(deleteSpot(spotId));
   }
