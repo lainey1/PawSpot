@@ -1,71 +1,73 @@
-# 🐾 PawSpot: Where Your Pets Find Their Home Away From Home!
+# PawSpot
 
-Welcome to **PawSpot**, the ultimate online marketplace designed for pet lovers! PawSpot connects pet owners with trusted hosts for both short and long-term homestays and experiences.
+[**PawSpot**](https://pawspot.onrender.com/) is an online marketplace connecting pet owners with trusted hosts for short- and long-term homestays. This full-stack application showcases my ability to build scalable, user-focused web solutions. ([Live Site](https://pawspot.onrender.com/))
 
-## 🎉 Features
+## 🐶 Key Features 🐱
 
-- **🐶 Dog-Friendly Stays**: From cozy apartments to spacious backyards, find the perfect spot for your pup!
-- **🐱 Cat Cuddles**: Discover warm homes where your feline friends can relax and roam.
-- **💼 Host Opportunities**: Be a paw pal and open your home to furry guests while earning extra income. Upload images to showcase your spot.
-- **🔍 Easy Search & Filter**: Find the perfect stay with our user-friendly search options.
+- **User Authentication:** Secure login and registration for pet owners and hosts.
+- **Spot Listings:** Browse, filter, and search for available spots.
+- **Spot Management Dashboard:** Create, manage, and update listings effortlessly.
+- **User Reviews & Ratings:** Share experiences and build trust within the community.
 
-## 💻 Technoligies used
-- Built with a PostgreSQL database, Express for the backend, and React with Redux for the frontend. 
+## 💻 Tech Stack
+
+- `React` & `Redux`: Dynamic, interactive UI with efficient state management.
+- `Express`: Robust API handling and secure authentication.
+- `JWT` Authentication: Ensures secure user sessions.
+- `PostgreSQL` & `Sequelize`: Relational data management in production using Sequelize ORM.
+- `SQLite`: Used for local development and testing.
 
 ## 📘 Wiki
 
-- [API Documentation](https://github.com/lainey1/PawSpot/wiki/API-Documentation)
+- [API Documentation](https://github.com/lainey1/pawSpot/wiki#api-documentation)
+- Frontend Documentation (coming soon!)
+
+## 📸 Screenshots
+
+_(Screenshots coming soon!)_
 
 ## 🚀 Getting Started
 
-1. **Clone the repository**:
+### Live Version
 
-```
-git clone https://github.com/yourusername/pawSpot.git
-```
+Visit the live site: https://pawspot.onrender.com/
 
-2. **Navigate into the project directory**:
+### Running Locally
 
-```
-cd paSspot
-```
+1. **Clone the repository:**
 
-3. **Install dependencies**:
-   cd into the `frontend` and `backend` and install dependencies for each.
+   ```bash
+   git clone https://github.com/yourusername/pawSpot.git
+   cd pawSpot
+   ```
 
-```
-npm install
-```
+2. **Install dependencies:**
+   Navigate to the `frontend` and `backend` directories and install dependencies for each.
 
-4. **Run the application**:
+   ```bash
+   npm install
+   ```
 
-In backend folder:
-```
-npm start
-```
+3. **Start the application:**
 
-In frontend folder:
-```
-npm run dev
-```
+- Start the backend server:
 
-5. **Enjoy**: Browse and book the best stays for your furry friends!
+  ```bash
+  cd backend
+  npm start
+  ```
 
-## 🐾 How It Works
+- Start the frontend development server:
+  ```bash
+  cd frontend
+  npm run dev
+  ```
 
-For Pet Owners: Sign up, browse listings, and book your pet's next adventure!
-For Hosts: Create a listing, share your space, and welcome furry guests into your home!
-📸 Screenshots
+## 🌟 Future Enhancements
 
-## 🤝 Contributing
-
-We welcome contributions from pet enthusiasts! Whether it's a bug fix, feature request, or just a fun idea, feel free to open an issue or submit a pull request.
-
-## 📄 License
-
-This project is licensed under the **TBD** - see the LICENSE file for details.
-
-## 🌟 Stay Connected!
-
-Website: [PawSpot](https://pawspot.onrender.com)
-Join us in making the world a better place for pets and their humans! 🐕🐈
+- **Enhanced Search & Filters:** Refine search options by amenities, location, and pet preferences.
+- **Booking System:** Real-time availability and instant confirmation.
+- **Google Maps Integration:** Interactive map to locate nearby spots.
+- **AWS Image Hosting:** Faster image storage and scalability.
+- **Favorites:** Save and revisit favorite spots.
+- **Multi-Language Support:** Expand global reach with multi-language options.
